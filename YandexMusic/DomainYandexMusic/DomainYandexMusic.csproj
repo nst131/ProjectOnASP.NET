@@ -67,6 +67,20 @@
     <Compile Include="Repositories\EntitiesRepository\ISingerRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\ITrackRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Services\EntitiesDomainServices\AlbumDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\GenreDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\NoveltyDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\PlaylistDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\PopularDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\SingerDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\TrackDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IAlbumDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IGenreDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\INoveltyDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPlaylistDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPopularDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\ISingerDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\ITrackDomainService.cs" />
     <Compile Include="Services\Interfaces\IBaseDomainService.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
   </ItemGroup>

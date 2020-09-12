@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DomainYandexMusic.Services.Interfaces
 {
-    public interface IBaseDomainService
+    public interface IBaseDomainService<T> where T : class
     {
+
     }
 }

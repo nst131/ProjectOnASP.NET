@@ -10,6 +10,16 @@ namespace InfastructureYandexMusic.Configurations
 {
     public class GenreConfiguration : EntityTypeConfiguration<Genre>
     {
+        public GenreConfiguration()
+        {
+            ToTable("Genre");
 
+            HasKey(x => x.Id);
+
+            HasMany(x => x.Tracks)
+                .WithOptional(x => x.Genre)
+                .HasForeignKey(x => x.GenreId)
+                .WillCascadeOnDelete(true);
+        }
     }
 }

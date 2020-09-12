@@ -13,6 +13,7 @@ using InfastructureYandexMusic.Context;
 using InfastructureYandexMusic.Repositories;
 using InfastructureYandexMusic.UnitOfWork;
 using PresentationYandexMusic.Services;
+using PresentationYandexMusic.Services.Interfaces;
 
 namespace PresentationYandexMusic.App_Start
 {
@@ -32,8 +33,8 @@ namespace PresentationYandexMusic.App_Start
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
-            builder.RegisterAssemblyTypes(typeof(IBaseDomainService).Assembly)
-               .Where(t => typeof(IBaseDomainService).IsAssignableFrom(t))
+            builder.RegisterAssemblyTypes(typeof(IBaseDomainService<>).Assembly)
+               .Where(t => typeof(IBaseDomainService<>).IsAssignableFrom(t))
                .AsImplementedInterfaces()
                .InstancePerDependency();
 

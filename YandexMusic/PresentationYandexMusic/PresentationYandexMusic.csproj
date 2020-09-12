@@ -146,6 +146,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EntitiesPresentationService\AlbumPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\GenrePresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\NoveltyPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\PlaylistPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\PopularPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\SingerPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\TrackPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IAlbumPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IGenrePresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\INoveltyPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPlaylistPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPopularPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\ISingerPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\ITrackPresentationService.cs" />
     <Compile Include="Services\Interfaces\IBasePresentationService.cs" />
   </ItemGroup>
   <ItemGroup>

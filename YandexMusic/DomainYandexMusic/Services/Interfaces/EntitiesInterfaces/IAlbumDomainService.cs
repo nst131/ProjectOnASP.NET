@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainYandexMusic.Repositories.EntitiesRepository
+namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
-    public interface IAlbumRepository : IBaseRepository<Album>
+    public interface IAlbumDomainService : IBaseDomainService<Album>
     {
 
     }

@@ -8,5 +8,13 @@ namespace DomainYandexMusic.Entities
 {
     public class Playlist
     {
+        public int Id { get; set; }
+
+        public ICollection<Track> Tracks { get; set; }
+
+        public Playlist()
+        {
+            Tracks = new List<Track>();
+        }
     }
 }

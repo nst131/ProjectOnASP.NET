@@ -10,6 +10,16 @@ namespace InfastructureYandexMusic.Configurations
 {
     public class NoveltyConfiguration : EntityTypeConfiguration<Novelty>
     {
+        NoveltyConfiguration()
+        {
+            ToTable("Novelty");
 
+            HasKey(x => x.Id);
+
+            HasMany(x => x.Tracks)
+                .WithOptional(x => x.Novelty)
+                .HasForeignKey(x => x.NoveltyId)
+                .WillCascadeOnDelete(true);
+        }
     }
 }

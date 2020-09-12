@@ -10,6 +10,16 @@ namespace InfastructureYandexMusic.Configurations
 {
     public class PlaylistConfiguration : EntityTypeConfiguration<Playlist>
     {
+        public PlaylistConfiguration()
+        {
+            ToTable("Playlist");
 
+            HasKey(x => x.Id);
+
+            HasMany(x => x.Tracks)
+                .WithMany(x => x.Playlists)
+                .Map(x => x.MapRightKey("TrackId")
+                .MapLeftKey("PlaykistId"));
+        }
     }
 }
