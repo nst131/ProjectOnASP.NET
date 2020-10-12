@@ -53,13 +53,12 @@
   <ItemGroup>
     <Compile Include="Configurations\AlbumConfiguration.cs" />
     <Compile Include="Configurations\GenreConfiguration.cs" />
-    <Compile Include="Configurations\NoveltyConfiguration.cs" />
     <Compile Include="Configurations\PlaylistConfiguration.cs" />
-    <Compile Include="Configurations\PopularConfiguration.cs" />
     <Compile Include="Configurations\SingerConfiguration.cs" />
     <Compile Include="Configurations\TrackConfiguration.cs" />
     <Compile Include="Context\CoreDbContext.cs" />
     <Compile Include="Context\ICoreDbContext.cs" />
+    <Compile Include="InitilazerDb\InitilazerDatabaseYandexMusic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\AlbumRepository.cs" />

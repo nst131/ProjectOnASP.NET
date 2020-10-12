@@ -1,0 +1,88 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.TrackViewModel
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<p class="Aligning">
+    <label for="TrackName">Название трека</label>
+    <input type="text" name="TrackName" value=@Model.TrackName />
+    @Html.ValidationMessageFor(x => x.TrackName)
+</p>
+<p class="Aligning">
+    <label for="TimeOfCreation">Дата добавления трека</label>
+    <input type="date" name="TimeOfCreation" value=@Model.TimeOfCreation />
+    @Html.ValidationMessageFor(x => x.TimeOfCreation)
+</p>
+<p class="Aligning">
+    <label for="Liked">Количество Лайков</label>
+    <input type="number" name="Liked" value=@Model.Liked />
+    @Html.ValidationMessageFor(x => x.Liked)
+</p>
+<p class="Aligning">
+    <label>Выберите исполнителя</label>
+    @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers)
+    @Html.ValidationMessageFor(x => x.SingerId)
+</p>
+<div class="Aligning">
+    <label>Выберите плэйлисты</label>
+    <div class="checkselect">
+        @foreach (var item in Model.PlaylistList)
+        {
+            <label><input type="checkbox" name="PlaylistArrayId[]" value=@item.Key />@item.Value</label>
+        }
+    </div>
+</div>
+<p class="Aligning">
+    <label>Выберите альбом</label>
+    @Html.DropDownListFor(x => x.AlbumId, Model.SelectListAlbums)
+    @Html.ValidationMessageFor(x => x.AlbumId)
+</p>
+<p class="Aligning">
+    <label>Выберите жанр</label>
+    @Html.DropDownListFor(x => x.GenreId, Model.SelectListGenre)
+    @Html.ValidationMessageFor(x => x.GenreId)
+</p>
+<div class="Aligning">
+    <label>Выберите новинку</label>
+    <div>
+        @foreach (var item in Model.NoveltyList)
+        {
+            <input type="radio" name="NoveltyId" value=@item.Key />
+            <label class="Radio">@item.Value</label>
+        }
+    </div>
+</div>
+<div class="Aligning">
+    <label>Выберите популярность</label>
+    <div>
+        @foreach (var item in Model.PopularList)
+        {
+            <input type="radio" name="PopularId"  value=@item.Key />
+            <label class="Radio">@item.Value</label>
+        }
+    </div>
+</div>
+<p class="Aligning">
+    <label for="TrackImage">Загрузить картинку Трека</label>
+    <input type="file" name="TrackImage" />
+    @Html.ValidationMessageFor(x => x.TrackImage)
+</p>
+<p class="Aligning">
+    <label for="TrackFile">Загрузить Трек</label>
+    <input type="file" name="TrackFile" />
+    @Html.ValidationMessageFor(x => x.TrackFile)
+</p>
+
+<input type="submit" value="Сохранить" />
+
+<link href="~/Content/SyleCheckbox.css" rel="stylesheet" />
+<script src="~/Scripts/JSCheckbox.js"></script>
+
+<style>
+    .Aligning {
+        display: grid;
+        grid-template-columns: 20% 20% 30%;
+        grid-template-rows: auto;
+        margin-bottom: 10px;
+    }
+    .Radio{
+        margin-right: 5px;
+    }
+</style>

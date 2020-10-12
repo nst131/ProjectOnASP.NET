@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace DomainYandexMusic.UnitOfWork
 {
@@ -12,5 +7,6 @@ namespace DomainYandexMusic.UnitOfWork
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         int SaveChanges();
+        System.Data.Entity.Infrastructure.DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
     }
 }

@@ -1,10 +1,5 @@
 ﻿using DomainYandexMusic.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InfastructureYandexMusic.Configurations
 {
@@ -16,10 +11,14 @@ namespace InfastructureYandexMusic.Configurations
 
             HasKey(x => x.Id);
 
-            HasMany(x => x.Albums)
-                .WithOptional(x => x.Singer)
-                .HasForeignKey(x => x.SingerId)
-                .WillCascadeOnDelete(true);
+            Property(x => x.Name)
+                .IsOptional()
+                .HasMaxLength(50);
+
+            HasOptional(x => x.SingerImage)
+                .WithRequired(x => x.Singer)
+                .Map(x => x.MapKey("SingerId"))
+                .WillCascadeOnDelete(false);
         }
     }
 }

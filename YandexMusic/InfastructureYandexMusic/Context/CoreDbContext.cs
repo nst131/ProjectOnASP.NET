@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using InfastructureYandexMusic.InitilazerDb;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InfastructureYandexMusic.Context
 {
     public class CoreDbContext : DbContext, ICoreDbContext
     {
+        static CoreDbContext()
+        {
+            //Database.SetInitializer<CoreDbContext>(new InitilazerDatabaseYandexMusic());
+        }
+
         public CoreDbContext()
             : base("name = YandexMusicContext")
         {
-
+            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

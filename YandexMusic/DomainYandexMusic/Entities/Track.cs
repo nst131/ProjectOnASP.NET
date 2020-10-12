@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainYandexMusic.Entities
 {
@@ -10,27 +7,33 @@ namespace DomainYandexMusic.Entities
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+        public DateTime TimeOfCreation { get; set; } 
+        public int Liked { get; set; } 
+
         public int SingerId { get; set; }
-        public ICollection<Singer> Singers { get; set; }
+        public Singer Singer { get; set; }
 
         public int PlaylistId { get; set; }
         public ICollection<Playlist> Playlists { get; set; }
 
         public int AlbumId { get; set; }
-        public Album Album { get; set; }
+        public Album Album { get; set; } 
 
         public int GenreId { get; set; }
-        public Genre Genre { get; set; }
+        public Genre Genre { get; set; } 
 
         public int NoveltyId { get; set; }
-        public Novelty Novelty { get; set; }
+        public Novelty Novelty { get; set; } 
 
         public int PopularId { get; set; }
-        public Popular Popular { get; set; }
+        public Popular Popular { get; set; } 
+
+        public TrackImage TrackImage { get; set; }
+        public TrackFile TrackFile { get; set; }
 
         public Track()
         {
-            Singers = new List<Singer>();
             Playlists = new List<Playlist>();
         }
     }

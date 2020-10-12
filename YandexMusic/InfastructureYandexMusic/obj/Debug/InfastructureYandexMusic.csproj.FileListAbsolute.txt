@@ -1,0 +1,15 @@
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\obj\Debug\InfastructureYandexMusic.csprojAssemblyReference.cache
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\obj\Debug\InfastructureYandexMusic.csproj.CoreCompileInputs.cache
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\InfastructureYandexMusic.dll.config
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\InfastructureYandexMusic.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\InfastructureYandexMusic.pdb
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\DomainYandexMusic.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\EntityFramework.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\EntityFramework.SqlServer.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\DomainYandexMusic.pdb
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\DomainYandexMusic.dll.config
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\EntityFramework.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\bin\Debug\EntityFramework.SqlServer.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\obj\Debug\InfastructureYandexMusic.csproj.CopyComplete
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\obj\Debug\InfastructureYandexMusic.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\InfastructureYandexMusic\obj\Debug\InfastructureYandexMusic.pdb

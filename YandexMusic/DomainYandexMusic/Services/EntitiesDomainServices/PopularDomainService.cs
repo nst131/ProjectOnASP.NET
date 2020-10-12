@@ -1,10 +1,7 @@
-﻿using DomainYandexMusic.Repositories.EntitiesRepository;
+﻿using DomainYandexMusic.Entities;
+using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
@@ -15,6 +12,20 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         public PopularDomainService(IPopularRepository popularRepository)
         {
             this.popularRepository = popularRepository;
+        }
+
+        public List<Popular> GetListPopular()
+        {
+            return popularRepository.GetListPopular();
+        }
+
+        public Dictionary<int, string> GetDictionaryPopular()
+        {
+            Dictionary<int, string> vs = new Dictionary<int, string>();
+
+            GetListPopular().ForEach(x => vs.Add(x.Id, x.Name));
+
+            return vs;
         }
     }
 }

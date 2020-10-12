@@ -9,5 +9,6 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
     public interface IPopularRepository : IBaseRepository<Popular>
     {
+        List<Popular> GetListPopular();
     }
 }

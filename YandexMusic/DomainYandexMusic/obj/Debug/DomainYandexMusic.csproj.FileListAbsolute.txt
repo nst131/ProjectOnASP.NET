@@ -1,0 +1,14 @@
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\DomainYandexMusic.dll.config
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\DomainYandexMusic.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\DomainYandexMusic.pdb
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\EntityFramework.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\EntityFramework.SqlServer.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\EntityFramework.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\EntityFramework.SqlServer.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.csprojAssemblyReference.cache
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.csproj.CoreCompileInputs.cache
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.csproj.CopyComplete
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.pdb
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Newtonsoft.Json.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Newtonsoft.Json.xml

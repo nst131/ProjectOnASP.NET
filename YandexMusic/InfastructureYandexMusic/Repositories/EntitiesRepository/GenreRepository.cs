@@ -1,11 +1,8 @@
 ﻿using DomainYandexMusic.Entities;
 using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.UnitOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InfastructureYandexMusic.Repositories.EntitiesRepository
 {
@@ -15,6 +12,16 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
             : base(unitOfWork)
         {
 
+        }
+
+        public bool IsUniqueGenre(string genreName)
+        {
+            return !GetQueryable().Any(x => x.Name == genreName);
+        }
+
+        public List<Genre> GetListGenre()
+        {
+            return GetQueryable().ToList();
         }
     }
 }

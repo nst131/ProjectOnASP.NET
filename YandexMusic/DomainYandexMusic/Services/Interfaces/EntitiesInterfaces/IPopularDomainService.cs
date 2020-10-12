@@ -1,14 +1,9 @@
-﻿using DomainYandexMusic.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
-    public interface IPopularDomainService : IBaseDomainService<Popular>
+    public interface IPopularDomainService : IBaseDomainService
     {
-
+        Dictionary<int, string> GetDictionaryPopular();
     }
 }

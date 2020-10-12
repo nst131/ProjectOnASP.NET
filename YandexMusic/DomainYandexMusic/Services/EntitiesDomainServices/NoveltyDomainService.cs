@@ -1,10 +1,7 @@
-﻿using DomainYandexMusic.Repositories.EntitiesRepository;
+﻿using DomainYandexMusic.Entities;
+using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
@@ -15,6 +12,20 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         public NoveltyDomainService(INoveltyRepository noveltyRepository)
         {
             this.noveltyRepository = noveltyRepository;
+        }
+
+        public List<Novelty> GetListNovelty()
+        {
+            return noveltyRepository.GetListNovelty();
+        }
+
+        public Dictionary<int, string> GetDictionaryNovelty()
+        {
+            Dictionary<int, string> vs = new Dictionary<int, string>();
+
+            GetListNovelty().ForEach(x => vs.Add(x.Id, x.Name));
+
+            return vs;
         }
     }
 }

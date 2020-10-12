@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "GetTrack";
+}
+@model DomainYandexMusic.Entities.TrackFile
+<h2>GetTrack</h2>
+
+<audio controls>
+    <source src="@Model.FileLocation" type="audio/mp3"/>
+</audio>

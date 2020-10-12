@@ -1,14 +1,16 @@
 ﻿using DomainYandexMusic.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
+using System.Web;
 
 namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
-    public interface IAlbumDomainService : IBaseDomainService<Album>
+    public interface IAlbumDomainService : IBaseDomainService
     {
-
+        DbEntityEntry Entry(Album album);
+        List<Album> GetListAlbums();
+        bool IsJpg(HttpPostedFileBase file);
+        bool IsUniqueAlbum(string albumName);
+        int SaveChanges();
     }
 }

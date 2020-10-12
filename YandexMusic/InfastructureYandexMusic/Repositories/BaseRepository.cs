@@ -1,11 +1,8 @@
-﻿using System;
+﻿using DomainYandexMusic.Repositories;
+using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainYandexMusic.Repositories;
-using DomainYandexMusic.UnitOfWork;
 
 namespace InfastructureYandexMusic.Repositories
 {
@@ -39,12 +36,12 @@ namespace InfastructureYandexMusic.Repositories
             return DbSet().Find(id);
         }
 
-        protected virtual IQueryable<T> GetAll()
+        protected virtual ICollection<T> GetCollection()
         {
-            return DbSet();
+            return DbSet().ToList();
         }
 
-        protected virtual IQueryable<T> GetItems()
+        protected virtual IQueryable<T> GetQueryable()
         {
             return DbSet().AsQueryable();
         }

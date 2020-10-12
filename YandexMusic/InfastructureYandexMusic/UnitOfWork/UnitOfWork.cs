@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainYandexMusic.UnitOfWork;
+﻿using DomainYandexMusic.UnitOfWork;
 using InfastructureYandexMusic.Context;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace InfastructureYandexMusic.UnitOfWork
 {
@@ -20,12 +16,17 @@ namespace InfastructureYandexMusic.UnitOfWork
 
         public int SaveChanges()
         {
-            return db.SaveChanges();   
+            return db.SaveChanges();
         }
 
-        public DbSet<TEntity> Set<TEntity>() where TEntity: class
+        public DbSet<TEntity> Set<TEntity>() where TEntity : class
         {
             return db.Set<TEntity>();
+        }
+
+        public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+        {
+            return db.Entry(entity);
         }
     }
 }

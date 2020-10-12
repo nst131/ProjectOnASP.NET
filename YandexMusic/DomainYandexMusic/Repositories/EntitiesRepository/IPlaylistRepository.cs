@@ -9,5 +9,7 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
     public interface IPlaylistRepository : IBaseRepository<Playlist>
     {
+        List<Playlist> GetListPlaylist();
+        bool IsUniquePlaylist(string playlistName);
     }
 }

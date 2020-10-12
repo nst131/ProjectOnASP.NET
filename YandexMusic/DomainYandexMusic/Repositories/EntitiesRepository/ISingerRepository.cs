@@ -9,5 +9,9 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
     public interface ISingerRepository : IBaseRepository<Singer>
     {
+        List<Singer> GetListSingers();
+        Singer GetSingerById(int id);
+        bool IsExistSinger(int id);
+        bool IsUniqueSinger(string singerName);
     }
 }

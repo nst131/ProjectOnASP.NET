@@ -1,0 +1,21 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.AlbumViewModel
+
+<p>
+    <label for="AlbumName">Название альбома</label>
+    <input type="text" name="AlbumName" value=@Model.AlbumName />
+    @Html.ValidationMessageFor(x => x.AlbumName)
+</p>
+
+<p>
+    <label>Выберите исполнителя</label>
+    @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers)
+    @Html.ValidationMessageFor(x => x.SingerId);
+</p>
+
+<p>
+    <label for="AlbumImage">Загрузить картинку альбома</label>
+    <input type="file" name="AlbumImage" />
+    @Html.ValidationMessageFor(x => x.AlbumImage)
+</p>
+
+<input type="submit" value="Сохранить" />

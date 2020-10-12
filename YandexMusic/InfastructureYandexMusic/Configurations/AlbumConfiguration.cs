@@ -11,10 +11,19 @@ namespace InfastructureYandexMusic.Configurations
 
             HasKey(x => x.Id);
 
-            HasMany(x => x.Tracks)
-                .WithOptional(x => x.Album)
-                .HasForeignKey(x => x.AlbumId)
-                .WillCascadeOnDelete(true);
+            Property(x => x.Name)
+                .IsOptional()
+                .HasMaxLength(50);
+
+            HasRequired(x => x.Singer) //
+                .WithMany(x => x.Albums)
+                .HasForeignKey(x => x.SingerId)
+                .WillCascadeOnDelete(false);
+
+            HasOptional(x => x.AlbumImage) //--
+                .WithRequired(x => x.Album)
+                .Map(x => x.MapKey("AlbumImageId"))
+                .WillCascadeOnDelete(false);
         }
     }
 }

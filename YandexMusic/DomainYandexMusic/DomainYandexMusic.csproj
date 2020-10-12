@@ -40,9 +40,13 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,12 +56,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\AlbumImage.cs" />
     <Compile Include="Entities\Genre.cs" />
+    <Compile Include="Entities\GenreImage.cs" />
     <Compile Include="Entities\Novelty.cs" />
     <Compile Include="Entities\Playlist.cs" />
+    <Compile Include="Entities\PlaylistImage.cs" />
     <Compile Include="Entities\Popular.cs" />
     <Compile Include="Entities\Singer.cs" />
+    <Compile Include="Entities\SingerImage.cs" />
     <Compile Include="Entities\Track.cs" />
+    <Compile Include="Entities\TrackFile.cs" />
+    <Compile Include="Entities\TrackImage.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntitiesRepository\IAlbumRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\IGenreRepository.cs" />
@@ -67,6 +79,7 @@
     <Compile Include="Repositories\EntitiesRepository\ISingerRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\ITrackRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Services\CheckJPG.cs" />
     <Compile Include="Services\EntitiesDomainServices\AlbumDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\GenreDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\NoveltyDomainService.cs" />

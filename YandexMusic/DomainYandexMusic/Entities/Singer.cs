@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DomainYandexMusic.Entities
 {
@@ -10,9 +6,13 @@ namespace DomainYandexMusic.Entities
     {
         public int Id { get; set; }
 
-        public ICollection<Track> Tracks { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<Track> Tracks { get; set; } 
 
         public ICollection<Album> Albums { get; set; }
+
+        public SingerImage SingerImage { get; set; }
 
         public Singer()
         {
