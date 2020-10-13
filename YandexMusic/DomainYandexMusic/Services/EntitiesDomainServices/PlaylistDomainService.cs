@@ -52,5 +52,10 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
             return vs;
         }
+
+        public Playlist GetPlaylistById(int id)
+        {
+            return playlistRepository.GetPlaylistById(id);
+        }
     }
 }

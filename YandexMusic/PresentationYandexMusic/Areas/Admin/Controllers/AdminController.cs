@@ -3,7 +3,6 @@ using DomainYandexMusic.UnitOfWork;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
@@ -48,7 +47,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                adminTrack.AddTrack(trackModel,Server);
+                adminTrack.AddTrack(trackModel, Server);
 
                 return Redirect("AdminLayout");
             }
@@ -133,6 +132,11 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         }
 
         //---------------------------------- Other -----------------------------------
+        public JsonResult ReplaceItem(int id)
+        {
+            return Json(adminSinger.GetAlbumNamesBySingerId(id), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetTrack(int id)
         {
             TrackFile trackFile = unitOfWork.Set<TrackFile>().FirstOrDefault(x => x.Id == id);

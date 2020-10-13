@@ -27,5 +27,10 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
             return vs;
         }
+
+        public Popular GetPopularById(int id)
+        {
+            return popularRepository.GetPopularById(id);
+        }
     }
 }

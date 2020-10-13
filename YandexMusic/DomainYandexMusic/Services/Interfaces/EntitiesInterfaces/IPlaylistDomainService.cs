@@ -10,6 +10,7 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
         DbEntityEntry Entry(Playlist playlist);
         Dictionary<int, string> GetDictionaryPlaylist();
         List<Playlist> GetListPlaylist();
+        Playlist GetPlaylistById(int id);
         bool IsJpg(HttpPostedFileBase file);
         bool IsUniquePlaylist(string playlistName);
         int SaveChanges();

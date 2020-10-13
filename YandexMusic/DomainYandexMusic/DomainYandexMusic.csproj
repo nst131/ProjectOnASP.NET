@@ -70,6 +70,7 @@
     <Compile Include="Entities\TrackImage.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserImage.cs" />
+    <Compile Include="Models\AlbumNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntitiesRepository\IAlbumRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\IGenreRepository.cs" />

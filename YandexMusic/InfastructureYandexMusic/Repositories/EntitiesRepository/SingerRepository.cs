@@ -2,6 +2,7 @@
 using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace InfastructureYandexMusic.Repositories.EntitiesRepository
@@ -16,7 +17,8 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
 
         public List<Singer> GetListSingers()
         {
-            return GetQueryable().ToList();
+            return GetQueryable()
+                .ToList();
         }
 
         public Singer GetSingerById(int id)
@@ -27,12 +29,26 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
 
         public bool IsExistSinger(int id)
         {
-            return GetQueryable().Any(x => x.Id == id);
+            return GetQueryable()
+                .Any(x => x.Id == id);
         }
 
         public bool IsUniqueSinger(string singerName)
         {
-            return !GetQueryable().Any(x => x.Name == singerName);
+            return !GetQueryable()
+                .Any(x => x.Name == singerName);
+        }
+
+        public Singer GetSingerByIdWithAlbums(int id)
+        {
+            return GetQueryable()
+                .Include(x => x.Albums)
+                .FirstOrDefault(x => x.Id == id);
+        }
+
+        public int GetFirstSingerId()
+        {
+            return GetQueryable().FirstOrDefault().Id;
         }
     }
 }

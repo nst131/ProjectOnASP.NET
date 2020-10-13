@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainYandexMusic.Entities;
+using DomainYandexMusic.Models;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel;
@@ -24,6 +25,11 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 
             singerDomainService.Entry(singer).State = EntityState.Added;
             singerDomainService.SaveChanges();
+        }
+
+        public AlbumNames GetAlbumNamesBySingerId(int id)
+        {
+            return singerDomainService.GetAlbumNamesBySingerId(id);
         }
     }
 }

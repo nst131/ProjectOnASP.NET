@@ -18,5 +18,11 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
         {
             return GetQueryable().ToList();
         }
+
+        public Novelty GetNoveltyById(int id)
+        {
+            return GetQueryable()
+                .FirstOrDefault(x => x.Id == id);
+        }
     }
 }

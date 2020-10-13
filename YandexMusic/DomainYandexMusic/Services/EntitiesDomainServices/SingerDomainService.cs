@@ -1,10 +1,12 @@
 ﻿using DomainYandexMusic.Entities;
+using DomainYandexMusic.Models;
 using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Web;
+using System.Linq;
 
 namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
@@ -13,7 +15,7 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         private readonly ISingerRepository singerRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public SingerDomainService(ISingerRepository singerRepository,IUnitOfWork unitOfWork)
+        public SingerDomainService(ISingerRepository singerRepository, IUnitOfWork unitOfWork)
         {
             this.singerRepository = singerRepository;
             this.unitOfWork = unitOfWork;
@@ -52,6 +54,36 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         public bool IsUniqueSinger(string singerName)
         {
             return singerRepository.IsUniqueSinger(singerName);
+        }
+
+        public Singer GetSingerByIdWithAlbums(int id)
+        {
+            return singerRepository.GetSingerByIdWithAlbums(id);
+        }
+
+        public AlbumNames GetAlbumNamesBySingerId(int id)
+        {
+            Singer singer = GetSingerByIdWithAlbums(id);
+
+            List<int> albumId = new List<int>();
+            List<string> albumName = new List<string>();
+
+            foreach (var item in singer.Albums)
+            {
+                albumId.Add(item.Id);
+                albumName.Add(item.Name);
+            }
+
+            return new AlbumNames()
+            {
+                AlbumsId = albumId,
+                AlbumsName = albumName
+            };
+        }
+
+        public int GetFirstSingerId()
+        {
+            return singerRepository.GetFirstSingerId();
         }
     }
 }

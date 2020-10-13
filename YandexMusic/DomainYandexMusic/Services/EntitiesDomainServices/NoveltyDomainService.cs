@@ -27,5 +27,10 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
             return vs;
         }
+
+        public Novelty GetNoveltyById(int id)
+        {
+            return noveltyRepository.GetNoveltyById(id);
+        }
     }
 }

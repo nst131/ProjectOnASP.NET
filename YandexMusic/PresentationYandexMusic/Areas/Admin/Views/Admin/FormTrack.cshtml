@@ -1,5 +1,9 @@
 ﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.TrackViewModel
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 <p class="Aligning">
     <label for="TrackName">Название трека</label>
     <input type="text" name="TrackName" value=@Model.TrackName />
@@ -15,9 +19,9 @@
     <input type="number" name="Liked" value=@Model.Liked />
     @Html.ValidationMessageFor(x => x.Liked)
 </p>
-<p class="Aligning">
+<p id="Singers" class="Aligning">
     <label>Выберите исполнителя</label>
-    @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers)
+    @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers, new { @class = "SingerList" })
     @Html.ValidationMessageFor(x => x.SingerId)
 </p>
 <div class="Aligning">
@@ -29,11 +33,11 @@
         }
     </div>
 </div>
-<p class="Aligning">
+<p id="Albums" class="Aligning">
     <label>Выберите альбом</label>
-    @Html.DropDownListFor(x => x.AlbumId, Model.SelectListAlbums)
-    @Html.ValidationMessageFor(x => x.AlbumId)
+    @Html.DropDownListFor(x => x.AlbumId, Model.SelectListAlbums, new { @class = "AlbumList" })
 </p>
+    @Html.ValidationMessageFor(x => x.AlbumId)
 <p class="Aligning">
     <label>Выберите жанр</label>
     @Html.DropDownListFor(x => x.GenreId, Model.SelectListGenre)
@@ -54,7 +58,7 @@
     <div>
         @foreach (var item in Model.PopularList)
         {
-            <input type="radio" name="PopularId"  value=@item.Key />
+            <input type="radio" name="PopularId" value=@item.Key />
             <label class="Radio">@item.Value</label>
         }
     </div>
@@ -82,7 +86,27 @@
         grid-template-rows: auto;
         margin-bottom: 10px;
     }
-    .Radio{
+
+    .Radio {
         margin-right: 5px;
     }
 </style>
+
+<script>
+    $(function () {
+        $(`#Singers`).on(`change`, `.SingerList`, function () {
+            let id = $(`.SingerList option:selected`).val()
+            $.ajax({
+                method: `GET`,
+                url: `/Admin/Admin/ReplaceItem/${id}`
+            })
+                .done(function (data) {
+                    $(`.AlbumList`).remove();
+                    $(`#Albums`).append(`<select name=AlbumId class='AlbumList'></select>`)
+                    for (var i = 0; i < data.AlbumsId.length; i++) {
+                        $(`.AlbumList`).append(`<option value=${data.AlbumsId[i]}>${data.AlbumsName[i]}</option>`)
+                    }
+                })
+        })
+    })
+</script>

@@ -9,6 +9,7 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
     public interface IGenreRepository : IBaseRepository<Genre>
     {
+        Genre GetGenreById(int id);
         List<Genre> GetListGenre();
         bool IsUniqueGenre(string genreName);
     }

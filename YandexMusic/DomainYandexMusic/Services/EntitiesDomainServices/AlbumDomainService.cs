@@ -43,5 +43,10 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         {
             return albumRepository.GetListAlbums();
         }
+
+        public Album GetAlbumById(int id)
+        {
+            return albumRepository.GetAlbumById(id);
+        }
     }
 }

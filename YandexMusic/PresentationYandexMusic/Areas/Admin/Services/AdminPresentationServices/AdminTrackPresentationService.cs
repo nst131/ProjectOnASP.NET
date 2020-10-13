@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
+using Microsoft.Ajax.Utilities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel;
 using System.Data.Entity;
@@ -43,13 +44,14 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         {
             return new TrackViewModel()
             {
-                SingerId = 1,
+                SingerId = singerDomainService.GetFirstSingerId(),
                 SelectListSingers = new SelectList(singerDomainService.GetListSingers(), "Id", "Name"),
 
                 PlaylistList = playlistDomainService.GetDictionaryPlaylist(),
 
                 AlbumId = 1,
-                SelectListAlbums = new SelectList(albumDomainService.GetListAlbums(), "Id", "Name"),
+                SelectListAlbums = new SelectList(singerDomainService
+                    .GetSingerByIdWithAlbums(singerDomainService.GetFirstSingerId()).Albums, "Id", "Name"),
 
                 GenreId = 1,
                 SelectListGenre = new SelectList(genreDomainService.GetListGenre(), "Id", "Name"),
@@ -63,6 +65,19 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         public void AddTrack(TrackViewModel trackModel, HttpServerUtilityBase server)
         {
             Track track = Mapper.Map<TrackViewModel, Track>(trackModel);
+
+            track.Singer = singerDomainService.GetSingerById(trackModel.SingerId);
+
+            trackModel.PlaylistArrayId
+                .ForEach(x => track.Playlists.Add(playlistDomainService.GetPlaylistById(x)));
+
+            track.Album = albumDomainService.GetAlbumById(trackModel.AlbumId);
+
+            track.Genre = genreDomainService.GetGenreById(trackModel.GenreId);
+
+            track.Popular = popularDomainService.GetPopularById(trackModel.PopularId);
+
+            track.Novelty = noveltyDomainService.GetNoveltyById(trackModel.NoveltyId);
 
             track.TrackImage.ImageData = GetArray(trackModel.TrackImage);
 

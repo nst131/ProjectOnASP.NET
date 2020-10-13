@@ -10,5 +10,6 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
     public interface INoveltyRepository : IBaseRepository<Novelty>
     {
         List<Novelty> GetListNovelty();
+        Novelty GetNoveltyById(int id);
     }
 }

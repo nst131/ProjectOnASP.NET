@@ -23,5 +23,11 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
         {
             return GetQueryable().ToList();
         }
+
+        public Genre GetGenreById(int id)
+        {
+            return GetQueryable()
+                .FirstOrDefault(x => x.Id == id);
+        }
     }
 }

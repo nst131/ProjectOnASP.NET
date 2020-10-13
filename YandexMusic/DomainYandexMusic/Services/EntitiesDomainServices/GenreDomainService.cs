@@ -43,5 +43,10 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         {
             return genreRepository.GetListGenre();
         }
+
+        public Genre GetGenreById(int id)
+        {
+            return genreRepository.GetGenreById(id);
+        }
     }
 }

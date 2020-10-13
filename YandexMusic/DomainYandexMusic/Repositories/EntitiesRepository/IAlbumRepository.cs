@@ -9,6 +9,7 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
     public interface IAlbumRepository : IBaseRepository<Album>
     {
+        Album GetAlbumById(int id);
         List<Album> GetListAlbums();
         bool IsUniqueAlbum(string albumName);
     }
