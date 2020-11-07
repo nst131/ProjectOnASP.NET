@@ -11,6 +11,8 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
     {
         List<Playlist> GetListPlaylist();
         Playlist GetPlaylistById(int id);
+        Playlist GetPlaylistWithImage(int id);
+        bool IsExistPlaylist(int id);
         bool IsUniquePlaylist(string playlistName);
     }
 }

@@ -7,5 +7,6 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
     {
         Dictionary<int, string> GetDictionaryPopular();
         Popular GetPopularById(int id);
+        List<Track> GetPopularTracksByQuantityTracks(int numberTracks);
     }
 }

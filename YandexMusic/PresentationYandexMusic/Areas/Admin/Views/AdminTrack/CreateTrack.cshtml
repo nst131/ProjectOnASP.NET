@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "CreateTrack";
+}
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Track.CreateTrackViewModel
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/ColorValidation.css" rel="stylesheet" />
+<link href="~/Content/SyleCheckbox.css" rel="stylesheet" />
+<link href="~/Content/StyleTrackCreate.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/Ajax")
+    @Scripts.Render("~/Scripts/SolutionAjaxForm.js")
+    @Scripts.Render("~/Scripts/JSCheckbox.js")
+    @Scripts.Render("~/Scripts/JSTrackCreate.js")
+}
+
+<form action="/Admin/AdminTrack/CreateTrack" method="post" enctype="multipart/form-data">
+
+    <p class="Aligning">
+        <label for="TrackName">Название трека</label>
+        <input type="text" name="TrackName" value=@Model.TrackName />
+        @Html.ValidationMessageFor(x => x.TrackName)
+    </p>
+
+    <p class="Aligning">
+        <label for="TimeOfCreation">Дата добавления трека</label>
+        <input type="date" name="TimeOfCreation" value=@Model.TimeOfCreation />
+        @Html.ValidationMessageFor(x => x.TimeOfCreation)
+    </p>
+
+    <p class="Aligning">
+        <label for="Liked">Количество Лайков</label>
+        <input type="number" name="Liked" value=@Model.Liked />
+        @Html.ValidationMessageFor(x => x.Liked)
+    </p>
+
+    <p id="Singers" class="Aligning">
+        <label>Выберите исполнителя</label>
+        @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers, new { @class = "SingerList" })
+        @Html.ValidationMessageFor(x => x.SingerId)
+    </p>
+
+    <div class="Aligning">
+        <label>Выберите плэйлисты</label>
+        <div class="checkselect">
+            @foreach (var item in Model.PlaylistList)
+            {
+                <label><input type="checkbox" name="PlaylistArrayId[]" value=@item.Key />@item.Value</label>
+            }
+        </div>
+    </div>
+
+    <p id="Albums" class="Aligning">
+        <label>Выберите альбом</label>
+        @Html.DropDownListFor(x => x.AlbumId, Model.SelectListAlbums, new { @class = "AlbumList" })
+    </p>
+    @Html.ValidationMessageFor(x => x.AlbumId)
+
+    <p class="Aligning">
+        <label>Выберите жанр</label>
+        @Html.DropDownListFor(x => x.GenreId, Model.SelectListGenre)
+        @Html.ValidationMessageFor(x => x.GenreId)
+    </p>
+
+    <div class="Aligning">
+        <label>Выберите новинку</label>
+        <div>
+            @foreach (var item in Model.NoveltyList)
+            {
+                <input type="radio" name="NoveltyId" value=@item.Key />
+                <label class="Radio">@item.Value</label>
+            }
+        </div>
+        @Html.ValidationMessageFor(x => x.NoveltyId)
+    </div>
+
+    <div class="Aligning">
+        <label>Выберите популярность</label>
+        <div>
+            @foreach (var item in Model.PopularList)
+            {
+                <input type="radio" name="PopularId" value=@item.Key />
+                <label class="Radio">@item.Value</label>
+            }
+        </div>
+        @Html.ValidationMessageFor(x => x.PopularId)
+    </div>
+
+    <p class="Aligning">
+        <label for="TrackImage">Загрузить картинку Трека</label>
+        <input type="file" name="TrackImage" />
+        @Html.ValidationMessageFor(x => x.TrackImage)
+    </p>
+
+    <p class="Aligning">
+        <label for="TrackFile">Загрузить Трек</label>
+        <input type="file" name="TrackFile" />
+        @Html.ValidationMessageFor(x => x.TrackFile)
+    </p>
+
+    <input type="submit" value="Сохранить" class="btn btn-success" />
+</form>

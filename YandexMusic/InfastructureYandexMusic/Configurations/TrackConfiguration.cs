@@ -19,50 +19,48 @@ namespace InfastructureYandexMusic.Configurations
             Property(x => x.Liked)
                 .IsRequired();
 
-            HasMany(x => x.Playlists) // View
+            HasMany(x => x.Playlists)
                 .WithMany(x => x.Tracks)
                 .Map(x => x.MapRightKey("PlaylistId"))
                 .Map(x => x.MapLeftKey("TrackId"));
 
-            HasOptional(x => x.Singer) // View
+            HasOptional(x => x.Singer)
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.SingerId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             Property(x => x.SingerId).IsOptional();
 
-            HasOptional(x => x.Album) // View
+            HasOptional(x => x.Album)
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.AlbumId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             Property(x => x.AlbumId).IsOptional();
 
-            HasOptional(x => x.Genre) // View
+            HasOptional(x => x.Genre)
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.GenreId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             Property(x => x.GenreId).IsOptional();
 
-            HasOptional(x => x.Novelty) // Initiliazer
+            HasOptional(x => x.Novelty) 
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.NoveltyId)
                 .WillCascadeOnDelete(false);
             Property(x => x.NoveltyId).IsOptional();
 
-            HasOptional(x => x.Popular) // Initiliazer
+            HasOptional(x => x.Popular) 
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.PopularId)
                 .WillCascadeOnDelete(false);
             Property(x => x.PopularId).IsOptional();
 
-            HasOptional(x => x.TrackImage) //--
+            HasOptional(x => x.TrackImage) 
                 .WithRequired(x => x.Track)
-                .Map(x => x.MapKey("TrackId")) //
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
-            HasOptional(x => x.TrackFile) //--
+            HasOptional(x => x.TrackFile) 
                 .WithRequired(x => x.Track)
-                .Map(x => x.MapKey("TrackId")) //
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }

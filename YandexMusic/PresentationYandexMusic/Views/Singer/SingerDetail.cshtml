@@ -1,0 +1,417 @@
+﻿@{
+    ViewBag.Title = "SingerDetail";
+}
+@model PresentationYandexMusic.Models.SingerModels.SingerDetailViewModel
+
+@Styles.Render("~/Content/CSSYandexMusic")
+
+@section scripts{
+    @Scripts.Render("~/bundles/JSYandexMusic")
+    @Scripts.Render("~/Scripts/JSButtonPlayMusic.js")
+    @Scripts.Render("~/Scripts/JSHeart.js")
+}
+
+<style>
+    .popularMusic img {
+        width: 15px;
+        height: 25px;
+    }
+
+    .likeMusic img {
+        width: 10px;
+        height: 20px;
+    }
+
+    .coll {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+    }
+</style>
+
+<div class="app dk" id="app">
+
+    <!-- ############ LAYOUT START-->
+    <div id="content" class="app-content white bg box-shadow-z2" role="main">
+        <div class="app-header hidden-lg-up white lt box-shadow-z1">
+            <div class="navbar">
+                <!-- brand -->
+                <a class="navbar-brand md">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                        <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
+                        <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
+                        <circle cx="24" cy="24" r="10" fill="#ffffff" />
+                        <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
+                        <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
+                        <circle cx="24" cy="24" r="3" fill="#000000" />
+                    </svg>
+
+                    <img src="images/logo.png" alt="." class="hide">
+                    <span class="hidden-folded inline">pulse</span>
+                </a>
+                <!-- / brand -->
+                <!-- nabar right -->
+                <ul class="nav navbar-nav pull-right">
+                    <li class="nav-item">
+                        <a data-toggle="modal" data-target="#aside" class="nav-link">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- / navbar right -->
+            </div>
+        </div>
+        <!-- Плеер -->
+        <!-- <div class="app-footer app-player grey bg">
+          <div class="playlist" style="width:100%"></div>
+        </div> -->
+        <div class="app-body" id="view">
+
+            <!-- ############ PAGE START-->
+            <!-- Singer -->
+            <div class="pos-rlt">
+                <!-- Top Image-->
+                <div class="page-bg" data-stellar-ratio="2" style="background-image: url('../../images/b5.jpg'); max-height: 200px; "></div>
+            </div>
+            <div class="page-content">
+                <div class="padding b-b">
+                    <div class="row-col">
+                        <div class="col-sm w w-auto-xs m-b">
+                            <div class="item w rounded">
+                                <div class="item-media">
+                                    <!-- Image Singer -->
+                                    <div class="item-media-content" style="background-image: url('@Url.Action(MVC.Singer.GetSingerImage(Model.Singer.Id))');"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="p-l-md no-padding-xs">
+                                <div class="page-title">
+                                    <!-- SingerName -->
+                                    <h1 class="inline">@Model.Singer.Name</h1>
+                                    <label class="fa fa-star text-primary text-lg m-b v-m m-l-xs" title="Pro"></label>
+                                    <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
+                                </div>
+                                <div class="item-action m-b">
+                                    <!-- AmountAlbums and AmountTracks -->
+                                    <span>@Model.AmountAlbums Albums, @Model.AmountTracks Tracks</span>
+                                </div>
+                                <!-- Genre -->
+                                <div class="container">
+                                    <div class="row item-list item-list-sm m-b">
+                                        <div class="col-lg-12">
+                                            <div class="media-left d-flex flex-column">
+                                                <!-- GenreImage -->
+                                                <img class="rounded-circle" src="@Url.Action(MVC.Genre.GetGenreImage(Model.SingerGenre.Id))" style="width: 60px;">
+                                                <!-- GenreName -->
+                                                <a class="btn btn-xs rounded white" style="margin-left: 10px;">@Model.SingerGenre.Name</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+        <div class="padding">
+            <!-- Popular Tracks -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <h5 class="m-b">Popular Tracks</h5>
+                    <div class="row item-list item-list-md item-list-li m-b" id="tracks">
+                        <!-- Record only popular Track in Singer -->
+                        @foreach (var track in Model.Singer.Tracks)
+                        {
+                            <div class="col-md-12 col-lg-6">
+                                <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                    <div class="item-media coll">
+                                        <!-- TrackImage -->
+                                        <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(track.Id))');"></a>
+                                        <div class="item-overlay">
+                                            <button class="btn-playpause playMusic popularMusic rounded">
+                                                <img src="~/images/Play.jpg" class="rounded" name="Play" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-overlay bottom text-right">
+                                            <a class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                            <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                            <div class="dropdown-menu pull-right black lt"></div>
+                                        </div>
+                                        <div class="item-title text-ellipsis">
+                                            <!-- TrackName -->
+                                            <p style="font-size: medium;">@track.Name</p>
+                                        </div>
+                                        <!-- AlbumName -->
+                                        <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))">Album: @track.Album.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Albums -->
+                    <h5 class="m-b">Albums</h5>
+                    <div class="row m-b">
+
+                        @foreach (var album in Model.Singer.Albums)
+                        {
+                            <div class="col-xs-4 col-sm-4 col-md-3">
+                                <div class="item r" data-id="item-7" data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                    <div class="item-media ">
+                                        <!-- AlbumImage -->
+                                        <a href="@Url.Action(MVC.Album.AlbumDetail(album.Id))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(album.Id))');"></a>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-overlay bottom text-right">
+                                            <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                            <div class="dropdown-menu pull-right black lt"></div>
+                                        </div>
+                                        <div class="item-title text-ellipsis">
+                                            <!-- AlbumName -->
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(album.Id))">@album.Name</a>
+                                        </div>
+                                        <div class="item-meta text-sm text-muted">
+                                            <span class="item-meta-stats text-xs ">
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- Location -->
+                <div class="tab-pane" id="tab_4">
+                    <div class="row-col m-b">
+                        <div class="col-xs w-xs text-muted">Location</div>
+                        <div class="col-xs">UK</div>
+                    </div>
+                    <div class="row-col m-b">
+                        <div class="col-xs w-xs text-muted">Website</div>
+                        <div class="col-xs"><a href="http://rachel-platten.com">http://rachel-platten.com</a></div>
+                    </div>
+                    <div class="row-col m-b">
+                        <div class="col-xs w-xs text-muted"></div>
+                        <div class="col-xs">
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-facebook indigo"></i>
+                            </a>
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-twitter light-blue"></i>
+                            </a>
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-google-plus red"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Liked Tracks -->
+    <div class="col-lg-3 w-xxl w-auto-md">
+        <div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent">
+            <!-- Liked -->
+            <h6 class="text text-muted">Liked Tracks</h6>
+            <div class="row item-list item-list-sm m-b">
+
+                @foreach (var likeTrack in Model.LikedTracks)
+                {
+                    <div class="col-xs-12">
+                        <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                            <div class="item-media ">
+                                <!-- TrackImage -->
+                                <a href="@Url.Action(MVC.Album.AlbumDetail(likeTrack.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(likeTrack.Id))');"></a>
+                                <div class="item-overlay">
+                                    <button class="btn-playpause playMusic likeMusic rounded">
+                                        <img src="~/images/Play.jpg" class="rounded" name="Play" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-title text-ellipsis">
+                                    <!-- TrackName -->
+                                    <a href="@Url.Action(MVC.Album.AlbumDetail(likeTrack.AlbumId))">@likeTrack.Name</a>
+                                </div>
+                                <div class="item-author text-sm text-ellipsis ">
+                                    <!-- SingerName -->
+                                    <a href="@Url.Action(MVC.Singer.SingerDetail(likeTrack.SingerId))" class="text-muted">@likeTrack.Singer.Name</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- AppStore and GooglePlay -->
+            <h6 class="text text-muted">Go mobile</h6>
+            <div class="btn-groups">
+                <a href="" class="btn btn-sm dark lt m-r-xs" style="width: 135px">
+                    <span class="pull-left m-r-sm">
+                        <i class="fa fa-apple fa-2x"></i>
+                    </span>
+                    <span class="clear text-left l-h-1x">
+                        <span class="text-muted text-xxs">Download on the</span>
+                        <b class="block m-b-xs">App Store</b>
+                    </span>
+                </a>
+                <a href="" class="btn btn-sm dark lt" style="width: 133px">
+                    <span class="pull-left m-r-sm">
+                        <i class="fa fa-play fa-2x"></i>
+                    </span>
+                    <span class="clear text-left l-h-1x">
+                        <span class="text-muted text-xxs">Get it on</span>
+                        <b class="block m-b-xs m-r-xs">Google Play</b>
+                    </span>
+                </a>
+            </div>
+            <div class="b-b m-y"></div>
+            <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
+        </div>
+    </div>
+</div>
+<!-- ############ PAGE END-->
+<!-- ############ SWITHCHER START-->
+<div id="switcher">
+    <div class="switcher white" id="sw-theme">
+        <a href="#" data-ui-toggle-class="active" data-ui-target="#sw-theme" class="white sw-btn">
+            <i class="fa fa-gear text-muted"></i>
+        </a>
+        <div class="box-header">
+            <strong>Theme Switcher</strong>
+        </div>
+        <div class="box-divider"></div>
+        <div class="box-body">
+            <p id="settingLayout" class="hidden-md-down">
+                <label class="md-check m-y-xs" data-target="folded">
+                    <input type="checkbox">
+                    <i class="green"></i>
+                    <span>Folded Aside</span>
+                </label>
+                <label class="m-y-xs pointer" data-ui-fullscreen data-target="fullscreen">
+                    <span class="fa fa-expand fa-fw m-r-xs"></span>
+                    <span>Fullscreen Mode</span>
+                </label>
+            </p>
+            <p>Colors:</p>
+            <p data-target="color">
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="primary">
+                    <i class="primary"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="accent">
+                    <i class="accent"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="warn">
+                    <i class="warn"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="success">
+                    <i class="success"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="info">
+                    <i class="info"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="blue">
+                    <i class="blue"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="warning">
+                    <i class="warning"></i>
+                </label>
+                <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+                    <input type="radio" name="color" value="danger">
+                    <i class="danger"></i>
+                </label>
+            </p>
+            <p>Themes:</p>
+            <div data-target="bg" class="text-u-c text-center _600 clearfix">
+                <label class="p-a col-xs-3 light pointer m-a-0">
+                    <input type="radio" name="theme" value="" hidden>
+                    <i class="active-checked fa fa-check"></i>
+                </label>
+                <label class="p-a col-xs-3 grey pointer m-a-0">
+                    <input type="radio" name="theme" value="grey" hidden>
+                    <i class="active-checked fa fa-check"></i>
+                </label>
+                <label class="p-a col-xs-3 dark pointer m-a-0">
+                    <input type="radio" name="theme" value="dark" hidden>
+                    <i class="active-checked fa fa-check"></i>
+                </label>
+                <label class="p-a col-xs-3 black pointer m-a-0">
+                    <input type="radio" name="theme" value="black" hidden>
+                    <i class="active-checked fa fa-check"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ############ SWITHCHER END-->
+<!-- ############ SHARE START -->
+<!-- Share -->
+<div id="share-modal" class="modal fade animate">
+    <div class="modal-dialog">
+        <div class="modal-content fade-down">
+            <div class="modal-header">
+
+                <h5 class="modal-title">Share</h5>
+            </div>
+            <div class="modal-body p-lg">
+                <div id="share-list" class="m-b">
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored indigo" title="Facebook">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-facebook"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored light-blue" title="Twitter">
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-twitter"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored red-600" title="Google+">
+                        <i class="fa fa-google-plus"></i>
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored blue-grey-600" title="Trumblr">
+                        <i class="fa fa-tumblr"></i>
+                        <i class="fa fa-tumblr"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored red-700" title="Pinterst">
+                        <i class="fa fa-pinterest"></i>
+                        <i class="fa fa-pinterest"></i>
+                    </a>
+                </div>
+                <div>
+                    <input class="form-control" value="http://plamusic.com/slug" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ############ SHARE END -->
+<!-- ############ LAYOUT END-->

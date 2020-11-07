@@ -1,0 +1,8 @@
+﻿.spinner {
+    visibility: hidden;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+}

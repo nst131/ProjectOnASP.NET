@@ -1,0 +1,58 @@
+﻿@model List<PresentationYandexMusic.Areas.Admin.ViewModel.Singer.AdminSingerViewModel>
+
+<script>
+    $(function () {
+        $("#accordion").accordion();
+    });
+</script>
+
+<link href="~/Content/StyleAdminPresentationPage.css" rel="stylesheet" />
+
+<div id="accordion">
+    @foreach (var singer in Model)
+     {
+        <h3>@singer.Name</h3>
+
+        <div>
+            @Html.ActionLink("Изменить", @MVC.Admin.AdminSinger.EditSinger(singer.Id))
+            @Html.ActionLink("Удалить", @MVC.Admin.AdminSinger.DeleteSinger(singer.Id))
+            @foreach (var album in singer.Albums)
+             {
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse_@album.Id" aria-expanded="true" aria-controls="collapseOne">
+                                    Альбом: @album.Name
+                                </button>
+                                @Html.ActionLink("Изменить", @MVC.Admin.AdminAlbum.EditAlbum(album.Id))
+                                @Html.ActionLink("Удалить", @MVC.Admin.AdminAlbum.DeleteAlbum(album.Id))
+                            </h2>
+                        </div>
+
+                        <div id="collapse_@album.Id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                @foreach (var track in album.Tracks)
+                                 {
+                                    <div class="TrackLine">
+                                        <img src="/Admin/AdminTrack/GetTrackImage?id=@track.Id" width="50" height="50" />
+                                        <h5>@track.Name</h5>
+                                        <audio controls style="width:100%">
+                                            <source src="@track.FileLocation" type="audio/mp3" />
+                                        </audio>
+                                        <div class="TrackLineLink">
+                                            @Html.ActionLink("Изменить", @MVC.Admin.AdminTrack.EditTrack(track.Id))
+                                            @Html.ActionLink("Удалить", @MVC.Admin.AdminTrack.DeleteTrack(track.Id))
+                                        </div>
+                                    </div>
+                                 }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             }
+        </div>
+     }
+</div>
+
+<script src="~/Scripts/ScriptSpinnerHidden.js"></script>

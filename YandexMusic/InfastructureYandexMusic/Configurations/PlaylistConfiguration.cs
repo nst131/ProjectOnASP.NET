@@ -17,8 +17,7 @@ namespace InfastructureYandexMusic.Configurations
 
             HasOptional(x => x.PlaylistImage)
                 .WithRequired(x => x.Playlist)
-                .Map(x => x.MapKey("PlayImageId"))
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -2,7 +2,7 @@
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
-using PresentationYandexMusic.Areas.Admin.ViewModel;
+using PresentationYandexMusic.Areas.Admin.ViewModel.Genre;
 using System.Data.Entity;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
@@ -16,23 +16,12 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
             this.genreDomainService = genreDomainService;
         }
 
-        //public void AddGenre(GenreViewModel genreModel)
-        //{
-        //    Genre genre = Mapper.Map<GenreViewModel, Genre>(genreModel);
-
-        //    genreModel.GenreImage.InputStream
-        //        .Read(genre.GenreImage.ImageData, 0, genreModel.GenreImage.ContentLength);
-
-        //    genreDomainService.Entry(genre).State = EntityState.Added;
-        //    genreDomainService.SaveChanges();
-        //}
-
-        public void AddGenre(GenreViewModel genreModel)
+        public void AddGenre(CreateGenreViewModel genreModel)
         {
-            Genre genre = Mapper.Map<GenreViewModel, Genre>(genreModel);
+            Genre genre = Mapper.Map<CreateGenreViewModel, Genre>(genreModel);
 
             genre.GenreImage.ImageData = GetArray(genreModel.GenreImage);
-                                                    
+
             genreDomainService.Entry(genre).State = EntityState.Added;
             genreDomainService.SaveChanges();
         }

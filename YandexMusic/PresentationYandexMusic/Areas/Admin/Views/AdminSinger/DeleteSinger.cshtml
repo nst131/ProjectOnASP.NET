@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "DeleteSinger";
+}
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Singer.DeleteSingerViewModel
+
+<form class="Form" action="/Admin/AdminSinger/DeleteSinger/@Model.Id" method="post" enctype="multipart/form-data">
+    <h3>Вы уверены что хотите удалить этого исполнителя</h3>
+    <img src="/Admin/AdminSinger/GetSingerImage?Id=@Model.Id" width="200" height="200" />
+    <p>@Model.Name</p>
+    <input type="submit" value="Удалить исполнителя" class="btn btn-danger"/>
+</form>
+
+<link href="~/Content/StyleItemDelete.css" rel="stylesheet" />
+
+

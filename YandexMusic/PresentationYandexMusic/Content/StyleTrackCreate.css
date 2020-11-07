@@ -1,0 +1,14 @@
+﻿.Aligning {
+    display: grid;
+    grid-template-columns: 20% 20% 30%;
+    grid-template-rows: auto;
+    margin-bottom: 10px;
+}
+
+.Radio {
+    margin-right: 5px;
+}
+
+.form-control {
+    padding: 0px;
+}

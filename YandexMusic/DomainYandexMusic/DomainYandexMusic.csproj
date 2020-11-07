@@ -80,7 +80,7 @@
     <Compile Include="Repositories\EntitiesRepository\ISingerRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\ITrackRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
-    <Compile Include="Services\CheckJPG.cs" />
+    <Compile Include="Services\CheckFile.cs" />
     <Compile Include="Services\EntitiesDomainServices\AlbumDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\GenreDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\NoveltyDomainService.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ISingerDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ITrackDomainService.cs" />
     <Compile Include="Services\Interfaces\IBaseDomainService.cs" />
+    <Compile Include="Services\Interfaces\ICheckFile.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />

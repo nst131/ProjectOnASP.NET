@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace InfastructureYandexMusic.InitilazerDb
 {
-    public class InitilazerDatabaseYandexMusic : DropCreateDatabaseAlways<CoreDbContext>
+    public class InitilazerDatabaseYandexMusic : CreateDatabaseIfNotExists<CoreDbContext>
     {
         protected override void Seed(CoreDbContext db)
         {

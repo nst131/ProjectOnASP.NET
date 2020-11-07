@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.9</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -152,6 +154,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\T4MVCExtensions.4.2.4\lib\net45\T4MVCExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -167,6 +172,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.AdminAlbumController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.AdminController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.AdminGenreController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.AdminPlaylistController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.AdminSingerController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.AdminTrackController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlbumController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AutofacContainer.cs" />
     <Compile Include="App_Start\AutofacValidatorFactory.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
@@ -175,6 +204,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminAlbumController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminGenreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminPlaylistController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminSingerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminTrackController.cs" />
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\AdminAlbumPresentationService.cs" />
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\AdminPlaylistPresentationService.cs" />
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\GetArrayImage.cs" />
@@ -187,65 +221,422 @@
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\Interfaces\IAdminPlaylistPresentationService.cs" />
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\Interfaces\IAdminSingerPresentationService.cs" />
     <Compile Include="Areas\Admin\Services\AdminPresentationServices\Interfaces\IAdminTrackPresentationService.cs" />
-    <Compile Include="Areas\Admin\Validation\AdminValidationOfAlbumCreate.cs" />
-    <Compile Include="Areas\Admin\Validation\AdminValidationOfGenreCreate.cs" />
-    <Compile Include="Areas\Admin\Validation\AdminValidationOfPlaylistCreate.cs" />
-    <Compile Include="Areas\Admin\Validation\AdminValidationOfSingerCreate.cs" />
-    <Compile Include="Areas\Admin\ViewModel\AlbumViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\GenreViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\PlaylistViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\SingerViewModel.cs" />
+    <Compile Include="Areas\Admin\Validation\Album\AdminValidationOfAlbumCreate.cs" />
+    <Compile Include="Areas\Admin\Validation\Album\AdminValidationOfAlbumEdit.cs" />
+    <Compile Include="Areas\Admin\Validation\Genre\AdminValidationOfGenreCreate.cs" />
+    <Compile Include="Areas\Admin\Validation\Playlist\AdminValidationOfPlaylistCreate.cs" />
+    <Compile Include="Areas\Admin\Validation\Singer\AdminValidationOfSingerCreate.cs" />
+    <Compile Include="Areas\Admin\Validation\Singer\AdminValidationOfSingerEdit.cs" />
+    <Compile Include="Areas\Admin\Validation\Track\AdminValidationOfTrackCreate.cs" />
+    <Compile Include="Areas\Admin\Validation\Track\AdminValidationOfTrackEdit.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Album\AdminAlbumViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Album\CreateAlbumViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Album\DeleteAlbumViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Album\EditAlbumViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Genre\CreateGenreViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Playlist\CreatePlaylistViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Playlist\DeletePlaylistViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Singer\AdminSingerViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Singer\CreateSingerViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Singer\DeleteSingerViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Singer\EditSingerViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Track\AdminTrackViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Track\DeleteTrackViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Track\EditTrackViewModel.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SingerController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
+    <Compile Include="GenreController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AlbumModels\AlbumDetailViewModel.cs" />
+    <Compile Include="Models\GenreModels\GenreViewModel.cs" />
+    <Compile Include="Models\SingerModels\SingerDetailViewModel.cs" />
+    <Compile Include="Models\SingerModels\SingerViewModel.cs" />
+    <Compile Include="Models\HomeModels\MainViewModel.cs" />
+    <Compile Include="Models\TrackModels\TrackGenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EntitiesPresentationService\AlbumPresentationService.cs" />
     <Compile Include="Services\EntitiesPresentationService\GenrePresentationService.cs" />
-    <Compile Include="Services\EntitiesPresentationService\NoveltyPresentationService.cs" />
-    <Compile Include="Services\EntitiesPresentationService\PlaylistPresentationService.cs" />
-    <Compile Include="Services\EntitiesPresentationService\PopularPresentationService.cs" />
+    <Compile Include="Services\EntitiesPresentationService\HomePresentationService.cs" />
     <Compile Include="Services\EntitiesPresentationService\SingerPresentationService.cs" />
     <Compile Include="Services\EntitiesPresentationService\TrackPresentationService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\IAlbumPresentationService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\IGenrePresentationService.cs" />
-    <Compile Include="Services\Interfaces\EntitiesInterfaces\INoveltyPresentationService.cs" />
-    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPlaylistPresentationService.cs" />
-    <Compile Include="Services\Interfaces\EntitiesInterfaces\IPopularPresentationService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IHomePresentationService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ISingerPresentationService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ITrackPresentationService.cs" />
     <Compile Include="Services\Interfaces\IBasePresentationService.cs" />
-    <Compile Include="Areas\Admin\ViewModel\TrackViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModel\Track\CreateTrackViewModel.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SingerController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrackController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ColorValidation.css" />
+    <Content Include="Content\css\animate.css\animate.min.css" />
+    <Content Include="Content\css\bootstrap-rtl\dist\bootstrap-rtl.css" />
+    <Content Include="Content\css\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\fonts\poppins\400.svg" />
+    <Content Include="Content\css\fonts\poppins\700.svg" />
+    <Content Include="Content\css\fonts\poppins\font.css" />
+    <Content Include="Content\css\glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\glyphicons\glyphicons.css" />
+    <Content Include="Content\css\material-design-icons\iconfont\codepoints.txt" />
+    <Content Include="Content\css\material-design-icons\iconfont\iconjar-map.js" />
+    <Content Include="Content\css\material-design-icons\iconfont\MaterialIcons-Regular.ijmap.txt" />
+    <Content Include="Content\css\material-design-icons\iconfont\README.md.txt" />
+    <Content Include="Content\css\material-design-icons\material-design-icons.css" />
+    <Content Include="Content\css\styles\app.css" />
+    <Content Include="Content\css\styles\app.rtl.css" />
+    <Content Include="Content\css\styles\font.css" />
+    <Content Include="Content\css\styles\style.css" />
+    <Content Include="Content\css\theme\accent.css" />
+    <Content Include="Content\css\theme\blue.css" />
+    <Content Include="Content\css\theme\danger.css" />
+    <Content Include="Content\css\theme\info.css" />
+    <Content Include="Content\css\theme\primary.css" />
+    <Content Include="Content\css\theme\success.css" />
+    <Content Include="Content\css\theme\warn.css" />
+    <Content Include="Content\css\theme\warning.css" />
+    <Content Include="Content\StyleAdminPresentationPage.css" />
+    <Content Include="Content\StyleFormEdit.css" />
+    <Content Include="Content\StyleItemDelete.css" />
+    <Content Include="Content\StyleSpinner.css" />
+    <Content Include="Content\StyleTrackCreate.css" />
     <Content Include="Content\SyleCheckbox.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\FormGenre.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\GetImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\GetTrack.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\CreateGenre.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\CreateSinger.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\FormSinger.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\CreateAlbum.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\FormAlbum.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\CreatePlaylist.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\FormPlaylist.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\CreateTrack.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\FormTrack.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminGenre\CreateGenre.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSinger\CreateSinger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAlbum\CreateAlbum.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPlaylist\CreatePlaylist.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTrack\CreateTrack.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSinger\DeleteSinger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAlbum\DeleteAlbum.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTrack\DeleteTrack.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPlaylist\DeletePlaylist.cshtml" />
+    <Content Include="images\a0.jpg" />
+    <Content Include="images\a1.jpg" />
+    <Content Include="images\a10.jpg" />
+    <Content Include="images\a11.jpg" />
+    <Content Include="images\a12.jpg" />
+    <Content Include="images\a13.jpg" />
+    <Content Include="images\a14.jpg" />
+    <Content Include="images\a15.jpg" />
+    <Content Include="images\a2.jpg" />
+    <Content Include="images\a3.jpg" />
+    <Content Include="images\a4.jpg" />
+    <Content Include="images\a5.jpg" />
+    <Content Include="images\a6.jpg" />
+    <Content Include="images\a7.jpg" />
+    <Content Include="images\a8.jpg" />
+    <Content Include="images\a9.jpg" />
+    <Content Include="images\b0.jpg" />
+    <Content Include="images\b1.jpg" />
+    <Content Include="images\b10.jpg" />
+    <Content Include="images\b11.jpg" />
+    <Content Include="images\b12.jpg" />
+    <Content Include="images\b13.jpg" />
+    <Content Include="images\b14.jpg" />
+    <Content Include="images\b15.jpg" />
+    <Content Include="images\b2.jpg" />
+    <Content Include="images\b3.jpg" />
+    <Content Include="images\b4.jpg" />
+    <Content Include="images\b5.jpg" />
+    <Content Include="images\b6.jpg" />
+    <Content Include="images\b7.jpg" />
+    <Content Include="images\b8.jpg" />
+    <Content Include="images\b9.jpg" />
+    <Content Include="images\c1.jpg" />
+    <Content Include="images\c2.jpg" />
+    <Content Include="images\c3.jpg" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logo.svg" />
+    <Content Include="images\Play.jpg" />
+    <Content Include="images\Play.png" />
+    <Content Include="images\Stop.jpg" />
+    <Content Include="images\Stop.png" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Views\AdminAlbum\EditAlbum.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSinger\EditSinger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminTrack\EditTrack.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AdminSingerData.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAlbum\FormCreateAlbum.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\FormSuccess.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSinger\FormCreateSinger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminGenre\FormCreateGenre.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPlaylist\FormCreatePlaylist.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAlbum\FormEditAlbum.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSinger\FormEditSinger.cshtml" />
+    <Content Include="Content\css\bootstrap-rtl\scss\alerts-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\badges-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\bootstrap-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\breadcrumbs-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\button-groups-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\carousel-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\close-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\dropdowns-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\forms-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\grid-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\input-groups-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\list-group-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\media-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\mixins-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\mixins\grid-framework-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\mixins\grid-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\modals-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\navbar-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\navs-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\normalize-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\pager-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\pagination-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\popovers-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\progress-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\responsive-embed-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\tables-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\type-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\utilities-rtl.scss" />
+    <Content Include="Content\css\bootstrap-rtl\scss\variables-rtl.scss" />
+    <Content Include="Content\css\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\bootstrap\scss\bootstrap-flex.scss" />
+    <Content Include="Content\css\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Content\css\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Content\css\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_cards.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_center-block.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_hover.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_label.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_navbar-align.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_progress.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_pulls.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_reset-filter.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_size.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_tab-focus.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_tag.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Include="Content\css\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_background.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_display.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_flex.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_pulls.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_text.scss" />
+    <Content Include="Content\css\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Include="Content\css\bootstrap\scss\_alert.scss" />
+    <Content Include="Content\css\bootstrap\scss\_animation.scss" />
+    <Content Include="Content\css\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Content\css\bootstrap\scss\_button-group.scss" />
+    <Content Include="Content\css\bootstrap\scss\_buttons.scss" />
+    <Content Include="Content\css\bootstrap\scss\_card.scss" />
+    <Content Include="Content\css\bootstrap\scss\_carousel.scss" />
+    <Content Include="Content\css\bootstrap\scss\_close.scss" />
+    <Content Include="Content\css\bootstrap\scss\_code.scss" />
+    <Content Include="Content\css\bootstrap\scss\_custom-forms.scss" />
+    <Content Include="Content\css\bootstrap\scss\_custom.scss" />
+    <Content Include="Content\css\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Content\css\bootstrap\scss\_forms.scss" />
+    <Content Include="Content\css\bootstrap\scss\_grid.scss" />
+    <Content Include="Content\css\bootstrap\scss\_images.scss" />
+    <Content Include="Content\css\bootstrap\scss\_input-group.scss" />
+    <Content Include="Content\css\bootstrap\scss\_jumbotron.scss" />
+    <Content Include="Content\css\bootstrap\scss\_labels.scss" />
+    <Content Include="Content\css\bootstrap\scss\_list-group.scss" />
+    <Content Include="Content\css\bootstrap\scss\_media.scss" />
+    <Content Include="Content\css\bootstrap\scss\_mixins.scss" />
+    <Content Include="Content\css\bootstrap\scss\_modal.scss" />
+    <Content Include="Content\css\bootstrap\scss\_nav.scss" />
+    <Content Include="Content\css\bootstrap\scss\_navbar.scss" />
+    <Content Include="Content\css\bootstrap\scss\_normalize.scss" />
+    <Content Include="Content\css\bootstrap\scss\_pager.scss" />
+    <Content Include="Content\css\bootstrap\scss\_pagination.scss" />
+    <Content Include="Content\css\bootstrap\scss\_popover.scss" />
+    <Content Include="Content\css\bootstrap\scss\_print.scss" />
+    <Content Include="Content\css\bootstrap\scss\_progress.scss" />
+    <Content Include="Content\css\bootstrap\scss\_reboot.scss" />
+    <Content Include="Content\css\bootstrap\scss\_responsive-embed.scss" />
+    <Content Include="Content\css\bootstrap\scss\_tables.scss" />
+    <Content Include="Content\css\bootstrap\scss\_tags.scss" />
+    <Content Include="Content\css\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Content\css\bootstrap\scss\_type.scss" />
+    <Content Include="Content\css\bootstrap\scss\_utilities-background.scss" />
+    <Content Include="Content\css\bootstrap\scss\_utilities-responsive.scss" />
+    <Content Include="Content\css\bootstrap\scss\_utilities-spacing.scss" />
+    <Content Include="Content\css\bootstrap\scss\_utilities.scss" />
+    <Content Include="Content\css\bootstrap\scss\_variables.scss" />
+    <Content Include="Content\css\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\fonts\poppins\400.eot" />
+    <Content Include="Content\css\fonts\poppins\400.ttf" />
+    <Content Include="Content\css\fonts\poppins\400.woff" />
+    <Content Include="Content\css\fonts\poppins\400.woff2" />
+    <Content Include="Content\css\fonts\poppins\700.eot" />
+    <Content Include="Content\css\fonts\poppins\700.ttf" />
+    <Content Include="Content\css\fonts\poppins\700.woff" />
+    <Content Include="Content\css\fonts\poppins\700.woff2" />
+    <Content Include="Content\css\glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\css\glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\glyphicons\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\css\material-design-icons\iconfont\codepoints" />
+    <Content Include="Content\css\material-design-icons\iconfont\MaterialIcons-Regular.eot" />
+    <Content Include="Content\css\material-design-icons\iconfont\MaterialIcons-Regular.ttf" />
+    <Content Include="Content\css\material-design-icons\iconfont\MaterialIcons-Regular.woff" />
+    <Content Include="Content\css\material-design-icons\iconfont\MaterialIcons-Regular.woff2" />
+    <Content Include="Content\css\material-design-icons\iconfont\README.md" />
+    <Content Include="Content\css\scss\app.rtl.scss" />
+    <Content Include="Content\css\scss\app.scss" />
+    <Content Include="Content\css\scss\bootstrap.scss" />
+    <Content Include="Content\css\scss\bs.base.scss" />
+    <Content Include="Content\css\scss\bs.button.scss" />
+    <Content Include="Content\css\scss\bs.card.scss" />
+    <Content Include="Content\css\scss\bs.carousel.scss" />
+    <Content Include="Content\css\scss\bs.dropdown.scss" />
+    <Content Include="Content\css\scss\bs.form.scss" />
+    <Content Include="Content\css\scss\bs.label.scss" />
+    <Content Include="Content\css\scss\bs.list-group.scss" />
+    <Content Include="Content\css\scss\bs.modal.animation.scss" />
+    <Content Include="Content\css\scss\bs.modal.scss" />
+    <Content Include="Content\css\scss\bs.nav.scss" />
+    <Content Include="Content\css\scss\bs.navbar.scss" />
+    <Content Include="Content\css\scss\bs.pager.scss" />
+    <Content Include="Content\css\scss\bs.progress.scss" />
+    <Content Include="Content\css\scss\bs.row.scss" />
+    <Content Include="Content\css\scss\bs.scss" />
+    <Content Include="Content\css\scss\bs.table.scss" />
+    <Content Include="Content\css\scss\md.btn.scss" />
+    <Content Include="Content\css\scss\md.check.scss" />
+    <Content Include="Content\css\scss\md.color.scss" />
+    <Content Include="Content\css\scss\md.input.scss" />
+    <Content Include="Content\css\scss\md.scss" />
+    <Content Include="Content\css\scss\md.switch.scss" />
+    <Content Include="Content\css\scss\mixins.scss" />
+    <Content Include="Content\css\scss\mixins.theme.scss" />
+    <Content Include="Content\css\scss\theme\accent.scss" />
+    <Content Include="Content\css\scss\theme\blue.scss" />
+    <Content Include="Content\css\scss\theme\danger.scss" />
+    <Content Include="Content\css\scss\theme\info.scss" />
+    <Content Include="Content\css\scss\theme\primary.scss" />
+    <Content Include="Content\css\scss\theme\success.scss" />
+    <Content Include="Content\css\scss\theme\warn.scss" />
+    <Content Include="Content\css\scss\theme\warning.scss" />
+    <Content Include="Content\css\scss\ui.arrow.scss" />
+    <Content Include="Content\css\scss\ui.avatar.scss" />
+    <Content Include="Content\css\scss\ui.box.scss" />
+    <Content Include="Content\css\scss\ui.check.scss" />
+    <Content Include="Content\css\scss\ui.col.scss" />
+    <Content Include="Content\css\scss\ui.color.dark.scss" />
+    <Content Include="Content\css\scss\ui.color.scss" />
+    <Content Include="Content\css\scss\ui.flexbox.scss" />
+    <Content Include="Content\css\scss\ui.icon.scss" />
+    <Content Include="Content\css\scss\ui.item.scss" />
+    <Content Include="Content\css\scss\ui.layout.boxed.scss" />
+    <Content Include="Content\css\scss\ui.layout.scss" />
+    <Content Include="Content\css\scss\ui.list.scss" />
+    <Content Include="Content\css\scss\ui.loading.scss" />
+    <Content Include="Content\css\scss\ui.nav.active.scss" />
+    <Content Include="Content\css\scss\ui.nav.plus.scss" />
+    <Content Include="Content\css\scss\ui.nav.scss" />
+    <Content Include="Content\css\scss\ui.page.scss" />
+    <Content Include="Content\css\scss\ui.plugin.scss" />
+    <Content Include="Content\css\scss\ui.scss" />
+    <Content Include="Content\css\scss\ui.streamline.scss" />
+    <Content Include="Content\css\scss\ui.switch.scss" />
+    <Content Include="Content\css\scss\ui.timeline.scss" />
+    <Content Include="Content\css\scss\util.base.scss" />
+    <Content Include="Content\css\scss\util.border.scss" />
+    <Content Include="Content\css\scss\util.hover.scss" />
+    <Content Include="Content\css\scss\util.radius.scss" />
+    <Content Include="Content\css\scss\util.scroll.scss" />
+    <Content Include="Content\css\scss\util.size.scss" />
+    <Content Include="Content\css\scss\util.spacing.scss" />
+    <Content Include="Content\css\scss\util.text.scss" />
+    <Content Include="Content\css\scss\utils.scss" />
+    <Content Include="Content\css\scss\variables.md.scss" />
+    <Content Include="Content\css\scss\variables.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -258,9 +649,90 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSButtonPlayMusic.js" />
     <Content Include="Scripts\JSCheckbox.js" />
+    <Content Include="Scripts\JSHeart.js" />
+    <Content Include="Scripts\JSTrackCreate.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\ScriptSpinnerHidden.js" />
+    <Content Include="Scripts\ScriptSpinnerVisible.js" />
     <Content Include="Scripts\SolutionAjaxForm.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -273,6 +745,24 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Singer\ShowAllSingers.cshtml" />
+    <None Include="T4MVC.tt.hooks.t4" />
+    <Content Include="Views\Home\StartPage.cshtml" />
+    <Content Include="Views\Singer\SingerDetail.cshtml" />
+    <Content Include="Views\Album\AlbumDetail.cshtml" />
+    <Content Include="Views\Home\MainPage.cshtml" />
+    <Content Include="Views\Genre\GetAllGenres.cshtml" />
+    <Content Include="Views\Track\GetTracksByGenre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,14 +771,6 @@
     <Folder Include="ServerFiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
@@ -304,13 +786,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

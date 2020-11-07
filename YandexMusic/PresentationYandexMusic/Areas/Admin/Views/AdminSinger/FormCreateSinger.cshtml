@@ -1,0 +1,15 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.Singer.CreateSingerViewModel
+
+<p>
+    <label for="SingerName">Имя исполнителя</label>
+    <input type="text" name="SingerName" value=@Model.SingerName />
+    @Html.ValidationMessageFor(x => x.SingerName)
+</p>
+
+<p>
+    <label for="SingerImage">Загрузить картинку исполнителя</label>
+    <input type="file" name="SingerImage" />
+    @Html.ValidationMessageFor(x => x.SingerImage)
+</p>
+
+<input type="submit" value="Сохранить" class="btn-success" />

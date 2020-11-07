@@ -15,14 +15,13 @@ namespace InfastructureYandexMusic.Configurations
                 .IsOptional()
                 .HasMaxLength(50);
 
-            HasRequired(x => x.Singer) //
+            HasOptional(x => x.AlbumImage) 
+                .WithRequired(x => x.Album)
+                .WillCascadeOnDelete(true);
+
+            HasRequired(x => x.Singer)
                 .WithMany(x => x.Albums)
                 .HasForeignKey(x => x.SingerId)
-                .WillCascadeOnDelete(false);
-
-            HasOptional(x => x.AlbumImage) //--
-                .WithRequired(x => x.Album)
-                .Map(x => x.MapKey("AlbumImageId"))
                 .WillCascadeOnDelete(false);
         }
     }

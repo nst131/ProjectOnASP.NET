@@ -59,6 +59,7 @@
     <Compile Include="Context\CoreDbContext.cs" />
     <Compile Include="Context\ICoreDbContext.cs" />
     <Compile Include="InitilazerDb\InitilazerDatabaseYandexMusic.cs" />
+    <Compile Include="Models\KindOfTrack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\AlbumRepository.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Repositories\EntitiesRepository\TrackRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

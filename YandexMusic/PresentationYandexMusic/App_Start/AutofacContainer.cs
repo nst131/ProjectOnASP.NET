@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using DomainYandexMusic.Repositories;
+using DomainYandexMusic.Services;
 using DomainYandexMusic.Services.Interfaces;
 using DomainYandexMusic.UnitOfWork;
 using FluentValidation;
@@ -9,7 +10,11 @@ using InfastructureYandexMusic.Context;
 using InfastructureYandexMusic.Repositories;
 using InfastructureYandexMusic.UnitOfWork;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
-using PresentationYandexMusic.Areas.Admin.Validation;
+using PresentationYandexMusic.Areas.Admin.Validation.Album;
+using PresentationYandexMusic.Areas.Admin.Validation.Genre;
+using PresentationYandexMusic.Areas.Admin.Validation.Playlist;
+using PresentationYandexMusic.Areas.Admin.Validation.Singer;
+using PresentationYandexMusic.Areas.Admin.Validation.Track;
 using PresentationYandexMusic.Services.Interfaces;
 using System.Linq;
 using System.Reflection;
@@ -26,6 +31,7 @@ namespace PresentationYandexMusic.App_Start
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<CoreDbContext>().As<ICoreDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<CheckFile>().As<ICheckFile>().InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(IBasePresentationService).Assembly)
                 .Where(t => typeof(IBasePresentationService).IsAssignableFrom(t))
@@ -47,13 +53,21 @@ namespace PresentationYandexMusic.App_Start
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
+            AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfAlbumCreate>()
+                    .ForEach(result =>
+                    {
+                        builder.RegisterType(result.ValidatorType)
+                        .Keyed<IValidator>(result.InterfaceType)
+                        .As<IValidator>();
+                    }); // Validation CreateAlbum
+
             AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfGenreCreate>()
                     .ForEach(result =>
                     {
                         builder.RegisterType(result.ValidatorType)
                         .Keyed<IValidator>(result.InterfaceType)
                         .As<IValidator>();
-                    }); // Validation Genre
+                    }); // Validation CreateGenre
 
             AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfSingerCreate>()
                     .ForEach(result =>
@@ -61,17 +75,7 @@ namespace PresentationYandexMusic.App_Start
                         builder.RegisterType(result.ValidatorType)
                         .Keyed<IValidator>(result.InterfaceType)
                         .As<IValidator>();
-                    }); // Validation Singer
-
-
-            AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfAlbumCreate>()
-                    .ForEach(result =>
-                    {
-                        builder.RegisterType(result.ValidatorType)
-                        .Keyed<IValidator>(result.InterfaceType)
-                        .As<IValidator>();
-                    }); // Validation Album
-
+                    }); // Validation CreateSinger
 
             AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfPlaylistCreate>()
                     .ForEach(result =>
@@ -79,7 +83,16 @@ namespace PresentationYandexMusic.App_Start
                         builder.RegisterType(result.ValidatorType)
                         .Keyed<IValidator>(result.InterfaceType)
                         .As<IValidator>();
-                    }); // Validation Playlist
+                    }); // Validation CreatePlaylist
+
+
+            AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfTrackCreate>()
+                    .ForEach(result =>
+                    {
+                        builder.RegisterType(result.ValidatorType)
+                        .Keyed<IValidator>(result.InterfaceType)
+                        .As<IValidator>();
+                    }); // Validation CreateTrack
 
             builder.RegisterFilterProvider();
 

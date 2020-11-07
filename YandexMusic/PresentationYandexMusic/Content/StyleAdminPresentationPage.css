@@ -1,0 +1,31 @@
+﻿.ui-accordion-content {
+    min-height: 300px
+}
+
+.card-body {
+    color: black;
+}
+
+.TrackLine {
+    display: grid;
+    grid-template-columns: 5% 15% 70% 10%;
+    grid-template-rows: auto;
+    align-content: stretch;
+    justify-content: stretch;
+    align-items: center;
+    justify-items: stretch;
+    margin-bottom: 10px;
+}
+
+.TrackLineLink {
+    margin-left: 10px;
+    font-size: small;
+}
+
+.mb-0 a {
+    font-size: small;
+}
+
+.mb-0 button {
+    font-size: medium;
+}

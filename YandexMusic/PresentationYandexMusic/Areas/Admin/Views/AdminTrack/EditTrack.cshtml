@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "EditTrack";
+}
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Track.EditTrackViewModel
+
+<link rel="stylesheet" href="~/Content/ColorValidation.css" />
+<link href="~/Content/SyleCheckbox.css" rel="stylesheet" />
+<link href="~/Content/StyleTrackCreate.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+@section scripts{
+    <script src="~/Scripts/JSCheckbox.js"></script>
+    <script src="~/Scripts/JSTrackCreate.js"></script>
+}
+
+<form action="/Admin/AdminTrack/EditTrack" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="Id" value=@Model.Id />
+    @Html.ValidationSummary(true)
+
+    <p class="Aligning">
+        <label for="TrackName">Название трека</label>
+        <input type="text" name="TrackName" value=@Model.TrackName />
+        @Html.ValidationMessageFor(x => x.TrackName)
+    </p>
+
+    <p class="Aligning">
+        <label for="TimeOfCreation">Дата добавления трека</label>
+        <input type="date" name="TimeOfCreation" value=@Model.TimeOfCreation />
+        @Html.ValidationMessageFor(x => x.TimeOfCreation)
+    </p>
+
+    <p class="Aligning">
+        <label for="Liked">Количество Лайков</label>
+        <input type="number" name="Liked" value=@Model.Liked />
+        @Html.ValidationMessageFor(x => x.Liked)
+    </p>
+
+    <p id="Singers" class="Aligning">
+        <label>Выберите исполнителя</label>
+        @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers, new { @class = "SingerList" })
+        @Html.ValidationMessageFor(x => x.SingerId)
+    </p>
+
+    <div class="Aligning">
+        <label>Выберите плэйлисты</label>
+        <div class="checkselect">
+            @foreach (var item in Model.PlaylistList)
+            {
+                <label><input type="checkbox" name="PlaylistArrayId[]" value=@item.Key />@item.Value</label>
+            }
+        </div>
+    </div>
+
+    <p id="Albums" class="Aligning">
+        <label>Выберите альбом</label>
+        @Html.DropDownListFor(x => x.AlbumId, Model.SelectListAlbums, new { @class = "AlbumList" })
+    </p>
+
+    @Html.ValidationMessageFor(x => x.AlbumId)
+    <p class="Aligning">
+        <label>Выберите жанр</label>
+        @Html.DropDownListFor(x => x.GenreId, Model.SelectListGenre)
+        @Html.ValidationMessageFor(x => x.GenreId)
+    </p>
+
+    <div class="Aligning">
+        <label>Выберите новинку</label>
+        <div class="NoveltyList">
+            @foreach (var item in Model.NoveltyList)
+            {
+                <input type="radio" name="NoveltyId" value=@item.Key />
+                <label class="Radio">@item.Value</label>
+            }
+        </div>
+        @Html.ValidationMessageFor(x => x.NoveltyId)
+    </div>
+
+    <div class="Aligning">
+        <label>Выберите популярность</label>
+        <div class="PopularList">
+            @foreach (var item in Model.PopularList)
+            {
+                <input type="radio" name="PopularId" value=@item.Key />
+                <label class="Radio">@item.Value</label>
+            }
+        </div>
+        @Html.ValidationMessageFor(x => x.PopularId)
+    </div>
+
+    <p class="Aligning">
+        <label for="TrackImage">Загрузить Новую Картинку Трека</label>
+        <input type="file" name="TrackImage" />
+        @Html.ValidationMessageFor(x => x.TrackImage)
+    </p>
+
+    <p>
+        <label style="display:block">Загруженная картинка</label>
+        <img src="~/Admin/Track/GetTrackImage?id=@Model.Id" width="200" height="200" />
+    </p>
+
+    <p class="Aligning">
+        <label for="TrackFile">Загрузить Новый Трек</label>
+        <input type="file" name="TrackFile" />
+        @Html.ValidationMessageFor(x => x.TrackFile)
+    </p>
+
+    <input type="submit" value="Сохранить" class="btn btn-success" />
+
+</form>
+
+<script>
+    $(function () {
+        ChangeItem(`.PopularList`,@Model.PopularId);
+        ChangeItem(`.NoveltyList`,@Model.NoveltyId);
+    });
+
+    function ChangeItem(classItem, id) {
+        let arrayRadio = $(classItem).children(`:radio`);
+        for (let i = 0; i < arrayRadio.length; i++) {
+            if (arrayRadio[i].getAttribute(`value`) == id) {
+                $(arrayRadio[i]).attr(`checked`, `true`);
+            }
+        }
+    }
+</script>

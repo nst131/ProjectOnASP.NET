@@ -14,7 +14,6 @@ namespace DomainYandexMusic.Entities
         public int SingerId { get; set; }
         public Singer Singer { get; set; }
 
-        public int PlaylistId { get; set; }
         public ICollection<Playlist> Playlists { get; set; }
 
         public int AlbumId { get; set; }

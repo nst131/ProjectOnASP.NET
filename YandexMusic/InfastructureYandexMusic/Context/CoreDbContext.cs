@@ -7,7 +7,7 @@ namespace InfastructureYandexMusic.Context
     {
         static CoreDbContext()
         {
-            //Database.SetInitializer<CoreDbContext>(new InitilazerDatabaseYandexMusic());
+            Database.SetInitializer<CoreDbContext>(new InitilazerDatabaseYandexMusic());
         }
 
         public CoreDbContext()

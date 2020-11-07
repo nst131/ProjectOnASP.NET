@@ -1,0 +1,29 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.Album.EditAlbumViewModel
+
+<input type="hidden" name="Id" value=@Model.Id />
+@Html.ValidationSummary()
+
+<p>
+    <label for="AlbumName">Название альбома</label>
+    <input type="text" name="AlbumName" value=@Model.AlbumName />
+    @Html.ValidationMessageFor(x => x.AlbumName)
+</p>
+
+<p>
+    <label>Выберите исполнителя</label>
+    @Html.DropDownListFor(x => x.SingerId, Model.SelectListSingers)
+    @Html.ValidationMessageFor(x => x.SingerId)
+</p>
+
+<p>
+    <label style="display:block">Загруженная картинка</label>
+    <img src="~/Admin/Album/GetAlbumImage?id=@Model.Id" width="200" height="200" />
+</p>
+
+<p>
+    <label for="AlbumImage">Загрузить новую картинку альбома</label>
+    <input type="file" name="AlbumImage" />
+    @Html.ValidationMessageFor(x => x.AlbumImage)
+</p>
+
+<input type="submit" value="Сохранить" class="btn-success" />

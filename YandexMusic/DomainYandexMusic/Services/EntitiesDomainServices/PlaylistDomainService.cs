@@ -1,22 +1,27 @@
 ﻿using DomainYandexMusic.Entities;
 using DomainYandexMusic.Repositories.EntitiesRepository;
+using DomainYandexMusic.Services.Interfaces;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Web;
 
 namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
-    public class PlaylistDomainService : CheckJPG, IPlaylistDomainService
+    public class PlaylistDomainService : IPlaylistDomainService
     {
         private readonly IPlaylistRepository playlistRepository;
         private readonly IUnitOfWork unitOfWork;
+        private readonly ICheckFile checkFile;
 
-        public PlaylistDomainService(IPlaylistRepository playlistRepository,IUnitOfWork unitOfWork)
+        public PlaylistDomainService(IPlaylistRepository playlistRepository,
+            IUnitOfWork unitOfWork, ICheckFile checkFile)
         {
             this.playlistRepository = playlistRepository;
             this.unitOfWork = unitOfWork;
+            this.checkFile = checkFile;
         }
 
         public DbEntityEntry Entry(Playlist playlist)
@@ -36,7 +41,7 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
         public bool IsJpg(HttpPostedFileBase file)
         {
-            return CheckingJpg(file);
+            return checkFile.CheckJpg(file);
         }
 
         public List<Playlist> GetListPlaylist()
@@ -56,6 +61,22 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         public Playlist GetPlaylistById(int id)
         {
             return playlistRepository.GetPlaylistById(id);
+        }
+
+        public bool IsExistPlaylist(int id)
+        {
+            return playlistRepository.IsExistPlaylist(id);
+        }
+
+        public void DeletePlaylist(int id)
+        {
+            unitOfWork.Entry<Playlist>(GetPlaylistById(id)).State = EntityState.Deleted;
+            unitOfWork.SaveChanges();
+        }
+
+        public PlaylistImage RedirectPlaylistImage(int id)
+        {
+            return playlistRepository.GetPlaylistWithImage(id).PlaylistImage;
         }
     }
 }

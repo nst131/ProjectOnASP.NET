@@ -115,3 +115,4 @@ D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\Pr
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\PresentationYandexMusic\bin\System.ComponentModel.Annotations.dll
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\PresentationYandexMusic\bin\FluentValidation.xml
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\PresentationYandexMusic\bin\FluentValidation.Mvc.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\PresentationYandexMusic\bin\T4MVCExtensions.dll

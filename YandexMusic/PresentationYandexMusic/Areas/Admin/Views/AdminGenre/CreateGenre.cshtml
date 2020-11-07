@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "CreateGenre";
+}
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Genre.CreateGenreViewModel
+
+<link href="~/Content/ColorValidation.css" rel="stylesheet"/>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+
+<form action="/Admin/AdminGenre/CreateGenre" data-ajax="true" data-ajax-update="#result" method="post" enctype="multipart/form-data">
+    <div id="result">
+        @{Html.RenderPartial("FormCreateGenre", Model);}
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/SolutionAjaxForm.js"></script>
+}

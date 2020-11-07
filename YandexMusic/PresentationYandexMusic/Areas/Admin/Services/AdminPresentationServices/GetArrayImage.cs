@@ -2,7 +2,7 @@
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {
-    public class GetArrayImage
+    public abstract class GetArrayImage
     {
         public byte[] GetArray(HttpPostedFileBase image)
         {

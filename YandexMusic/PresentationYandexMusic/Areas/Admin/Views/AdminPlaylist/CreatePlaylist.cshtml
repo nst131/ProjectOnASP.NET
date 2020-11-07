@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "CreatePlaylist";
+}
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Playlist.CreatePlaylistViewModel
+
+<link href="~/Content/ColorValidation.css" rel="stylesheet"/>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+
+<form action="/Admin/AdminPlaylist/CreatePlaylist" data-ajax="true" data-ajax-update="#result" method="post" enctype="multipart/form-data">
+    <div id="result">
+        @{Html.RenderPartial("FormCreatePlaylist", Model);}
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/SolutionAjaxForm.js"></script>
+}

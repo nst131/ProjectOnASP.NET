@@ -1,0 +1,15 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.Playlist.CreatePlaylistViewModel
+
+<p>
+    <label for="PlaylistName">Название плэйлиста</label>
+    <input type="text" name="PlaylistName" value=@Model.PlaylistName />
+    @Html.ValidationMessageFor(x => x.PlaylistName)
+</p>
+
+<p>
+    <label for="PlaylistImage">Загрузить картинку плэйлиста</label>
+    <input type="file" name="PlaylistImage" />
+    @Html.ValidationMessageFor(x => x.PlaylistImage)
+</p>
+
+<input type="submit" value="Сохранить" class="btn-success" />

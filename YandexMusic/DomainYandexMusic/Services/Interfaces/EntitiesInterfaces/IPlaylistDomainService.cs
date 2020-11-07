@@ -7,12 +7,15 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
     public interface IPlaylistDomainService : IBaseDomainService
     {
+        void DeletePlaylist(int id);
         DbEntityEntry Entry(Playlist playlist);
         Dictionary<int, string> GetDictionaryPlaylist();
         List<Playlist> GetListPlaylist();
         Playlist GetPlaylistById(int id);
+        bool IsExistPlaylist(int id);
         bool IsJpg(HttpPostedFileBase file);
         bool IsUniquePlaylist(string playlistName);
+        PlaylistImage RedirectPlaylistImage(int id);
         int SaveChanges();
     }
 }

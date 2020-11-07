@@ -17,8 +17,7 @@ namespace InfastructureYandexMusic.Configurations
 
             HasOptional(x => x.GenreImage)
                 .WithRequired(x => x.Genre)
-                .Map(x => x.MapKey("GenreImageId"))
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }

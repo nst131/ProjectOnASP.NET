@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "DeletePlaylist";
+}
+
+@model PresentationYandexMusic.Areas.Admin.ViewModel.Playlist.DeletePlaylistViewModel
+
+<form class="Form" action="/Admin/AdminPlaylist/DeletePlaylist/@Model.Id" method="post" enctype="multipart/form-data">
+    <h3>Вы уверены что хотите удалить этот плэйлист</h3>
+    <img src="/Admin/AdminPlaylist/GetPlaylistImage?Id=@Model.Id" width="200" height="200" />
+    <p>@Model.Name</p>
+    <input type="submit" value="Удалить плэйлист" class="btn btn-danger"/>
+</form>
+
+<link href="~/Content/StyleItemDelete.css" rel="stylesheet" />
+

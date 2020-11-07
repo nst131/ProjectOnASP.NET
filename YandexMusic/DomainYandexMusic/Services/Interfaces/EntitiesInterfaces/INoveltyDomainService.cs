@@ -7,5 +7,6 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
     {
         Dictionary<int, string> GetDictionaryNovelty();
         Novelty GetNoveltyById(int id);
+        List<Track> GetNoveltyTracksByQuantityTracks(int numberTracks);
     }
 }

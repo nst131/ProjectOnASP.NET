@@ -1,5 +1,6 @@
 ﻿using DomainYandexMusic.Entities;
 using DomainYandexMusic.Repositories.EntitiesRepository;
+using DomainYandexMusic.Services.Interfaces;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
@@ -8,15 +9,18 @@ using System.Web;
 
 namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
-    public class GenreDomainService : CheckJPG, IGenreDomainService
+    public class GenreDomainService : IGenreDomainService
     {
         private readonly IGenreRepository genreRepository;
         private readonly IUnitOfWork unitOfWork;
+        private readonly ICheckFile checkFile;
 
-        public GenreDomainService(IGenreRepository genreRepository, IUnitOfWork unitOfWork)
+        public GenreDomainService(IGenreRepository genreRepository,
+            IUnitOfWork unitOfWork, ICheckFile checkFile)
         {
             this.genreRepository = genreRepository;
             this.unitOfWork = unitOfWork;
+            this.checkFile = checkFile;
         }
 
         public DbEntityEntry Entry(Genre genre)
@@ -36,7 +40,7 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
         public bool IsJpg(HttpPostedFileBase file)
         {
-            return CheckingJpg(file);
+            return checkFile.CheckJpg(file);
         }
 
         public List<Genre> GetListGenre()
@@ -47,6 +51,21 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
         public Genre GetGenreById(int id)
         {
             return genreRepository.GetGenreById(id);
+        }
+
+        public bool IsExistAlbum(int id)
+        {
+            return genreRepository.IsExistGenre(id);
+        }
+
+        public int GetFirstGenreId()
+        {
+            return genreRepository.GetFirstGenreId();
+        }
+
+        public GenreImage RedirectGenreImage(int id)
+        {
+            return genreRepository.GetGenreWithImage(id).GenreImage;
         }
     }
 }

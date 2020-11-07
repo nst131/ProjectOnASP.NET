@@ -2,6 +2,7 @@
 using DomainYandexMusic.Repositories.EntitiesRepository;
 using DomainYandexMusic.UnitOfWork;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace InfastructureYandexMusic.Repositories.EntitiesRepository
@@ -27,6 +28,19 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
         public Playlist GetPlaylistById(int id)
         {
             return GetQueryable()
+                .FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool IsExistPlaylist(int id)
+        {
+            return GetQueryable()
+                .Any(x => x.Id == id);
+        }
+
+        public Playlist GetPlaylistWithImage(int id)
+        {
+            return GetQueryable()
+                .Include(x => x.PlaylistImage)
                 .FirstOrDefault(x => x.Id == id);
         }
     }

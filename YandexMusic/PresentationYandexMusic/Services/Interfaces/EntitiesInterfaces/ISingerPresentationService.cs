@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DomainYandexMusic.Entities;
+using PresentationYandexMusic.Models.SingerModels;
 
 namespace PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
     public interface ISingerPresentationService : IBasePresentationService
     {
-
+        SingerImage RedirectSingerImage(int id);
+        SingerViewModel GetSingersViewModel();
+        SingerDetailViewModel GetSingerDetailViewModel(int id);
     }
 }
