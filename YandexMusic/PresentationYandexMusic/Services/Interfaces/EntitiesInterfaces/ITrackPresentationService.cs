@@ -1,16 +1,14 @@
 ﻿using DomainYandexMusic.Entities;
 using PresentationYandexMusic.Models.TrackModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
     public interface ITrackPresentationService : IBasePresentationService
     {
-        TrackGenreViewModel GetTrackGenreViewModel(int id);
+        LikedTrackViewModel GetLikedTrackView(string userId);
+
+        TrackGenreViewModel GetTrackGenreViewModel(int id, string userId);
+
         TrackImage RedirecttrackImage(int id);
     }
 }

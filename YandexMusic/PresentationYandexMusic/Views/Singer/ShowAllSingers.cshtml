@@ -4,37 +4,18 @@
 @model PresentationYandexMusic.Models.SingerModels.SingerViewModel
 
 @Styles.Render("~/Content/CSSYandexMusic")
+@Styles.Render("~/Content/CSSMusic.css")
 
 @section scripts{
-    @Scripts.Render("~/bundles/JSYandexMusic")
+    @Scripts.Render("~/bundles/ScriptsYandexMusic")
     @Scripts.Render("~/Scripts/JSButtonPlayMusic.js")
 }
 
-<style>
-    .likeMusic img {
-        width: 10px;
-        height: 20px;
-    }
-
-    .coll {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        top: 0px;
-    }
-</style>
-
 <div class="app dk" id="app">
-
     <!-- ############ LAYOUT START-->
     <div id="content" class="app-content white bg box-shadow-z2" role="main">
         <div class="app-header hidden-lg-up white lt box-shadow-z1">
             <div class="navbar">
-                <!-- brand -->
                 <a class="navbar-brand md">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
                         <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
@@ -48,8 +29,6 @@
                     <img src="images/logo.png" alt="." class="hide">
                     <span class="hidden-folded inline">pulse</span>
                 </a>
-                <!-- / brand -->
-                <!-- nabar right -->
                 <ul class="nav navbar-nav pull-right">
                     <li class="nav-item">
                         <a data-toggle="modal" data-target="#aside" class="nav-link">
@@ -57,75 +36,75 @@
                         </a>
                     </li>
                 </ul>
-                <!-- / navbar right -->
             </div>
         </div>
-        <!-- <div class="app-footer app-player grey bg">
-          <div class="playlist" style="width:100%"></div>
-        </div> -->
-        <div class="app-body" id="view">
 
-            <!-- ############ PAGE START-->
-            <div class="page-content">
-                <div class="row-col">
-                    <div class="col-lg-9 b-r no-border-md">
-                        <div class="padding">
+        <!-- ############ PAGE START-->
+        <div class="page-content">
+            <div class="row-col">
+                <div class="col-lg-9 b-r no-border-md">
+                    <div class="padding">
 
-                            <div class="page-title m-b">
-                                <h1 class="inline m-a-0">Artists</h1>
-                            </div>
-                            <div data-ui-jp="jscroll" data-ui-options="{
-                                 autoTrigger: false,
-                                 loadingHtml: '<i class=\' fa fa-refresh fa-spin text-md text-muted\'>
-                                </i>',
-                                padding: 50,
-                                nextSelector: 'a.jscroll-next:last'
-                                }">
-                                <div class="row row-lg">
-                                    @foreach (var singer in Model.Singers)
-                                    {
-                                        <div class="col-xs-4 col-sm-4 col-md-3">
-                                            <div class="item">
-                                                <div class="item-media rounded ">
-                                                    <a href="@Url.Action(MVC.Singer.SingerDetail(singer.Id))" class="item-media-content" style="background-image: url(@Url.Action(MVC.Singer.GetSingerImage(singer.Id)))"></a>
-                                                </div>
-                                                <div class="item-info text-center">
-                                                    <div class="item-title text-ellipsis">
-                                                        <a href="@Url.Action(MVC.Singer.SingerDetail(singer.Id))">@singer.Name</a>
-                                                    </div>
+                        <div class="page-title m-b">
+                            <h1 class="inline m-a-0">Artists</h1>
+                        </div>
+                        <div data-ui-jp="jscroll" data-ui-options="{
+                             autoTrigger: false,
+                             loadingHtml: '<i class=\' fa fa-refresh fa-spin text-md text-muted\'>
+                            </i>',
+                            padding: 50,
+                            nextSelector: 'a.jscroll-next:last'
+                            }">
+                            <div class="row row-lg">
+                                @foreach (var singer in Model.Singers)
+                                {
+                                    <div class="col-xs-4 col-sm-4 col-md-3">
+                                        <div class="item">
+                                            <div class="item-media rounded-circle ">
+                                                <a href="@Url.Action(MVC.Singer.SingerDetail(singer.Id))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url(@Url.Action(MVC.Singer.GetSingerImage(singer.Id)))"></a>
+                                            </div>
+                                            <div class="item-info text-center">
+                                                <div class="item-title text-ellipsis">
+                                                    <a href="@Url.Action(MVC.Singer.SingerDetail(singer.Id))" data-ajax="true" data-ajax-update="#view">@singer.Name</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                </div>
-                                <a href="scroll.author.html" class="btn btn-sm white rounded jscroll-next">Show More</a>
+                                    </div>
+                                }
                             </div>
-
+                            <a href="#" class="btn btn-sm text-white rounded-circle jscroll-next">Show More</a>
                         </div>
-                    </div>
-                    <div class="col-lg-3 w-xxl w-auto-md">
-                        <div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent">
-                            <h6 class="text text-muted">Liked Tracks</h6>
 
+                    </div>
+                </div>
+                <div class="col-lg-3 w-xxl w-auto-md">
+                    <div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent">
+                        <div id="LikeTrack">
+
+                            <h6 class="text text-muted">
+                                <a data-ajax="true" data-ajax-update="#view" href="@Url.Action(MVC.Track.LikedTrackView())">
+                                    Liked Tracks
+                                </a>
+                            </h6>
                             @foreach (var track in Model.LikedTracks)
                             {
                                 <div class="row item-list item-list-sm m-b">
                                     <div class="col-xs-12">
                                         <div class="item r" data-id="item-7" data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                             <div class="item-media coll">
-                                                <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" class="item-media-content" style="background-image: url(@Url.Action(MVC.Track.GetTrackImage(track.Id)))"></a>
+                                                <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url(@Url.Action(MVC.Track.GetTrackImage(track.Id)))"></a>
                                                 <div class="item-overlay">
-                                                    <button class="btn-playpause playMusic likeMusic rounded">
-                                                        <img src="~/images/Play.jpg" class="rounded" name="Play" />
+                                                    <button class="btn-playpause playMusic likeMusic rounded-circle" data-location="@track.TrackFile.FileLocation">
+                                                        <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-title text-ellipsis">
-                                                    <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))">@track.Name</a>
+                                                    <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" data-ajax="true" data-ajax-update="#view">@track.Name</a>
                                                 </div>
                                                 <div class="item-author text-sm text-ellipsis ">
-                                                    <a href="@Url.Action(MVC.Singer.SingerDetail(track.SingerId))" class="text-muted">@track.Singer.Name</a>
+                                                    <a href="@Url.Action(MVC.Singer.SingerDetail(track.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted">@track.Singer.Name</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,115 +112,36 @@
                                 </div>
                             }
 
-                            <h6 class="text text-muted">Go mobile</h6>
-                            <div class="btn-groups">
-                                <a href="" class="btn btn-sm dark lt m-r-xs" style="width: 135px">
-                                    <span class="pull-left m-r-sm">
-                                        <i class="fa fa-apple fa-2x"></i>
-                                    </span>
-                                    <span class="clear text-left l-h-1x">
-                                        <span class="text-muted text-xxs">Download on the</span>
-                                        <b class="block m-b-xs">App Store</b>
-                                    </span>
-                                </a>
-                                <a href="" class="btn btn-sm dark lt" style="width: 133px">
-                                    <span class="pull-left m-r-sm">
-                                        <i class="fa fa-play fa-2x"></i>
-                                    </span>
-                                    <span class="clear text-left l-h-1x">
-                                        <span class="text-muted text-xxs">Get it on</span>
-                                        <b class="block m-b-xs m-r-xs">Google Play</b>
-                                    </span>
-                                </a>
-                            </div>
-                            <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- ############ PAGE END-->
-            <!-- ############ SWITHCHER START-->
-            <div id="switcher">
-                <div class="switcher white" id="sw-theme">
-                    <a href="#" data-ui-toggle-class="active" data-ui-target="#sw-theme" class="white sw-btn">
-                        <i class="fa fa-gear text-muted"></i>
-                    </a>
-                    <div class="box-header">
-                        <strong>Theme Switcher</strong>
-                    </div>
-                    <div class="box-divider"></div>
-                    <div class="box-body">
-                        <p id="settingLayout" class="hidden-md-down">
-                            <label class="md-check m-y-xs" data-target="folded">
-                                <input type="checkbox">
-                                <i class="green"></i>
-                                <span>Folded Aside</span>
-                            </label>
-                            <label class="m-y-xs pointer" data-ui-fullscreen data-target="fullscreen">
-                                <span class="fa fa-expand fa-fw m-r-xs"></span>
-                                <span>Fullscreen Mode</span>
-                            </label>
-                        </p>
-                        <p>Colors:</p>
-                        <p data-target="color">
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="primary">
-                                <i class="primary"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="accent">
-                                <i class="accent"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="warn">
-                                <i class="warn"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="success">
-                                <i class="success"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="info">
-                                <i class="info"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="blue">
-                                <i class="blue"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="warning">
-                                <i class="warning"></i>
-                            </label>
-                            <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="color" value="danger">
-                                <i class="danger"></i>
-                            </label>
-                        </p>
-                        <p>Themes:</p>
-                        <div data-target="bg" class="text-u-c text-center _600 clearfix">
-                            <label class="p-a col-xs-3 light pointer m-a-0">
-                                <input type="radio" name="theme" value="" hidden>
-                                <i class="active-checked fa fa-check"></i>
-                            </label>
-                            <label class="p-a col-xs-3 grey pointer m-a-0">
-                                <input type="radio" name="theme" value="grey" hidden>
-                                <i class="active-checked fa fa-check"></i>
-                            </label>
-                            <label class="p-a col-xs-3 dark pointer m-a-0">
-                                <input type="radio" name="theme" value="dark" hidden>
-                                <i class="active-checked fa fa-check"></i>
-                            </label>
-                            <label class="p-a col-xs-3 black pointer m-a-0">
-                                <input type="radio" name="theme" value="black" hidden>
-                                <i class="active-checked fa fa-check"></i>
-                            </label>
+                        <h6 class="text text-muted">Go mobile</h6>
+                        <div class="btn-groups">
+                            <a href="" class="btn btn-sm dark lt m-r-xs" style="width: 135px">
+                                <span class="pull-left m-r-sm">
+                                    <i class="fa fa-apple fa-2x"></i>
+                                </span>
+                                <span class="clear text-left l-h-1x">
+                                    <span class="text-muted text-xxs">Download on the</span>
+                                    <b class="block m-b-xs">App Store</b>
+                                </span>
+                            </a>
+                            <a href="" class="btn btn-sm dark lt" style="width: 133px">
+                                <span class="pull-left m-r-sm">
+                                    <i class="fa fa-play fa-2x"></i>
+                                </span>
+                                <span class="clear text-left l-h-1x">
+                                    <span class="text-muted text-xxs">Get it on</span>
+                                    <b class="block m-b-xs m-r-xs">Google Play</b>
+                                </span>
+                            </a>
                         </div>
+                        <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
                     </div>
                 </div>
             </div>
-            <!-- ############ SWITHCHER END-->
-            <!-- ############ LAYOUT END-->
         </div>
+
+        <!-- ############ PAGE END-->
+        <!-- ############ LAYOUT END-->
     </div>
 </div>

@@ -1,5 +1,5 @@
-﻿using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
@@ -12,6 +12,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             this.adminSinger = adminSinger;
         }
 
+        [Authorize(Roles = "admin")]
         public virtual ViewResult AdminLayout()
         {
             return View();

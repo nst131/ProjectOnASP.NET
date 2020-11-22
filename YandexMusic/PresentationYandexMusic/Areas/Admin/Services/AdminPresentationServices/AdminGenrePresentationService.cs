@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Genre;
-using System.Data.Entity;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {

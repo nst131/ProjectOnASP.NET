@@ -1,0 +1,17 @@
+﻿@model PresentationYandexMusic.Areas.Admin.ViewModel.Genre.CreateGenreViewModel
+
+<p>
+    <label for="GenreName">Название жанра</label>
+    <input type="text" name="GenreName" value=@Model.GenreName />
+    @Html.ValidationMessageFor(x => x.GenreName)
+</p>
+
+<p>
+    <label for="GenreImage">Загрузить картинку Жанра</label>
+    <input type="file" name="GenreImage" />
+    @Html.ValidationMessageFor(x => x.GenreImage)
+</p>
+
+<input type="submit" value="Сохранить" class="btn-success" />
+
+<h3 class="text-success">Successful save</h3>

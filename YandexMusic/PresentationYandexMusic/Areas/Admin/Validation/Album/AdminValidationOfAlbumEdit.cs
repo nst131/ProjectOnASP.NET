@@ -1,7 +1,7 @@
-﻿using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
+﻿using System.Web;
+using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using FluentValidation;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Album;
-using System.Web;
 
 namespace PresentationYandexMusic.Areas.Admin.Validation.Album
 {
@@ -10,7 +10,8 @@ namespace PresentationYandexMusic.Areas.Admin.Validation.Album
         private readonly IAlbumDomainService albumDomain;
         private readonly ISingerDomainService singerDomain;
 
-        public AdminValidationOfAlbumEdit(IAlbumDomainService albumDomain,
+        public AdminValidationOfAlbumEdit(
+            IAlbumDomainService albumDomain,
             ISingerDomainService singerDomain)
         {
             this.albumDomain = albumDomain;
@@ -37,7 +38,7 @@ namespace PresentationYandexMusic.Areas.Admin.Validation.Album
 
         public bool EditIsUniqueAlbum(EditAlbumViewModel editAlbum)
         {
-            return albumDomain.EditIsUniqueAlbum(editAlbum.Id,editAlbum.AlbumName);
+            return albumDomain.EditIsUniqueAlbum(editAlbum.Id, editAlbum.AlbumName);
         }
 
         public bool IsExistSinger(int id)

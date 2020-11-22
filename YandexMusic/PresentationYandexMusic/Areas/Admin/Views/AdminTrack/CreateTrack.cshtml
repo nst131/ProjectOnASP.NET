@@ -11,7 +11,6 @@
 @section scripts{
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/Ajax")
-    @Scripts.Render("~/Scripts/SolutionAjaxForm.js")
     @Scripts.Render("~/Scripts/JSCheckbox.js")
     @Scripts.Render("~/Scripts/JSTrackCreate.js")
 }
@@ -31,9 +30,9 @@
     </p>
 
     <p class="Aligning">
-        <label for="Liked">Количество Лайков</label>
-        <input type="number" name="Liked" value=@Model.Liked />
-        @Html.ValidationMessageFor(x => x.Liked)
+        <label for="NumberOfLikes">Количество Лайков</label>
+        <input type="number" name="NumberOfLikes" value=@Model.NumberOfLikes />
+        @Html.ValidationMessageFor(x => x.NumberOfLikes)
     </p>
 
     <p id="Singers" class="Aligning">

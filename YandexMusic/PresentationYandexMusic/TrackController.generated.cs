@@ -86,6 +86,7 @@ namespace PresentationYandexMusic.Controllers
         {
             public readonly string GetTrackImage = "GetTrackImage";
             public readonly string GetTracksByGenre = "GetTracksByGenre";
+            public readonly string LikedTrackView = "LikedTrackView";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -93,6 +94,7 @@ namespace PresentationYandexMusic.Controllers
         {
             public const string GetTrackImage = "GetTrackImage";
             public const string GetTracksByGenre = "GetTracksByGenre";
+            public const string LikedTrackView = "LikedTrackView";
         }
 
 
@@ -123,8 +125,12 @@ namespace PresentationYandexMusic.Controllers
             public class _ViewNamesClass
             {
                 public readonly string GetTracksByGenre = "GetTracksByGenre";
+                public readonly string LikedTrack = "LikedTrack";
+                public readonly string LikedTrackView = "LikedTrackView";
             }
             public readonly string GetTracksByGenre = "~/Views/Track/GetTracksByGenre.cshtml";
+            public readonly string LikedTrack = "~/Views/Track/LikedTrack.cshtml";
+            public readonly string LikedTrackView = "~/Views/Track/LikedTrackView.cshtml";
         }
     }
 
@@ -154,6 +160,17 @@ namespace PresentationYandexMusic.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.GetTracksByGenre);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             GetTracksByGenreOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LikedTrackViewOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ViewResult LikedTrackView()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.LikedTrackView);
+            LikedTrackViewOverride(callInfo);
             return callInfo;
         }
 

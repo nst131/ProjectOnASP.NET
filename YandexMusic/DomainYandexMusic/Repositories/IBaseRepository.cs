@@ -1,4 +1,6 @@
-﻿namespace DomainYandexMusic.Repositories
+﻿using DomainYandexMusic.Entities;
+
+namespace DomainYandexMusic.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {

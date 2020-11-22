@@ -1,0 +1,36 @@
+﻿@model PresentationYandexMusic.Models.HomeModels.LoginViewModel
+
+@Html.AntiForgeryToken()
+
+<div>
+    <a href="#" class="btn btn-block indigo text-white m-b-sm">
+        <i class="fa fa-facebook pull-left"></i>
+        Sign in with Facebook
+    </a>
+    <a href="#" class="btn btn-block red text-white">
+        <i class="fa fa-google-plus pull-left"></i>
+        Sign in with Google+
+    </a>
+</div>
+
+<div class="m-y text-sm">
+    OR
+</div>
+
+@Html.ValidationSummary()
+
+<div class="form-group">
+    <input name="UserName" type="text" value=@Model.UserName class="form-control" placeholder="Name">
+</div>
+
+<div class="form-group">
+    <input name="Password" type="password" class="form-control" placeholder="Password">
+</div>
+
+<div class="m-b-md">
+    <label class="md-check">
+        <input type="checkbox" name="Persistent" value="persistent"><i class="primary"></i> Keep me signed in
+    </label>
+</div>
+
+<button type="submit" class="btn btn-lg black p-x-lg">Sign in</button>

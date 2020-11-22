@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@model PresentationYandexMusic.Models.HomeModels.LoginViewModel
+
+@Styles.Render("~/Content/CSSYandexMusic")
+@Styles.Render("~/Content/ColorValidation.css")
+
+@section scripts{
+    @Scripts.Render("~/bundles/LibsYandexMusic")
+    @Scripts.Render("~/bundles/ScriptsYandexMusic")
+    @Scripts.Render("~/bundles/Ajax")
+}
+
+<div class="app dk" id="app">
+
+    <!-- ############ LAYOUT START-->
+    <div class="padding">
+        <div class="navbar">
+            <div class="pull-center">
+                <a href="index.html" class="navbar-brand md">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                        <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
+                        <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
+                        <circle cx="24" cy="24" r="10" fill="#ffffff" />
+                        <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
+                        <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
+                        <circle cx="24" cy="24" r="3" fill="#000000" />
+                    </svg>
+
+                    <img src="images/logo.png" alt="." class="hide">
+                    <span class="hidden-folded inline">pulse</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="b-t">
+        <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+            <div class="p-a-md">
+                <div>
+
+                @using (Ajax.BeginForm(MVC.Home.Login(), new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "view", OnFailure = "OnFailure", }))
+                {
+                    <div id="view">
+                        @{Html.RenderPartial("FormLogin", Model);}
+                    </div>
+                }
+
+                <div class="m-y">
+                    <a href="forgot-password.html" class="_600">Forgot password?</a>
+                </div>
+                <div>
+                    Do not have an account?
+                    <a href="@Url.Action(MVC.Home.Register())" class="text-primary _600">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ############ LAYOUT END-->
+
+<script>
+    function OnFailure() {
+        document.location.href = "@Url.Action(MVC.Home.StartPage())"
+    }
+</script>

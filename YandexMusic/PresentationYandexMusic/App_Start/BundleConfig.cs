@@ -4,7 +4,6 @@ namespace PresentationYandexMusic
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -13,8 +12,6 @@ namespace PresentationYandexMusic
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
@@ -29,7 +26,6 @@ namespace PresentationYandexMusic
                            "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             bundles.Add(new StyleBundle("~/Content/CSSYandexMusic").Include(
-
                 "~/Content/css/animate.css/animate.min.css",
                 "~/Content/css/glyphicons/glyphicons.css",
                 "~/Content/css/font-awesome/css/font-awesome.min.css",
@@ -41,11 +37,9 @@ namespace PresentationYandexMusic
                 "~/Content/libs/owl.carousel/dist/assets/owl.carousel.min.css",
                 "~/Content/libs/owl.carousel/dist/assets/owl.theme.css",
                 "~/Content/libs/mediaelement/build/mediaelementplayer.min.css",
-                "~/Content/libs/mediaelement/build/mep.css"
-                ));
+                "~/Content/libs/mediaelement/build/mep.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/JSYandexMusic").Include(
-
+            bundles.Add(new ScriptBundle("~/bundles/LibsYandexMusic").Include(
             "~/Scripts/libs/jquery/dist/jquery.js",
             "~/Scripts/libs/tether/dist/js/tether.min.js",
             "~/Scripts/libs/bootstrap/dist/js/bootstrap.js",
@@ -56,7 +50,9 @@ namespace PresentationYandexMusic
             "~/Scripts/libs/PACE/pace.min.js",
             "~/Scripts/libs/jquery-pjax/jquery.pjax.js",
             "~/Scripts/libs/mediaelement/build/mediaelement-and-player.min.js",
-            "~/Scripts/libs/mediaelement/build/mep.js",
+            "~/Scripts/libs/mediaelement/build/mep.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ScriptsYandexMusic").Include(
             "~/Scripts/scripts/player.js",
             "~/Scripts/scripts/config.lazyload.js",
             "~/Scripts/scripts/ui-load.js",
@@ -70,9 +66,7 @@ namespace PresentationYandexMusic
             "~/Scripts/scripts/ui-toggle-class.js",
             "~/Scripts/scripts/ui-taburl.js",
             "~/Scripts/scripts/app.js",
-            "~/Scripts/scripts/site.js"
-            //"~/Scripts/scripts/ajax.js"
-            ));
+            "~/Scripts/scripts/site.js"));
         }
     }
 }

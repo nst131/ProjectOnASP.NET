@@ -9,7 +9,8 @@ namespace DomainYandexMusic.Entities
 
         public string Name { get; set; }
         public DateTime TimeOfCreation { get; set; } 
-        public int Liked { get; set; } 
+        public int NumberOfLikes { get; set; }
+        public bool Like { get; set; }
 
         public int SingerId { get; set; }
         public Singer Singer { get; set; }

@@ -1,8 +1,8 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Net;
+using System.Web.Mvc;
+using DomainYandexMusic.Entities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Playlist;
-using System.Net;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
@@ -20,6 +20,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(new CreatePlaylistViewModel());
         }
+
         [HttpPost]
         public virtual ActionResult CreatePlaylist(CreatePlaylistViewModel playlistView)
         {
@@ -27,12 +28,16 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminPlaylist.AddPlaylist(playlistView);
 
-                return Redirect("/Admin/Admin/Success");
+                return Redirect(Url.Action(MVC.Admin.AdminPlaylist.FormPlaylistSuccess()));
             }
 
             return PartialView("FormCreatePlaylist", playlistView);
         }
 
+        public virtual PartialViewResult FormPlaylistSuccess()
+        {
+            return PartialView("FormPlaylistSuccess", new CreatePlaylistViewModel());
+        }
 
         [HttpGet]
         public virtual ActionResult DeletePlaylist(int? id)
@@ -44,6 +49,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
 
             return View(adminPlaylist.GetDeletePlaylistViewModel((int)id));
         }
+
         [HttpPost]
         public virtual ActionResult DeletePlaylist(int id)
         {

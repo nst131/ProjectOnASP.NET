@@ -9,6 +9,7 @@ namespace DomainYandexMusic.Entities
         public string Name { get; set; }
 
         public ICollection<Track> Tracks { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
 
         public PlaylistImage PlaylistImage { get; set; }
 

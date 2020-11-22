@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Playlist;
-using System.Data.Entity;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {
@@ -13,7 +13,7 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 
         public AdminPlaylistPresentationService(IPlaylistDomainService playlistDomain)
         {
-            this.playlistDomainService = playlistDomain;
+            playlistDomainService = playlistDomain;
         }
 
         public void AddPlaylist(CreatePlaylistViewModel playlistModel)

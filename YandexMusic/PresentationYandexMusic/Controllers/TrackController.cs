@@ -1,6 +1,7 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Web.Mvc;
+using DomainYandexMusic.Entities;
+using Microsoft.AspNet.Identity;
 using PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Controllers
 {
@@ -27,7 +28,12 @@ namespace PresentationYandexMusic.Controllers
 
         public virtual ViewResult GetTracksByGenre(int id)
         {
-            return View(trackPresentation.GetTrackGenreViewModel(id));
+            return View(trackPresentation.GetTrackGenreViewModel(id, User.Identity.GetUserId()));
+        }
+
+        public virtual ViewResult LikedTrackView()
+        {
+            return View(trackPresentation.GetLikedTrackView(User.Identity.GetUserId()));
         }
     }
 }

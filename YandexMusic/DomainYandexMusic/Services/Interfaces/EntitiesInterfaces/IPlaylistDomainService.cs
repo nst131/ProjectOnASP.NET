@@ -7,6 +7,7 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
 {
     public interface IPlaylistDomainService : IBaseDomainService
     {
+        void CreatePlaylistAndUserId(string playlistName, ApplicationUser user);
         void DeletePlaylist(int id);
         DbEntityEntry Entry(Playlist playlist);
         Dictionary<int, string> GetDictionaryPlaylist();

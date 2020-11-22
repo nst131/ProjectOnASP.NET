@@ -1,0 +1,36 @@
+﻿@model List<DomainYandexMusic.Entities.Track>
+
+<h6 class="text text-muted">
+    <a data-ajax="true" data-ajax-update="#view" href="@Url.Action(MVC.Track.LikedTrackView())">
+        Liked Tracks
+    </a>
+</h6>
+
+<div class="row item-list item-list-sm m-b">
+    @foreach (var likedTrack in Model)
+    {
+        <div class="col-xs-12">
+            <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                <div class="item-media ">
+                    <!-- TrackImage -->
+                    <a href="@Url.Action(MVC.Album.AlbumDetail(likedTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(likedTrack.Id))');"></a>
+                    <div class="item-overlay" style="display:flex;flex-direction:row;align-content:center;justify-content:center;align-items:center">
+                        <button class="btn-playpause playMusic likeMusic rounded-circle" data-location="@likedTrack.TrackFile.FileLocation">
+                            <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
+                        </button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-title text-ellipsis">
+                        <!-- TrackName -->
+                        <a href="@Url.Action(MVC.Album.AlbumDetail(likedTrack.AlbumId))" data-ajax="true" data-ajax-update="#view">@likedTrack.Name</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis ">
+                        <!-- Singer -->
+                        <a href="@Url.Action(MVC.Singer.SingerDetail(likedTrack.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted">@likedTrack.Singer.Name</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

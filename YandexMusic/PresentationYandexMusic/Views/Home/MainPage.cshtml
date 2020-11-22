@@ -7,9 +7,11 @@
 @Styles.Render("~/Content/css")
 
 @section scripts{
-    @Scripts.Render("~/bundles/JSYandexMusic")
+    @Scripts.Render("~/bundles/LibsYandexMusic")
+    @Scripts.Render("~/bundles/ScriptsYandexMusic")
     @Scripts.Render("~/Scripts/JSButtonPlayMusic.js")
     @Scripts.Render("~/Scripts/JSHeart.js")
+    @Scripts.Render("~/bundles/Ajax")
     <script>
         $(function () {
             let itemHeightPrev = $(`.carousel-control-prev`).first().height();
@@ -18,7 +20,6 @@
             $(`.carousel-control-next`).first().css(`height`, `${itemHeightNext / 1.5}`);
         });
     </script>
-
 }
 
 <style>
@@ -60,14 +61,14 @@
                 </a>
             </div>
 
-            <div class="navbar-nav mt-2">
-                <a href="#" class="">
+            <div class="navbar-nav mt-2 Navig">
+                <a href="@Url.Action(MVC.Home.MainPage())" class="">
                     <span class="text-center mr-2">Main</span>
                 </a>
-                <a href="@Url.Action(MVC.Genre.GetAllGenres())" class="">
+                <a href="@Url.Action(MVC.Genre.GetAllGenres())" data-ajax="true" data-ajax-update="#view" class="">
                     <span class="text-center mr-2">Genre</span>
                 </a>
-                <a href="@Url.Action(MVC.Singer.ShowAllSingers())" class="">
+                <a href="@Url.Action(MVC.Singer.ShowAllSingers())" data-ajax="true" data-ajax-update="#view" class="">
                     <span class="text-center mt-2">Artists</span>
                 </a>
             </div>
@@ -81,29 +82,17 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
 
-            <div class="dropdown my-2 my-lg-0">
+            <div class="dropdown my-2 my-lg-0 mr-2">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     Profile
                 </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item text-dark" href="#">
-                        <span>Profile</span>
-                    </a>
-                    <a class="dropdown-item text-dark" href="#">
-                        <span>Tracks</span>
-                    </a>
-                    <a class="dropdown-item text-dark" href="#">
-                        <span>Playlists</span>
-                    </a>
-                    <a class="dropdown-item text-dark" href="#">
-                        <span>Likes</span>
+                <div class="dropdown-menu" style="min-width:0px;">
+                    <a class="dropdown-item text-dark" data-ajax="true" data-ajax-update="#view" href="@Url.Action(MVC.Track.LikedTrackView())">
+                        <span>LikedTracks</span>
                     </a>
                     <div class="dropdown-divider">
 
                     </div>
-                    <a class="dropdown-item text-dark" href="#">
-                        <span>Sign out</span>
-                    </a>
                 </div>
             </div>
 
@@ -112,10 +101,13 @@
     </nav>
 
     <!-- Player -->
-    <div class="app-footer app-player grey bg">
-        <!-- <div class="playlist" style="width:100%"></div> -->
+    <div class="app-footer position-fixed Player">
+        <audio controls style="width:100%; background-color:black;">
+            <source src="" type="audio/mp3" />
+        </audio>
     </div>
-    <div class="app-body" id="view">
+
+    <div id="view">
 
         <!-- ############ PAGE START-->
         <div class="page-content">
@@ -133,24 +125,24 @@
                                 <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                
+
                                 <div class="item r carousel-item active" data-id="item-115" data-src="http://api.soundcloud.com/tracks/239793212/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                     <div class="item-media primary BackgroundWidth">
-                                        
+
                                     </div>
                                     <div class="item-info">
                                         <!-- AlbumImage -->
-                                        <a href="@Url.Action(MVC.Album.AlbumDetail(Model.Albums.FirstOrDefault().Id))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(Model.Albums.FirstOrDefault().Id))');"></a>
+                                        <a href="@Url.Action(MVC.Album.AlbumDetail(Model.Albums.FirstOrDefault().Id))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(Model.Albums.FirstOrDefault().Id))');"></a>
                                         <div class="item-overlay bottom text-right">
                                             <div class="dropdown-menu pull-right black lt"></div>
                                         </div>
                                         <div class="item-title text-ellipsis">
                                             <!-- AlbumName -->
-                                            <a href="@Url.Action(MVC.Album.AlbumDetail(Model.Albums.FirstOrDefault().Id))" class="text-white" style="font-size:x-large">@Model.Albums.FirstOrDefault().Name</a>
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(Model.Albums.FirstOrDefault().Id))" data-ajax="true" data-ajax-update="#view" class="text-white" style="font-size:x-large">@Model.Albums.FirstOrDefault().Name</a>
                                         </div>
                                         <div class="item-author text-sm text-ellipsis">
                                             <!-- SingerName -->
-                                            <a href="@Url.Action(MVC.Singer.SingerDetail(Model.Albums.FirstOrDefault().SingerId))" class="text-dark" style="font-size:large">@Model.Albums.FirstOrDefault().Singer.Name</a>
+                                            <a href="@Url.Action(MVC.Singer.SingerDetail(Model.Albums.FirstOrDefault().SingerId))" data-ajax="true" data-ajax-update="#view" class="text-dark" style="font-size:large">@Model.Albums.FirstOrDefault().Singer.Name</a>
                                         </div>
                                     </div>
                                 </div>
@@ -159,21 +151,21 @@
                                 {
                                     <div class="item r carousel-item" data-id="item-116" data-src="http://api.soundcloud.com/tracks/260682299/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                         <div class="item-media info">
-                                            
+
                                         </div>
                                         <div class="item-info">
                                             <!-- AlbumImage -->
-                                            <a href="@Url.Action(MVC.Album.AlbumDetail(albumLeft.Id))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(albumLeft.Id))')"></a>
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(albumLeft.Id))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(albumLeft.Id))')"></a>
                                             <div class="item-overlay bottom text-right">
                                                 <div class="dropdown-menu pull-right black lt"></div>
                                             </div>
                                             <div class="item-title text-ellipsis">
                                                 <!-- AlbumName -->
-                                                <a href="@Url.Action(MVC.Album.AlbumDetail(albumLeft.Id))" class="text-white" style="font-size:x-large">@albumLeft.Name</a>
+                                                <a href="@Url.Action(MVC.Album.AlbumDetail(albumLeft.Id))" data-ajax="true" data-ajax-update="#view" class="text-white" style="font-size:x-large">@albumLeft.Name</a>
                                             </div>
                                             <div class="item-author text-sm text-ellipsis">
                                                 <!-- SingerName -->
-                                                <a href="@Url.Action(MVC.Singer.SingerDetail(albumLeft.SingerId))" class="text-dark" style="font-size:large">@albumLeft.Singer.Name</a>
+                                                <a href="@Url.Action(MVC.Singer.SingerDetail(albumLeft.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-dark" style="font-size:large">@albumLeft.Singer.Name</a>
                                             </div>
                                         </div>
                                     </div>
@@ -190,22 +182,22 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="item r" data-id="item-1" data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                     <div class="item-media ">
-                                       
+
                                     </div>
                                     <div class="item-info">
                                         <!-- AlbumImage -->
-                                        <a href="@Url.Action(MVC.Album.AlbumDetail(albumRight.Id))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(albumRight.Id))');"></a>
+                                        <a href="@Url.Action(MVC.Album.AlbumDetail(albumRight.Id))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Album.GetAlbumImage(albumRight.Id))');"></a>
                                         <div class="item-overlay bottom text-right">
                                             <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                             <div class="dropdown-menu pull-right black lt"></div>
                                         </div>
                                         <div class="item-title text-ellipsis">
                                             <!-- AlbumName -->
-                                            <a href="@Url.Action(MVC.Album.AlbumDetail(albumRight.Id))" class="text-white" style="font-size:large">@albumRight.Name</a>
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(albumRight.Id))" data-ajax="true" data-ajax-update="#view" class="text-white" style="font-size:large">@albumRight.Name</a>
                                         </div>
                                         <div class="item-author text-sm text-ellipsis ">
                                             <!-- SingerName -->
-                                            <a href="@Url.Action(MVC.Singer.SingerDetail(albumRight.SingerId))" class="text-dark" style="font-size:medium">@albumRight.Singer.Name</a>
+                                            <a href="@Url.Action(MVC.Singer.SingerDetail(albumRight.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-dark" style="font-size:medium">@albumRight.Singer.Name</a>
                                         </div>
                                     </div>
                                 </div>
@@ -235,26 +227,26 @@
                                                 <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                                     <div class="item-media item-media-4by3 d-flex justify-content-center align-items-center">
                                                         <!-- TrackImage -->
-                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
+                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
                                                         <div class="item-overlay">
-                                                            <button class="btn-playpause playMusic popularMusic rounded-circle">
+                                                            <button class="btn-playpause playMusic popularMusic rounded-circle" data-location="@popularTrack.TrackFile.FileLocation">
                                                                 <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="item-info">
                                                         <div class="item-overlay bottom text-right">
-                                                            <a class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                            <a class="btn-favorite" data-trackId=@popularTrack.Id><i data-like=@popularTrack.Like class="fa fa-heart-o"></i></a>
                                                             <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                                             <div class="dropdown-menu pull-right black lt"></div>
                                                         </div>
                                                         <div class="item-title text-ellipsis">
                                                             <!-- TrackName -->
-                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" style="font-size:large">@popularTrack.Name</a>
+                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" style="font-size:large">@popularTrack.Name</a>
                                                         </div>
                                                         <div class="item-author text-sm text-ellipsis ">
                                                             <!-- SingleTrack -->
-                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
+                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,26 +266,26 @@
                                                 <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                                     <div class="item-media item-media-4by3 d-flex justify-content-center align-items-center">
                                                         <!-- TrackImage -->
-                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
+                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
                                                         <div class="item-overlay">
-                                                            <button class="btn-playpause playMusic popularMusic rounded-circle">
+                                                            <button class="btn-playpause playMusic popularMusic rounded-circle" data-location="@popularTrack.TrackFile.FileLocation">
                                                                 <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="item-info">
                                                         <div class="item-overlay bottom text-right">
-                                                            <a class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                            <a class="btn-favorite" data-trackId=@popularTrack.Id ><i data-like=@popularTrack.Like class="fa fa-heart-o"></i></a>
                                                             <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                                             <div class="dropdown-menu pull-right black lt"></div>
                                                         </div>
                                                         <div class="item-title text-ellipsis">
                                                             <!-- TrackName -->
-                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" style="font-size:large">@popularTrack.Name</a>
+                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" style="font-size:large">@popularTrack.Name</a>
                                                         </div>
                                                         <div class="item-author text-sm text-ellipsis ">
                                                             <!-- SingleTrack -->
-                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
+                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,26 +305,26 @@
                                                 <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                                     <div class="item-media item-media-4by3 d-flex justify-content-center align-items-center">
                                                         <!-- TrackImage -->
-                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
+                                                        <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(popularTrack.Id))');"></a>
                                                         <div class="item-overlay">
-                                                            <button class="btn-playpause playMusic popularMusic rounded-circle">
+                                                            <button class="btn-playpause playMusic popularMusic rounded-circle" data-location="@popularTrack.TrackFile.FileLocation">
                                                                 <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="item-info">
                                                         <div class="item-overlay bottom text-right">
-                                                            <a class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                            <a class="btn-favorite" data-trackId=@popularTrack.Id><i data-like=@popularTrack.Like class="fa fa-heart-o"></i></a>
                                                             <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                                             <div class="dropdown-menu pull-right black lt"></div>
                                                         </div>
                                                         <div class="item-title text-ellipsis">
                                                             <!-- TrackName -->
-                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" style="font-size:large">@popularTrack.Name</a>
+                                                            <a href="@Url.Action(MVC.Album.AlbumDetail(popularTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" style="font-size:large">@popularTrack.Name</a>
                                                         </div>
                                                         <div class="item-author text-sm text-ellipsis ">
                                                             <!-- SingleTrack -->
-                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
+                                                            <a href="@Url.Action(MVC.Singer.SingerDetail(popularTrack.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted" style="font-size:medium">@popularTrack.Singer.Name</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,26 +358,26 @@
                                     <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                         <div class="item-media d-flex justify-content-center align-items-center">
                                             <!-- NewImages -->
-                                            <a href="@Url.Action(MVC.Album.AlbumDetail(noveltyTrack.AlbumId))" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(noveltyTrack.Id))');"></a>
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(noveltyTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(noveltyTrack.Id))');"></a>
                                             <div class="item-overlay">
-                                                <button class="btn-playpause playMusic popularMusic rounded-circle">
+                                                <button class="btn-playpause playMusic popularMusic rounded-circle" data-location="@noveltyTrack.TrackFile.FileLocation">
                                                     <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="item-info ml-2">
                                             <div class="item-overlay bottom text-right">
-                                                <a class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                <a class="btn-favorite" data-trackId=@noveltyTrack.Id ><i data-like=@noveltyTrack.Like class="fa fa-heart-o"></i></a>
                                                 <a class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                                 <div class="dropdown-menu pull-right black lt"></div>
                                             </div>
                                             <div class="item-title text-ellipsis">
                                                 <!-- TrackName -->
-                                                <a href="@Url.Action(MVC.Album.AlbumDetail(noveltyTrack.AlbumId))" style="font-size:large">@noveltyTrack.Name</a>
+                                                <a href="@Url.Action(MVC.Album.AlbumDetail(noveltyTrack.AlbumId))" data-ajax="true" data-ajax-update="#view" style="font-size:large">@noveltyTrack.Name</a>
                                             </div>
                                             <div class="item-author text-sm text-ellipsis ">
                                                 <!-- SingleTrack -->
-                                                <a href="@Url.Action(MVC.Singer.SingerDetail(noveltyTrack.SingerId))" class="text-muted" style="font-size:medium">@noveltyTrack.Singer.Name</a>
+                                                <a href="@Url.Action(MVC.Singer.SingerDetail(noveltyTrack.SingerId))" data-ajax="true" data-ajax-update="#view" class="text-muted" style="font-size:medium">@noveltyTrack.Singer.Name</a>
                                             </div>
                                         </div>
                                     </div>

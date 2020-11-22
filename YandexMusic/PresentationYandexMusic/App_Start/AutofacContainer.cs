@@ -1,4 +1,7 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using System.Web.Mvc;
+using Autofac;
 using Autofac.Integration.Mvc;
 using DomainYandexMusic.Repositories;
 using DomainYandexMusic.Services;
@@ -16,9 +19,6 @@ using PresentationYandexMusic.Areas.Admin.Validation.Playlist;
 using PresentationYandexMusic.Areas.Admin.Validation.Singer;
 using PresentationYandexMusic.Areas.Admin.Validation.Track;
 using PresentationYandexMusic.Services.Interfaces;
-using System.Linq;
-using System.Reflection;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.App_Start
 {
@@ -84,7 +84,6 @@ namespace PresentationYandexMusic.App_Start
                         .Keyed<IValidator>(result.InterfaceType)
                         .As<IValidator>();
                     }); // Validation CreatePlaylist
-
 
             AssemblyScanner.FindValidatorsInAssemblyContaining<AdminValidationOfTrackCreate>()
                     .ForEach(result =>

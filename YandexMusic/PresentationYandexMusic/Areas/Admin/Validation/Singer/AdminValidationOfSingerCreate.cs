@@ -1,7 +1,7 @@
-﻿using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
+﻿using System.Web;
+using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using FluentValidation;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Singer;
-using System.Web;
 
 namespace PresentationYandexMusic.Areas.Admin.Validation.Singer
 {
@@ -11,7 +11,7 @@ namespace PresentationYandexMusic.Areas.Admin.Validation.Singer
 
         public AdminValidationOfSingerCreate(ISingerDomainService singerDomain)
         {
-            this.singerDomainService = singerDomain;
+            singerDomainService = singerDomain;
 
             RuleFor(x => x.SingerName)
                 .NotEmpty().WithMessage("Введитете имя жанра")

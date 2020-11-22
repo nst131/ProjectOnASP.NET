@@ -1,15 +1,14 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Net;
+using System.Web.Mvc;
+using DomainYandexMusic.Entities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Singer;
-using System.Net;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
     public partial class AdminSingerController : Controller
     {
         private readonly IAdminSingerPresentationService adminSinger;
-
 
         public AdminSingerController(IAdminSingerPresentationService adminSinger)
         {
@@ -21,6 +20,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(new CreateSingerViewModel());
         }
+
         [HttpPost]
         public virtual ActionResult CreateSinger(CreateSingerViewModel singerModel)
         {
@@ -28,10 +28,15 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminSinger.AddSinger(singerModel);
 
-                return Redirect("/Admin/Admin/Success");
+                return Redirect(Url.Action(MVC.Admin.AdminSinger.FormSingerSuccess()));
             }
 
             return PartialView("FormCreateSinger", singerModel);
+        }
+
+        public virtual PartialViewResult FormSingerSuccess()
+        {
+            return PartialView("FormSingerSuccess", new CreateSingerViewModel());
         }
 
         [HttpGet]
@@ -39,6 +44,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(adminSinger.GetEditSingerViewModel(id));
         }
+
         [HttpPost]
         public virtual ActionResult EditSinger(EditSingerViewModel singerView)
         {
@@ -46,7 +52,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminSinger.EditSinger(singerView);
 
-                return Redirect("/Admin/Admin/FormSuccess");
+                return Redirect(Url.Action(MVC.Admin.Admin.FormSuccess()));
             }
 
             return PartialView("FormEditSinger", singerView);
@@ -62,6 +68,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
 
             return View(adminSinger.GetDeleteSingerViewModel((int)id));
         }
+
         [HttpPost]
         public virtual ActionResult DeleteSinger(int id)
         {

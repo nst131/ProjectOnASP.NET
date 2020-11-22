@@ -73,12 +73,14 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string CreateGenre = "CreateGenre";
+            public readonly string FormGenreSuccess = "FormGenreSuccess";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string CreateGenre = "CreateGenre";
+            public const string FormGenreSuccess = "FormGenreSuccess";
         }
 
 
@@ -102,9 +104,11 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 public readonly string CreateGenre = "CreateGenre";
                 public readonly string FormCreateGenre = "FormCreateGenre";
+                public readonly string FormGenreSuccess = "FormGenreSuccess";
             }
             public readonly string CreateGenre = "~/Areas/Admin/Views/AdminGenre/CreateGenre.cshtml";
             public readonly string FormCreateGenre = "~/Areas/Admin/Views/AdminGenre/FormCreateGenre.cshtml";
+            public readonly string FormGenreSuccess = "~/Areas/Admin/Views/AdminGenre/FormGenreSuccess.cshtml";
         }
     }
 
@@ -133,6 +137,17 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateGenre);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "genreModel", genreModel);
             CreateGenreOverride(callInfo, genreModel);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FormGenreSuccessOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult FormGenreSuccess()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.FormGenreSuccess);
+            FormGenreSuccessOverride(callInfo);
             return callInfo;
         }
 

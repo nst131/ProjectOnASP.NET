@@ -3,7 +3,7 @@
         let id = $(`.SingerList option:selected`).val()
         $.ajax({
             method: `GET`,
-            url: `/Admin/Track/ReplaceItem/${id}`
+            url: `/Admin/AdminTrack/ReplaceItem/${id}`
         })
             .done(function (data) {
                 $(`.AlbumList`).remove();

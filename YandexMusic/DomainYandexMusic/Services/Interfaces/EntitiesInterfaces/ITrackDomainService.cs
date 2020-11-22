@@ -20,10 +20,10 @@ namespace DomainYandexMusic.Services.Interfaces.EntitiesInterfaces
         Track GetTrackWithImageAndFileTrack(int id);
         bool EditTrackIsUnique(int id, string trackName);
         bool CreateTrackIsUnique(string trackmName);
-        List<Track> GetLikedTracksWithSinger();
         Genre GetGenreBySingerId(int id);
-        List<Track> GetPopularTracksWithAlbumsBySingerId(int id);
-        Track GetTrackWithSingerById(int id);
-        List<Track> GetTrackGenreByGenreId(int id);
+        List<Track> GetPopularTracksWithAlbumsAndTrackFileBySingerId(int id);
+        Track GetTrackWithSingerAndTrackFileById(int id);
+        List<Track> GetTrackWithSingerAndTrackFileByGenreId(int id);
+        TrackFile GetTrackFileById(int id);
     }
 }

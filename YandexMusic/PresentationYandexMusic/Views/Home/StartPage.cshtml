@@ -5,7 +5,9 @@
 @Styles.Render("~/Content/CSSYandexMusic")
 
 @section scripts{
-    @Scripts.Render("~/bundles/JSYandexMusic")
+    @Scripts.Render("~/bundles/LibsYandexMusic")
+    @Scripts.Render("~/bundles/ScriptsYandexMusic")
+    @Scripts.Render("~/bundles/Ajax")
 }
 
 <div id="content" class="app-content" role="main">
@@ -27,220 +29,237 @@
                 <img src="images/logo.png" alt="." class="hide">
                 <span class="hidden-folded inline">pulse</span>
             </a>
-            <!-- nabar right -->
+
             <ul class="nav navbar-nav pull-right">
                 <li class="nav-item">
-                    <a href="signup.html" class="nav-link">
+                    <a href="@Url.Action(MVC.Home.Register())" class="nav-link">
                         Signup
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="signin.html" class="nav-link">
-                        <span class="btn btn-sm rounded primary _600">
-                            Signin
-                        </span>
-                    </a>
+                    @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action(MVC.Home.Login())" class="nav-link">
+                            <span class="btn btn-sm rounded primary _600">
+                                Signin
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(MVC.Home.Logout())" class="nav-link">
+                            <span class="btn btn-sm rounded primary _600">
+                                Signout
+                            </span>
+                            <span>
+                                User: @(HttpContext.Current.User.Identity.Name)
+                            </span>
+                        </a>
+                    }
+
                 </li>
             </ul>
-            <!-- / navbar right -->
-            <!-- navbar collapse -->
             <div class="collapse navbar-toggleable-sm l-h-0 text-center" id="navbar">
 
             </div>
-            <!-- / navbar collapse -->
         </div>
     </div>
-    <div class="app-body">
+    <div id="result">
 
-        <!-- ############ PAGE START-->
+        <div class="app-body">
 
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" style="min-height:320px">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row-col">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8 text-center">
-                            <div class="p-a-lg">
-                                <h2 class="display-4 m-y-lg">The world'smost popular music service</h2>
+            <!-- ############ PAGE START-->
+
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" style="min-height:320px">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row-col">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8 text-center">
+                                <div class="p-a-lg">
+                                    <h2 class="display-4 m-y-lg">The world'smost popular music service</h2>
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
                         </div>
-                        <div class="col-lg-2"></div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row-col">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8 text-center">
-                            <div class="p-a-lg">
-                                <h2 class="display-4 m-y-lg">Most recent artist tracks</h2>
+                    <div class="carousel-item">
+                        <div class="row-col">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8 text-center">
+                                <div class="p-a-lg">
+                                    <h2 class="display-4 m-y-lg">Most recent artist tracks</h2>
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
                         </div>
-                        <div class="col-lg-2"></div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row-col">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8 text-center">
-                            <div class="p-a-lg">
-                                <h2 class="display-4 m-y-lg">The service is completely free</h2>
+                    <div class="carousel-item">
+                        <div class="row-col">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8 text-center">
+                                <div class="p-a-lg">
+                                    <h2 class="display-4 m-y-lg">The service is completely free</h2>
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
                         </div>
-                        <div class="col-lg-2"></div>
                     </div>
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
 
-        <div class="row-col">
-            <div class="col-sm-6">
-                <div class="black cover cover-gd" style="background-image: url('../../images/b1.jpg');">
-                    <div class="p-a-lg text-center">
-                        <h3 class="display-3 m-y-lg">Music</h3>
-                        <p class="text-muted text-md m-b-lg">Get ready for high sound quality.</p>
-                        <a href="@Url.Action(MVC.Home.MainPage())" class="btn circle white m-b-lg p-x-md">Try Free</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 black lt">
-                <div class="black cover cover-gd" style="background-image: url('../../images/b7.jpg');">
-                    <div class="p-a-lg text-center">
-                        <h3 class="display-3 m-y-lg">Artists</h3>
-                        <p class="text-muted text-md m-b-lg">Listen to your favorite Artists.</p>
-                        <a href="@Url.Action(MVC.Singer.ShowAllSingers())" class="btn circle white m-b-lg p-x-md">View Artists</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row-col dark-white">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="p-a-lg text-center">
-                    <h3 class="display-4 m-y-lg">Light, Grey, Dark, Black themes</h3>
-                    <p class="text-muted text-md m-b-lg">Config any blocks with any colors</p>
-                </div>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-
-        <div class="black cover" data-stellar-background-ratio="0.5" style="background-image: url('../../images/b10.jpg');">
             <div class="row-col">
-                <div class="col-md-4">
-                    <div class="p-a-lg text-center">
-                        <h4 class="m-y-lg">View all popular artists</h4>
+                <div class="col-sm-6">
+                    <div class="black cover cover-gd" style="background-image: url('../../images/b1.jpg');">
+                        <div class="p-a-lg text-center">
+                            <h3 class="display-3 m-y-lg">Music</h3>
+                            <p class="text-muted text-md m-b-lg">Get ready for high sound quality.</p>
+                            <a href="@Url.Action(MVC.Home.MainPage())" class="btn circle white m-b-lg p-x-md">Try Free</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-a-lg text-center">
-                        <h4 class="m-y-lg">Listening to the latest released tracks</h4>
+
+                <div class="col-sm-6">
+                    <div class="black cover cover-gd" style="background-image: url('../../images/b1.jpg');">
+                        <div class="p-a-lg text-center">
+                            <h3 class="display-3 m-y-lg">Admin</h3>
+                            <p class="text-muted text-md m-b-lg">Remote access and administration system</p>
+                            <a href="@Url.Action(MVC.Admin.Admin.AdminLayout())" class="btn circle white m-b-lg p-x-md">Here goes!</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+
+            </div>
+
+            <div class="row-col dark-white">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
                     <div class="p-a-lg text-center">
-                        <h4 class="m-y-lg">Save favorite tracks</h4>
+                        <h3 class="display-4 m-y-lg">Light, Grey, Dark, Black themes</h3>
+                        <p class="text-muted text-md m-b-lg">Config any blocks with any colors</p>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="black cover" data-stellar-background-ratio="0.5" style="background-image: url('../../images/b10.jpg');">
+                <div class="row-col">
+                    <div class="col-md-4">
+                        <div class="p-a-lg text-center">
+                            <h4 class="m-y-lg">View all popular artists</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-a-lg text-center">
+                            <h4 class="m-y-lg">Listening to the latest released tracks</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-a-lg text-center">
+                            <h4 class="m-y-lg">Save favorite tracks</h4>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- ############ PAGE END-->
+
         </div>
+        <div class="white dk pos-rlt">
+            <div class="p-a-md">
+                <div class="footer p-y-md text-primary-hover">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="clearfix m-b-lg">
+                                <!-- brand -->
+                                <a href="#" class="navbar-brand md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                                        <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
+                                        <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
+                                        <circle cx="24" cy="24" r="10" fill="#ffffff" />
+                                        <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
+                                        <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
+                                        <circle cx="24" cy="24" r="3" fill="#000000" />
+                                    </svg>
 
-        <!-- ############ PAGE END-->
-
-    </div>
-    <div class="white dk pos-rlt">
-        <div class="p-a-md">
-            <div class="footer p-y-md text-primary-hover">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="clearfix m-b-lg">
-                            <!-- brand -->
-                            <a href="#" class="navbar-brand md">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
-                                    <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
-                                    <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
-                                    <circle cx="24" cy="24" r="10" fill="#ffffff" />
-                                    <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
-                                    <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
-                                    <circle cx="24" cy="24" r="3" fill="#000000" />
-                                </svg>
-
-                                <img src="images/logo.png" alt="." class="hide">
-                                <span class="hidden-folded inline">pulse</span>
-                            </a>
-                            <!-- / brand -->
+                                    <img src="images/logo.png" alt="." class="hide">
+                                    <span class="hidden-folded inline">pulse</span>
+                                </a>
+                                <!-- / brand -->
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <h6 class="text-u-c m-b text-muted">About</h6>
+                            <div class="m-b-md">
+                                <ul class="nav l-h-2x _600">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">About us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Mobile apps</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Jobs</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <h6 class="text-u-c m-b text-muted">Links</h6>
+                            <div class="m-b-md">
+                                <ul class="nav l-h-2x _600">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Help</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Support</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Legal</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Copyright</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <h6 class="text-u-c m-b text-muted">Connect</h6>
+                            <div class="m-b-md">
+                                <ul class="nav l-h-2x _600">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Facebook</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Twitter</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Google+</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-xs-6">
-                        <h6 class="text-u-c m-b text-muted">About</h6>
-                        <div class="m-b-md">
-                            <ul class="nav l-h-2x _600">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Mobile apps</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Jobs</a>
-                                </li>
-                            </ul>
+                    <div class="b b-b m-b m-t-lg"></div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <a href="#" ="#" class="text-muted text-sm">Cookies</a>
                         </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-6">
-                        <h6 class="text-u-c m-b text-muted">Links</h6>
-                        <div class="m-b-md">
-                            <ul class="nav l-h-2x _600">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Help</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Support</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Legal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Copyright</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-6">
-                        <h6 class="text-u-c m-b text-muted">Connect</h6>
-                        <div class="m-b-md">
-                            <ul class="nav l-h-2x _600">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Facebook</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Twitter</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Google+</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="b b-b m-b m-t-lg"></div>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <a href="#" ="#" class="text-muted text-sm">Cookies</a>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="text-sm-right text-xs-left">
-                            <small class="text-muted">&copy; Copyright. All rights reserved.</small>
+                        <div class="col-sm-4">
+                            <div class="text-sm-right text-xs-left">
+                                <small class="text-muted">&copy; Copyright. All rights reserved.</small>
+                            </div>
                         </div>
                     </div>
                 </div>

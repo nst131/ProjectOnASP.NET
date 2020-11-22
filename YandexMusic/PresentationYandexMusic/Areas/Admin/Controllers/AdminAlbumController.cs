@@ -1,8 +1,8 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Net;
+using System.Web.Mvc;
+using DomainYandexMusic.Entities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Album;
-using System.Net;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
@@ -20,6 +20,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(adminAlbum.GetCreateAlbumViewModel());
         }
+
         [HttpPost]
         public virtual ActionResult CreateAlbum(CreateAlbumViewModel albumView)
         {
@@ -27,10 +28,15 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminAlbum.AddAlbum(albumView);
 
-                return Redirect("/Admin/Admin/FormSuccess");
+                return Redirect(Url.Action(MVC.Admin.AdminAlbum.FormAlbumSuccess()));
             }
 
             return PartialView("FormCreateAlbum", adminAlbum.GetCreateAlbumViewModel(albumView));
+        }
+
+        public virtual PartialViewResult FormAlbumSuccess()
+        {
+            return PartialView("FormAlbumSuccess", adminAlbum.GetCreateAlbumViewModel());
         }
 
         [HttpGet]
@@ -38,6 +44,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(adminAlbum.GetEditAlbumViewModel(id));
         }
+
         [HttpPost]
         public virtual ActionResult EditAlbum(EditAlbumViewModel albumView)
         {
@@ -45,7 +52,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminAlbum.EditAlbum(albumView);
 
-                return Redirect("/Admin/Admin/FormSuccess");
+                return Redirect(Url.Action(MVC.Admin.Admin.FormSuccess()));
             }
 
             return PartialView("FormEditAlbum", adminAlbum.GetEditAlbumViewModel(albumView));
@@ -61,10 +68,10 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
 
             return View(adminAlbum.GetDeleteAlbumViewModel((int)id));
         }
+
         [HttpPost]
         public virtual ActionResult DeleteAlbum(int id)
         {
-            //adminAlbum.DeleteTrackFileByAlbumId(id); // При удалении файла трека выдает ошибку
             adminAlbum.DeleteAlbum(id);
 
             return Redirect("/Admin/Admin/AdminLayout");

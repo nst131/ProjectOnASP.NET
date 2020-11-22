@@ -13,16 +13,18 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 {
     public class AlbumDomainService : IAlbumDomainService
     {
+        private readonly ITrackDomainService trackDomainService;
         private readonly IAlbumRepository albumRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly ICheckFile checkFile;
 
         public AlbumDomainService(IAlbumRepository albumRepository, 
-            IUnitOfWork unitOfWork, ICheckFile checkFile)
+            IUnitOfWork unitOfWork, ICheckFile checkFile, ITrackDomainService trackDomainService)
         {
             this.albumRepository = albumRepository;
             this.unitOfWork = unitOfWork;
             this.checkFile = checkFile;
+            this.trackDomainService = trackDomainService;
         }
 
         public DbEntityEntry Entry(Album album)
@@ -96,9 +98,12 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
             return albumRepository.EditIsUniqueAlbum(id, albumName);
         }
 
-        public Album GetAlbumWithTracksAndSinger(int id)
+        public Album GetAlbumWithTracksAndSinger(int id)    
         {
-            return albumRepository.GetAlbumWithTracksAndSinger(id);
+            Album album = albumRepository.GetAlbumWithTracksAndSinger(id);
+            album.Tracks.ToList().ForEach(x => x.TrackFile = trackDomainService.GetTrackFileById(x.Id));
+
+            return album;
         }
 
         public int AmountTrackInAlbumByAlbumId(int id)

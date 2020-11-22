@@ -1,5 +1,6 @@
 ﻿using DomainYandexMusic.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DomainYandexMusic.Repositories.EntitiesRepository
 {
@@ -7,6 +8,6 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
     {
         List<Popular> GetListPopular();
         Popular GetPopularById(int id);
-        List<int> GetRandomPopularTracksIdByQuantityTracks(int numberTracks);
+        List<Track> GetRandomPopularsTracksIdByQuantityTracks(int numberTracks);
     }
 }

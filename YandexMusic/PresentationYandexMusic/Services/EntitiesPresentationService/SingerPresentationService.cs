@@ -1,5 +1,6 @@
 ﻿using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
+using InfastructureYandexMusic.Models;
 using PresentationYandexMusic.Models.SingerModels;
 using PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces;
 
@@ -9,20 +10,24 @@ namespace PresentationYandexMusic.Services.EntitiesPresentationService
     {
         private readonly ISingerDomainService singerDomainService;
         private readonly ITrackDomainService trackDomainService;
+        private readonly IUserDomainService userDomainService;
 
-        public SingerPresentationService(ISingerDomainService singerDomainService,
-            ITrackDomainService trackDomainService)
+        public SingerPresentationService(
+            ISingerDomainService singerDomainService,
+            ITrackDomainService trackDomainService,
+            IUserDomainService userDomainService)
         {
             this.singerDomainService = singerDomainService;
             this.trackDomainService = trackDomainService;
+            this.userDomainService = userDomainService;
         }
 
-        public SingerViewModel GetSingersViewModel()
+        public SingerViewModel GetSingersViewModel(string userId)
         {
             return new SingerViewModel()
             {
                 Singers = singerDomainService.GetListSingers(),
-                LikedTracks = trackDomainService.GetLikedTracksWithSinger()
+                LikedTracks = userDomainService.GetTracksInPlaylistBelovedByUserIdAndPlaylistName(userId, KindPlaylist.Beloved)
             };
         }
 
@@ -31,16 +36,25 @@ namespace PresentationYandexMusic.Services.EntitiesPresentationService
             return singerDomainService.RedirectSingerImage(id);
         }
 
-        public SingerDetailViewModel GetSingerDetailViewModel(int id)
+        public SingerDetailViewModel GetSingerDetailViewModel(int id, string userId)
         {
-            Singer singer = singerDomainService.GetSingerByIdWithAlbums(id);
-            singer.Tracks = trackDomainService.GetPopularTracksWithAlbumsBySingerId(id);
+            var singer = singerDomainService.GetSingerByIdWithAlbums(id);
+            singer.Tracks = trackDomainService.GetPopularTracksWithAlbumsAndTrackFileBySingerId(id);
+            var likeTrack = userDomainService.GetTracksInPlaylistBelovedByUserIdAndPlaylistName(userId, KindPlaylist.Beloved);
+
+            foreach (var item in singer.Tracks)
+            {
+                if (likeTrack.Contains(item))
+                {
+                    item.Like = true;
+                }
+            }
 
             return new SingerDetailViewModel()
             {
                 Singer = singer,
                 SingerGenre = trackDomainService.GetGenreBySingerId(id),
-                LikedTracks = trackDomainService.GetLikedTracksWithSinger(),
+                LikedTracks = likeTrack,
                 AmountAlbums = singerDomainService.AmountAlbumsInSinger(id),
                 AmountTracks = singerDomainService.AmountTracksInSinger(id)
             };

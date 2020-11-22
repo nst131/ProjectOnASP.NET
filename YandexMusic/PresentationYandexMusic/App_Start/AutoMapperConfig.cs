@@ -5,7 +5,6 @@ using PresentationYandexMusic.Areas.Admin.ViewModel.Genre;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Playlist;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Singer;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Track;
-using PresentationYandexMusic.Models;
 using PresentationYandexMusic.Models.AlbumModels;
 
 namespace PresentationYandexMusic.App_Start
@@ -14,7 +13,7 @@ namespace PresentationYandexMusic.App_Start
     {
         public static void Configure(IMapperConfigurationExpression cfg)
         {
-            //--------------------------------- Track ---------------------------------------
+            ////--------------------------------- Track ---------------------------------------
 
             cfg.CreateMap<CreateTrackViewModel, TrackImage>()
                 .ForMember(x => x.ImageData, y => y.MapFrom(z => new byte[z.TrackImage.ContentLength]))
@@ -32,7 +31,7 @@ namespace PresentationYandexMusic.App_Start
                 .ForMember(x => x.TrackImage, y => y.Ignore())
                 .ForMember(x => x.TrackFile, y => y.Ignore());
 
-            // --------------------------------- Genre -------------------------------------
+            //// --------------------------------- Genre -------------------------------------
 
             cfg.CreateMap<CreateGenreViewModel, GenreImage>()
                 .ForMember(x => x.ImageData, y => y.MapFrom(z => new byte[z.GenreImage.ContentLength]))
@@ -42,7 +41,7 @@ namespace PresentationYandexMusic.App_Start
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.GenreName))
                 .ForMember(x => x.GenreImage, y => y.MapFrom(z => Mapper.Map<CreateGenreViewModel, GenreImage>(z)));
 
-            //--------------------------------- Singer ---------------------------------------
+            ////--------------------------------- Singer ---------------------------------------
 
             cfg.CreateMap<CreateSingerViewModel, SingerImage>()
                 .ForMember(x => x.ImageData, y => y.MapFrom(z => new byte[z.SingerImage.ContentLength]))
@@ -56,7 +55,7 @@ namespace PresentationYandexMusic.App_Start
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.SingerName))
                 .ForMember(x => x.SingerImage, y => y.Ignore());
 
-            //----------------------------------- Album ---------------------------------------
+            ////----------------------------------- Album ---------------------------------------
 
             cfg.CreateMap<CreateAlbumViewModel, AlbumImage>()
                .ForMember(x => x.ImageData, y => y.MapFrom(z => new byte[z.AlbumImage.ContentLength]))
@@ -70,7 +69,7 @@ namespace PresentationYandexMusic.App_Start
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.AlbumName))
                 .ForMember(x => x.AlbumImage, y => y.Ignore());
 
-            //--------------------------------- Playlist ---------------------------------------
+            ////--------------------------------- Playlist ---------------------------------------
 
             cfg.CreateMap<CreatePlaylistViewModel, PlaylistImage>()
                .ForMember(x => x.ImageData, y => y.MapFrom(z => new byte[z.PlaylistImage.ContentLength]))
@@ -80,27 +79,27 @@ namespace PresentationYandexMusic.App_Start
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.PlaylistName))
                 .ForMember(x => x.PlaylistImage, y => y.MapFrom(z => Mapper.Map<CreatePlaylistViewModel, PlaylistImage>(z)));
 
-            //-------------------------------- AdminPresentationPage -----------------------------
+            ////-------------------------------- AdminPresentationPage -----------------------------
 
             cfg.CreateMap<Track, AdminTrackViewModel>()
                 .ForMember(x => x.FileLocation, y => y.MapFrom(z => z.TrackFile.FileLocation));
 
-            //-------------------------------- EditAlbumViewModel --------------------------------
+            ////-------------------------------- EditAlbumViewModel --------------------------------
 
             cfg.CreateMap<Album, EditAlbumViewModel>()
                 .ForMember(x => x.AlbumName, y => y.MapFrom(z => z.Name));
 
-            //-------------------------------- EditSingerViewModel -------------------------------
+            ////-------------------------------- EditSingerViewModel -------------------------------
 
             cfg.CreateMap<Singer, EditSingerViewModel>()
                 .ForMember(x => x.SingerName, y => y.MapFrom(z => z.Name));
 
-            //-------------------------------- EditTrackViewModel --------------------------------
+            ////-------------------------------- EditTrackViewModel --------------------------------
 
             cfg.CreateMap<Track, EditTrackViewModel>()
                 .ForMember(x => x.TrackName, y => y.MapFrom(z => z.Name));
 
-            //------------------------------- AlbumDetalViewModel --------------------------------
+            ////------------------------------- AlbumDetalViewModel --------------------------------
 
             cfg.CreateMap<Album, AlbumDetailViewModel>()
                 .ForMember(x => x.AlbumName, y => y.MapFrom(z => z.Name))
@@ -110,6 +109,7 @@ namespace PresentationYandexMusic.App_Start
                 .AfterMap((album, albumView) =>
                 {
                     albumView.SingerName = album.Singer.Name;
+                    albumView.SingerId = album.Singer.Id;
                 });
         }
     }

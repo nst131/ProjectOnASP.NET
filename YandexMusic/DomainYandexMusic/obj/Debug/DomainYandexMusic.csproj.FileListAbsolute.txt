@@ -12,3 +12,7 @@ D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\Pr
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\obj\Debug\DomainYandexMusic.pdb
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Newtonsoft.Json.dll
 D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Newtonsoft.Json.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Программирование\Задачи\ProjectOnASP.NET_YandexMusic\ProjectOnASP.NET\YandexMusic\DomainYandexMusic\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

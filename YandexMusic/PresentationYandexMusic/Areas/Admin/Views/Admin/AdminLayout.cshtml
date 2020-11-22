@@ -7,13 +7,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 <div class="list-group">
-    <a href="/Admin/Admin/Genre/CreateGenre" class="list-group-item list-group-item-action list-group-item-warning">Добавить Жанр</a>
-    <a href="/Admin/Admin/Singer/CreateSinger" class="list-group-item list-group-item-action list-group-item-info">Добавить Исполнителя</a>
-    <a href="/Admin/Admin/Album/CreateAlbum" class="list-group-item list-group-item-action list-group-item-warning">Добавить Альбом</a>
-    <a href="/Admin/Admin/Playlist/CreatePlaylist" class="list-group-item list-group-item-action list-group-item-info">Добавить Плэлист</a>
-    <a href="/Admin/Admin/Track/CreateTrack" class="list-group-item list-group-item-action list-group-item-warning">Добавить Трек</a>
+    <a href="@Url.Action(MVC.Admin.AdminGenre.CreateGenre())" class="list-group-item list-group-item-action list-group-item-warning">Добавить Жанр</a>
+    <a href="@Url.Action(MVC.Admin.AdminSinger.CreateSinger())" class="list-group-item list-group-item-action list-group-item-info">Добавить Исполнителя</a>
+    <a href="@Url.Action(MVC.Admin.AdminAlbum.CreateAlbum())" class="list-group-item list-group-item-action list-group-item-warning">Добавить Альбом</a>
+    <a href="@Url.Action(MVC.Admin.AdminPlaylist.CreatePlaylist())" class="list-group-item list-group-item-action list-group-item-info">Добавить Плэлист</a>
+    <a href="@Url.Action(MVC.Admin.AdminTrack.CreateTrack())" class="list-group-item list-group-item-action list-group-item-warning">Добавить Трек</a>
 </div>
-
+@Html.ActionLink("Вернуться назад",MVC.Home.StartPage())
 @section scripts{
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @Scripts.Render("~/Scripts/ScriptSpinnerVisible.js")

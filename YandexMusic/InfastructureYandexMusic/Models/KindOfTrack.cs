@@ -5,6 +5,6 @@
         public const string Popular = "Популярное";
         public const string NoPopular = "Неизвестное";
         public const string Novelty = "Новинка";
-        public const string NoNovelty = "Традиционная";
+        public const string NoNovelty = "Традиционное";
     }
 }

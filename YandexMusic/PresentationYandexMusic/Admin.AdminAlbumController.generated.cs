@@ -91,6 +91,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string CreateAlbum = "CreateAlbum";
+            public readonly string FormAlbumSuccess = "FormAlbumSuccess";
             public readonly string EditAlbum = "EditAlbum";
             public readonly string DeleteAlbum = "DeleteAlbum";
             public readonly string GetAlbumImage = "GetAlbumImage";
@@ -100,6 +101,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string CreateAlbum = "CreateAlbum";
+            public const string FormAlbumSuccess = "FormAlbumSuccess";
             public const string EditAlbum = "EditAlbum";
             public const string DeleteAlbum = "DeleteAlbum";
             public const string GetAlbumImage = "GetAlbumImage";
@@ -152,12 +154,14 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
                 public readonly string CreateAlbum = "CreateAlbum";
                 public readonly string DeleteAlbum = "DeleteAlbum";
                 public readonly string EditAlbum = "EditAlbum";
+                public readonly string FormAlbumSuccess = "FormAlbumSuccess";
                 public readonly string FormCreateAlbum = "FormCreateAlbum";
                 public readonly string FormEditAlbum = "FormEditAlbum";
             }
             public readonly string CreateAlbum = "~/Areas/Admin/Views/AdminAlbum/CreateAlbum.cshtml";
             public readonly string DeleteAlbum = "~/Areas/Admin/Views/AdminAlbum/DeleteAlbum.cshtml";
             public readonly string EditAlbum = "~/Areas/Admin/Views/AdminAlbum/EditAlbum.cshtml";
+            public readonly string FormAlbumSuccess = "~/Areas/Admin/Views/AdminAlbum/FormAlbumSuccess.cshtml";
             public readonly string FormCreateAlbum = "~/Areas/Admin/Views/AdminAlbum/FormCreateAlbum.cshtml";
             public readonly string FormEditAlbum = "~/Areas/Admin/Views/AdminAlbum/FormEditAlbum.cshtml";
         }
@@ -188,6 +192,17 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateAlbum);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "albumView", albumView);
             CreateAlbumOverride(callInfo, albumView);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FormAlbumSuccessOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult FormAlbumSuccess()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.FormAlbumSuccess);
+            FormAlbumSuccessOverride(callInfo);
             return callInfo;
         }
 

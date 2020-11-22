@@ -28,39 +28,41 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        private List<int> GetNoveltyTracksIdByName(string name)
+        private List<Track> GetNoveltyTracksByKindOfTrack(string name)
         {
             return GetQueryable()
                 .Where(x => x.Name == name)
                 .Include(x => x.Tracks)
-                .SingleOrDefault()
-                .Tracks.Select(x => x.Id).ToList();
+                .Include(x => x.Tracks.Select(y => y.Singer))
+                .Include(x => x.Tracks.Select(y => y.TrackFile))
+                .FirstOrDefault()
+                .Tracks.ToList();
         }
 
-        public List<int> GetRandomNoveltyTracksIdByQuantityTracks(int numberTracks)
+        public List<Track> GetRandomNoveltysTracksIdByQuantityTracks(int numberTracks)
         {
-            List<int> tracksId = GetNoveltyTracksIdByName(KindOfTrack.Novelty);
-            List<int> vs = new List<int>();
+            List<Track> tracks = GetNoveltyTracksByKindOfTrack(KindOfTrack.Novelty);
+            List<Track> noveltyTracks = new List<Track>();
             Random random = new Random();
 
-            if (tracksId.Count >= numberTracks)
+            if (tracks.Count >= numberTracks)
             {
                 for (int i = 0; i < numberTracks; i++)
                 {
-                    var elem = tracksId[random.Next(tracksId.Count)];
-                    vs.Add(elem);
-                    tracksId.Remove(elem);
+                    var elem = tracks[random.Next(tracks.Count)];
+                    noveltyTracks.Add(elem);
+                    tracks.Remove(elem);
                 }
 
-                return vs;
+                return noveltyTracks;
             }
 
             for (int i = 0; i < numberTracks; i++)
             {
-                vs.Add(tracksId[random.Next(tracksId.Count)]);
+                noveltyTracks.Add(tracks[random.Next(tracks.Count)]);
             }
 
-            return vs;
+            return noveltyTracks;
         }
     }
 }

@@ -54,6 +54,13 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
                 .FirstOrDefault(x => x.Id == id);
         }
 
+        public Track GetTrackWithTrackFileById(int id)
+        {
+            return GetQueryable()
+                .Include(x => x.TrackFile)
+                .FirstOrDefault(x => x.Id == id);
+        }
+
         public List<Track> GetTracksWithTrackFileByAlbumId(int id)
         {
             return GetQueryable()
@@ -80,14 +87,6 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
             return !GetQueryable().Any(x => x.Name == trackName);
         }
 
-        public List<Track> GetLikedTracksWithSinger()
-        {
-            return GetQueryable()
-                .Where(x => x.Liked > 0)
-                .Include(x => x.Singer)
-                .ToList();
-        }
-
         public Track GetTrackWithGenreBySingerId(int id)
         {
             return GetQueryable()
@@ -95,26 +94,29 @@ namespace InfastructureYandexMusic.Repositories.EntitiesRepository
                 .FirstOrDefault(x => x.SingerId == id);
         }
 
-        public List<Track> GetPopularTracksWithAlbumsBySingerId(int id)
+        public List<Track> GetPopularTracksWithAlbumsAndTrackFileBySingerId(int id)
         {
             return GetQueryable()
-                .Include(x => x.Album)
                 .Where(x => x.SingerId == id)
+                .Include(x => x.Album)
+                .Include(x => x.TrackFile)
                 .ToList();
         }
 
-        public Track GetTrackWithSingerById(int id)
+        public Track GetTrackWithSingerAndTrackFileById(int id)
         {
             return GetQueryable()
                 .Include(x => x.Singer)
+                .Include(x => x.TrackFile)
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Track> GetTrackGenreByGenreId(int id)
+        public List<Track> GetTrackWithSingerAndTrackFileByGenreId(int id)
         {
             return GetQueryable()
                .Where(x => x.GenreId == id)
                .Include(x => x.Singer)
+               .Include(x => x.TrackFile)
                .ToList();
         }
     }

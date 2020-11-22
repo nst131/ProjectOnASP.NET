@@ -1,7 +1,7 @@
-﻿using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
+﻿using System.Web;
+using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using FluentValidation;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Track;
-using System.Web;
 
 namespace PresentationYandexMusic.Areas.Admin.Validation.Track
 {
@@ -12,8 +12,10 @@ namespace PresentationYandexMusic.Areas.Admin.Validation.Track
         private readonly IAlbumDomainService albumDomain;
         private readonly IGenreDomainService genreDomain;
 
-        public AdminValidationOfTrackCreate(ITrackDomainService trackDomain,
-            ISingerDomainService singerDomain, IAlbumDomainService albumDomain,
+        public AdminValidationOfTrackCreate(
+            ITrackDomainService trackDomain,
+            ISingerDomainService singerDomain,
+            IAlbumDomainService albumDomain,
             IGenreDomainService genreDomain)
         {
             this.trackDomain = trackDomain;
@@ -30,7 +32,7 @@ namespace PresentationYandexMusic.Areas.Admin.Validation.Track
                 .NotEmpty().WithMessage("Введите дату создания")
                 .GreaterThan(new System.DateTime(2000, 1, 1)).WithMessage("Дата не раньше 2000 года");
 
-            RuleFor(x => x.Liked)
+            RuleFor(x => x.NumberOfLikes)
                 .NotEmpty().WithMessage("Введите кол-во лайков больше 0")
                 .GreaterThanOrEqualTo(-1).WithMessage("Лайки не могут быть отрицательными");
 

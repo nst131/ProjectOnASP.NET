@@ -1,8 +1,8 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Net;
+using System.Web.Mvc;
+using DomainYandexMusic.Entities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Track;
-using System.Net;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
@@ -11,7 +11,8 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         private readonly IAdminTrackPresentationService adminTrack;
         private readonly IAdminSingerPresentationService adminSinger;
 
-        public AdminTrackController(IAdminTrackPresentationService adminTrack,
+        public AdminTrackController(
+            IAdminTrackPresentationService adminTrack,
             IAdminSingerPresentationService adminSinger)
         {
             this.adminTrack = adminTrack;
@@ -28,6 +29,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(adminTrack.GetTrackViewModel());
         }
+
         [HttpPost]
         public virtual ActionResult CreateTrack(CreateTrackViewModel trackModel)
         {
@@ -46,6 +48,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(adminTrack.GetEditTrackViewModel(id));
         }
+
         [HttpPost]
         public virtual ActionResult EditTrack(EditTrackViewModel trackView)
         {
@@ -69,6 +72,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
 
             return View(adminTrack.GetDeleteTrackViewModel((int)id));
         }
+
         [HttpPost]
         public virtual ActionResult DeleteTrack(int id)
         {

@@ -1,6 +1,6 @@
-﻿using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
+﻿using System.Web.Mvc;
+using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Genre;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Controllers
 {
@@ -18,6 +18,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         {
             return View(new CreateGenreViewModel());
         }
+
         [HttpPost]
         public virtual ActionResult CreateGenre(CreateGenreViewModel genreModel)
         {
@@ -25,10 +26,15 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             {
                 adminGenre.AddGenre(genreModel);
 
-                return Redirect("/Admin/Admin/Success");
+                return Redirect(Url.Action(MVC.Admin.AdminGenre.FormGenreSuccess()));
             }
 
             return PartialView("FormCreateGenre", genreModel);
+        }
+
+        public virtual PartialViewResult FormGenreSuccess()
+        {
+            return PartialView("FormGenreSuccess", new CreateGenreViewModel());
         }
     }
 }

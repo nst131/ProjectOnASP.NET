@@ -1,6 +1,7 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Web.Mvc;
+using DomainYandexMusic.Entities;
+using Microsoft.AspNet.Identity;
 using PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Controllers
 {
@@ -28,7 +29,7 @@ namespace PresentationYandexMusic.Controllers
         [Route("AlbumDetail/{id:int}")]
         public virtual ViewResult AlbumDetail(int id)
         {
-            return View(albumPresentation.GetAlbumDetailViewModel(id));
+            return View(albumPresentation.GetAlbumDetailViewModel(id, User.Identity.GetUserId()));
         }
     }
 }

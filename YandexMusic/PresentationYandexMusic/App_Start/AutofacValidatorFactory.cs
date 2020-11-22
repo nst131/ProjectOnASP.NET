@@ -1,6 +1,6 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using FluentValidation;
-using System;
 
 namespace PresentationYandexMusic.App_Start
 {

@@ -103,29 +103,29 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
             return trackRepository.CreateTrackIsUnique(trackmName);
         }
 
-        public List<Track> GetLikedTracksWithSinger()
-        {
-            return trackRepository.GetLikedTracksWithSinger();
-        }
-
         public Genre GetGenreBySingerId(int id)
         {
             return trackRepository.GetTrackWithGenreBySingerId(id).Genre;
         }
 
-        public List<Track> GetPopularTracksWithAlbumsBySingerId(int id)
+        public List<Track> GetPopularTracksWithAlbumsAndTrackFileBySingerId(int id)
         {
-            return trackRepository.GetPopularTracksWithAlbumsBySingerId(id);
+            return trackRepository.GetPopularTracksWithAlbumsAndTrackFileBySingerId(id);
         }
 
-        public Track GetTrackWithSingerById(int id)
+        public Track GetTrackWithSingerAndTrackFileById(int id)
         {
-            return trackRepository.GetTrackWithSingerById(id);
+            return trackRepository.GetTrackWithSingerAndTrackFileById(id);
         }
 
-        public List<Track> GetTrackGenreByGenreId(int id)
+        public List<Track> GetTrackWithSingerAndTrackFileByGenreId(int id)
         {
-            return trackRepository.GetTrackGenreByGenreId(id);
+            return trackRepository.GetTrackWithSingerAndTrackFileByGenreId(id);
+        }
+
+        public TrackFile GetTrackFileById(int id)
+        {
+            return trackRepository.GetTrackWithTrackFileById(id).TrackFile;
         }
     }
 }

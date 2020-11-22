@@ -91,6 +91,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string CreateSinger = "CreateSinger";
+            public readonly string FormSingerSuccess = "FormSingerSuccess";
             public readonly string EditSinger = "EditSinger";
             public readonly string DeleteSinger = "DeleteSinger";
             public readonly string GetSingerImage = "GetSingerImage";
@@ -100,6 +101,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string CreateSinger = "CreateSinger";
+            public const string FormSingerSuccess = "FormSingerSuccess";
             public const string EditSinger = "EditSinger";
             public const string DeleteSinger = "DeleteSinger";
             public const string GetSingerImage = "GetSingerImage";
@@ -154,12 +156,14 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
                 public readonly string EditSinger = "EditSinger";
                 public readonly string FormCreateSinger = "FormCreateSinger";
                 public readonly string FormEditSinger = "FormEditSinger";
+                public readonly string FormSingerSuccess = "FormSingerSuccess";
             }
             public readonly string CreateSinger = "~/Areas/Admin/Views/AdminSinger/CreateSinger.cshtml";
             public readonly string DeleteSinger = "~/Areas/Admin/Views/AdminSinger/DeleteSinger.cshtml";
             public readonly string EditSinger = "~/Areas/Admin/Views/AdminSinger/EditSinger.cshtml";
             public readonly string FormCreateSinger = "~/Areas/Admin/Views/AdminSinger/FormCreateSinger.cshtml";
             public readonly string FormEditSinger = "~/Areas/Admin/Views/AdminSinger/FormEditSinger.cshtml";
+            public readonly string FormSingerSuccess = "~/Areas/Admin/Views/AdminSinger/FormSingerSuccess.cshtml";
         }
     }
 
@@ -188,6 +192,17 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateSinger);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "singerModel", singerModel);
             CreateSingerOverride(callInfo, singerModel);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FormSingerSuccessOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult FormSingerSuccess()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.FormSingerSuccess);
+            FormSingerSuccessOverride(callInfo);
             return callInfo;
         }
 

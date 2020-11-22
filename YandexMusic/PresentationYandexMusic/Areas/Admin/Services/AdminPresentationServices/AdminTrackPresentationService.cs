@@ -1,17 +1,20 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using System.Web;
+using System.Web.Mvc;
+using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using Microsoft.Ajax.Utilities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Track;
-using System.Data.Entity;
-using System.Web;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {
     public class AdminTrackPresentationService : GetArrayImage, IAdminTrackPresentationService
     {
+        private const string PathServerBefore = "~/ServerFiles/";
+        private const string PathServerAfter = "../../../ServerFiles/";
+
         private readonly ITrackDomainService trackDomainService;
         private readonly ISingerDomainService singerDomainService;
         private readonly IAlbumDomainService albumDomainService;
@@ -20,10 +23,8 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         private readonly INoveltyDomainService noveltyDomainService;
         private readonly IPopularDomainService popularDomainService;
 
-        private const string pathServerBefore = "~/ServerFiles/";
-        private const string pathServerAfter = "../../../ServerFiles/";
-
-        public AdminTrackPresentationService(ITrackDomainService trackDomainService,
+        public AdminTrackPresentationService(
+            ITrackDomainService trackDomainService,
             ISingerDomainService singerDomainService,
             IAlbumDomainService albumDomainService,
             IGenreDomainService genreDomainService,
@@ -49,12 +50,9 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 
         public EditTrackViewModel GetEditTrackViewModel(EditTrackViewModel track)
         {
-            track.SelectListSingers = new SelectList(singerDomainService
-                    .GetListSingers(), "Id", "Name");
-            track.SelectListAlbums = new SelectList(singerDomainService
-                    .GetAlbumsBySingerId(track.SingerId), "Id", "Name");
-            track.SelectListGenre = new SelectList(genreDomainService
-                    .GetListGenre(), "Id", "Name");
+            track.SelectListSingers = new SelectList(singerDomainService.GetListSingers(), "Id", "Name");
+            track.SelectListAlbums = new SelectList(singerDomainService.GetAlbumsBySingerId(track.SingerId), "Id", "Name");
+            track.SelectListGenre = new SelectList(genreDomainService.GetListGenre(), "Id", "Name");
             track.NoveltyList = noveltyDomainService.GetDictionaryNovelty();
             track.PopularList = popularDomainService.GetDictionaryPopular();
             track.PlaylistList = playlistDomainService.GetDictionaryPlaylist();
@@ -65,18 +63,18 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         public void EditTrack(EditTrackViewModel trackView, HttpServerUtilityBase server)
         {
             Track track = trackDomainService.GetTrackWithImageAndFileTrack(trackView.Id);
-            Mapper.Map<EditTrackViewModel, Track>(trackView, track);
+            Mapper.Map(trackView, track);
 
-            if(trackView.TrackImage != null)
+            if (trackView.TrackImage != null)
             {
                 track.TrackImage.ImageData = GetArray(trackView.TrackImage);
             }
 
-            if(trackView.TrackFile != null)
+            if (trackView.TrackFile != null)
             {
                 string name = trackView.TrackFile.FileName;
-                trackView.TrackFile.SaveAs(server.MapPath(pathServerBefore + name));
-                track.TrackFile.FileLocation = pathServerAfter + name;
+                trackView.TrackFile.SaveAs(server.MapPath(PathServerBefore + name));
+                track.TrackFile.FileLocation = PathServerAfter + name;
             }
 
             trackDomainService.Entry(track).State = EntityState.Modified;
@@ -92,8 +90,7 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
                 GenreId = genreDomainService.GetFirstGenreId(),
                 SelectListSingers = new SelectList(singerDomainService.GetListSingers(), "Id", "Name"),
                 SelectListGenre = new SelectList(genreDomainService.GetListGenre(), "Id", "Name"),
-                SelectListAlbums = new SelectList(singerDomainService
-                    .GetAlbumsBySingerId(singerDomainService.GetFirstSingerId()), "Id", "Name"),
+                SelectListAlbums = new SelectList(singerDomainService.GetAlbumsBySingerId(singerDomainService.GetFirstSingerId()), "Id", "Name"),
                 PlaylistList = playlistDomainService.GetDictionaryPlaylist(),
 
                 NoveltyList = noveltyDomainService.GetDictionaryNovelty(),
@@ -105,8 +102,7 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         {
             trackView.SelectListSingers = new SelectList(singerDomainService.GetListSingers(), "Id", "Name");
             trackView.SelectListGenre = new SelectList(genreDomainService.GetListGenre(), "Id", "Name");
-            trackView.SelectListAlbums = new SelectList(singerDomainService
-                    .GetAlbumsBySingerId(trackView.SingerId), "Id", "Name");
+            trackView.SelectListAlbums = new SelectList(singerDomainService.GetAlbumsBySingerId(trackView.SingerId), "Id", "Name");
             trackView.PlaylistList = playlistDomainService.GetDictionaryPlaylist();
             trackView.NoveltyList = noveltyDomainService.GetDictionaryNovelty();
             trackView.PopularList = popularDomainService.GetDictionaryPopular();
@@ -130,8 +126,8 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
                 .ForEach(x => track.Playlists.Add(playlistDomainService.GetPlaylistById(x)));
 
             string name = trackModel.TrackFile.FileName;
-            trackModel.TrackFile.SaveAs(server.MapPath(pathServerBefore + name));
-            track.TrackFile.FileLocation = pathServerAfter + name;
+            trackModel.TrackFile.SaveAs(server.MapPath(PathServerBefore + name));
+            track.TrackFile.FileLocation = PathServerAfter + name;
 
             trackDomainService.Entry(track).State = EntityState.Added;
             trackDomainService.SaveChanges();

@@ -40,6 +40,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -57,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\AlbumImage.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\GenreImage.cs" />
     <Compile Include="Entities\Novelty.cs" />
@@ -68,8 +76,6 @@
     <Compile Include="Entities\Track.cs" />
     <Compile Include="Entities\TrackFile.cs" />
     <Compile Include="Entities\TrackImage.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserImage.cs" />
     <Compile Include="Models\AlbumNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntitiesRepository\IAlbumRepository.cs" />
@@ -79,6 +85,7 @@
     <Compile Include="Repositories\EntitiesRepository\IPopularRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\ISingerRepository.cs" />
     <Compile Include="Repositories\EntitiesRepository\ITrackRepository.cs" />
+    <Compile Include="Repositories\EntitiesRepository\IUserRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Services\CheckFile.cs" />
     <Compile Include="Services\EntitiesDomainServices\AlbumDomainService.cs" />
@@ -88,6 +95,7 @@
     <Compile Include="Services\EntitiesDomainServices\PopularDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\SingerDomainService.cs" />
     <Compile Include="Services\EntitiesDomainServices\TrackDomainService.cs" />
+    <Compile Include="Services\EntitiesDomainServices\UserDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\IAlbumDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\IGenreDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\INoveltyDomainService.cs" />
@@ -95,11 +103,15 @@
     <Compile Include="Services\Interfaces\EntitiesInterfaces\IPopularDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ISingerDomainService.cs" />
     <Compile Include="Services\Interfaces\EntitiesInterfaces\ITrackDomainService.cs" />
+    <Compile Include="Services\Interfaces\EntitiesInterfaces\IUserDomainService.cs" />
     <Compile Include="Services\Interfaces\IBaseDomainService.cs" />
     <Compile Include="Services\Interfaces\ICheckFile.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

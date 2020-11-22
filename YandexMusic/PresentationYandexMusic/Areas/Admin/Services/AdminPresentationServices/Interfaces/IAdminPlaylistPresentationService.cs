@@ -6,9 +6,13 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
     public interface IAdminPlaylistPresentationService : IAdminBasePresentationService
     {
         void AddPlaylist(CreatePlaylistViewModel playlistModel);
+
         void DeletePlaylist(int id);
+
         DeletePlaylistViewModel GetDeletePlaylistViewModel(int id);
+
         bool IsExistPlaylist(int id);
+
         PlaylistImage RedirectPlaylistImage(int id);
     }
 }

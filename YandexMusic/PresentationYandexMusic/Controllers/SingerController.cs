@@ -1,6 +1,7 @@
-﻿using DomainYandexMusic.Entities;
+﻿using System.Web.Mvc;
+using DomainYandexMusic.Entities;
+using Microsoft.AspNet.Identity;
 using PresentationYandexMusic.Services.Interfaces.EntitiesInterfaces;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Controllers
 {
@@ -17,13 +18,13 @@ namespace PresentationYandexMusic.Controllers
         [Route("ShowAllSingers")]
         public virtual ViewResult ShowAllSingers()
         {
-            return View(singerPresentation.GetSingersViewModel());
+            return View(singerPresentation.GetSingersViewModel(User.Identity.GetUserId()));
         }
 
         [Route("Singer/{id:int}")]
         public virtual ViewResult SingerDetail(int id)
         {
-            return View(singerPresentation.GetSingerDetailViewModel(id));
+            return View(singerPresentation.GetSingerDetailViewModel(id, User.Identity.GetUserId()));
         }
 
         public virtual FileResult GetSingerImage(int id)

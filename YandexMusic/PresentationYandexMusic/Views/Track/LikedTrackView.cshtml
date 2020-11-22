@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "LikedTrackView";
+}
+@model PresentationYandexMusic.Models.TrackModels.LikedTrackViewModel
+
+@Styles.Render("~/Content/CSSYandexMusic")
+@Styles.Render("~/Content/CSSMusic.css")
+
+@section scripts{
+    @Scripts.Render("~/bundles/ScriptsYandexMusic")
+    @Scripts.Render("~/Scripts/JSButtonPlayMusic.js")
+    @Scripts.Render("~/Scripts/JSLikedTracks.js")
+}
+
+<div class="app dk" id="app">
+
+    <!-- ############ LAYOUT START-->
+    <!-- content -->
+    <div id="content" class="app-content white bg box-shadow-z2" role="main">
+        <div class="app-header hidden-lg-up white lt box-shadow-z1">
+            <div class="navbar">
+                <a class="navbar-brand md">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                        <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
+                        <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
+                        <circle cx="24" cy="24" r="10" fill="#ffffff" />
+                        <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
+                        <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
+                        <circle cx="24" cy="24" r="3" fill="#000000" />
+                    </svg>
+                    <img src="images/logo.png" alt="." class="hide">
+                    <span class="hidden-folded inline">pulse</span>
+                </a>
+                <ul class="nav navbar-nav pull-right">
+                    <li class="nav-item">
+                        <a data-toggle="modal" data-target="#aside" class="nav-link">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ############ PAGE START-->
+
+        <div class="page-content">
+            <div class="row-col">
+                <div class="col-lg-9 b-r no-border-md">
+                    <div class="padding">
+
+                        <div class="page-title m-b">
+                            <h1 class="inline m-a-0">LikedTracks</h1>
+                        </div>
+                        <div class="row item-list item-list-md item-list-li m-b">
+
+                            @foreach (var track in Model.LikedTrack)
+                            {
+                                <div class="col-xs-12">
+                                    <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                        <div class="item-media coll">
+                                            <!-- TrackImage -->
+                                            <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" data-ajax="true" data-ajax-update="#view" class="item-media-content" style="background-image: url('@Url.Action(MVC.Track.GetTrackImage(track.Id))');"></a>
+                                            <div class="item-overlay">
+                                                <button class="btn-playpause playMusic popularMusic rounded-circle" data-location="@track.TrackFile.FileLocation">
+                                                    <img src="~/images/Play.jpg" class="rounded-circle" name="Play" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="item-overlay bottom text-right">
+                                                <a class="btn-favorite" data-trackId=@track.Id><i data-like=@track.Like class="fa fa-heart-o"></i></a>
+                                                <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                <div class="dropdown-menu pull-right black lt"></div>
+                                            </div>
+                                            <div class="item-title text-ellipsis">
+                                                <!-- TrackName -->
+                                                <a href="@Url.Action(MVC.Album.AlbumDetail(track.AlbumId))" data-ajax="true" data-ajax-update="#view">@track.Name</a>
+                                            </div>
+                                            <div class="item-author text-sm text-ellipsis ">
+                                                <!-- SingerName -->
+                                                <a href="@Url.Action(MVC.Singer.SingerDetail(track.SingerId))" data-ajax="true" data-ajax-update="#view">@track.Singer.Name</a>
+                                            </div>
+                                            <div class="item-meta text-sm text-muted">
+                                                <span class="item-meta-stats text-xs  item-meta-right">
+                                                    <!-- AmountLikes -->
+                                                    <i class="fa fa-heart m-l-sm text-muted"></i>@track.NumberOfLikes
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="text-left">
+                            <!-- ShowMore -->
+                            <a href="#" class="btn btn-sm text-white rounded-circle jscroll-next">Show More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ############ PAGE END-->
+
+    </div>
+</div>
+<!-- / -->
+<!-- ############ SHARE START -->
+<div id="share-modal" class="modal fade animate">
+    <div class="modal-dialog">
+        <div class="modal-content fade-down">
+            <div class="modal-header">
+
+                <h5 class="modal-title">Share</h5>
+            </div>
+            <div class="modal-body p-lg">
+                <div id="share-list" class="m-b">
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored indigo" title="Facebook">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-facebook"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored light-blue" title="Twitter">
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-twitter"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored red-600" title="Google+">
+                        <i class="fa fa-google-plus"></i>
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored blue-grey-600" title="Trumblr">
+                        <i class="fa fa-tumblr"></i>
+                        <i class="fa fa-tumblr"></i>
+                    </a>
+
+                    <a href="" class="btn btn-icon btn-social rounded btn-social-colored red-700" title="Pinterst">
+                        <i class="fa fa-pinterest"></i>
+                        <i class="fa fa-pinterest"></i>
+                    </a>
+                </div>
+                <div>
+                    <input class="form-control" value="http://plamusic.com/slug" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ############ SHARE END -->
+<!-- ############ LAYOUT END-->
+<script>
+    function OnSuccess() {
+
+    }
+</script>

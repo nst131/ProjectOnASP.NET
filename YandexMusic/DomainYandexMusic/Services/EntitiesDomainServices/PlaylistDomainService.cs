@@ -70,13 +70,21 @@ namespace DomainYandexMusic.Services.EntitiesDomainServices
 
         public void DeletePlaylist(int id)
         {
-            unitOfWork.Entry<Playlist>(GetPlaylistById(id)).State = EntityState.Deleted;
-            unitOfWork.SaveChanges();
+            Entry(GetPlaylistById(id)).State = EntityState.Deleted;
+            SaveChanges();
         }
 
         public PlaylistImage RedirectPlaylistImage(int id)
         {
             return playlistRepository.GetPlaylistWithImage(id).PlaylistImage;
+        }
+
+        public void CreatePlaylistAndUserId(string playlistName, ApplicationUser user)
+        {
+            var playlist = new Playlist { Name = playlistName, Users = new List<ApplicationUser> { user } };
+
+            Entry(playlist).State = EntityState.Added;
+            SaveChanges();
         }
     }
 }

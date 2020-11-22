@@ -11,6 +11,6 @@ namespace DomainYandexMusic.Repositories.EntitiesRepository
     {
         List<Novelty> GetListNovelty();
         Novelty GetNoveltyById(int id);
-        List<int> GetRandomNoveltyTracksIdByQuantityTracks(int numberTracks);
+        List<Track> GetRandomNoveltysTracksIdByQuantityTracks(int numberTracks);
     }
 }

@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
+using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using Microsoft.Ajax.Utilities;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Album;
-using System.Data.Entity;
-using System.Web.Mvc;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {
@@ -15,12 +15,13 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         private readonly ISingerDomainService singerDomainService;
         private readonly ITrackDomainService trackDomainService;
 
-        public AdminAlbumPresentationService(IAlbumDomainService albumDomain,
+        public AdminAlbumPresentationService(
+            IAlbumDomainService albumDomain,
             ISingerDomainService singerDomain,
             ITrackDomainService trackDomainService)
         {
-            this.albumDomainService = albumDomain;
-            this.singerDomainService = singerDomain;
+            albumDomainService = albumDomain;
+            singerDomainService = singerDomain;
             this.trackDomainService = trackDomainService;
         }
 
@@ -58,7 +59,7 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         public void EditAlbum(EditAlbumViewModel albumView)
         {
             Album album = albumDomainService.GetAlbumWithImage(albumView.Id);
-            Mapper.Map<EditAlbumViewModel, Album>(albumView, album);
+            Mapper.Map(albumView, album);
 
             if (albumView.AlbumImage != null)
             {
@@ -80,7 +81,6 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 
             albumDomainService.Entry(album).State = EntityState.Added;
             albumDomainService.SaveChanges();
-
         }
 
         public bool IsExistAlbum(int id)

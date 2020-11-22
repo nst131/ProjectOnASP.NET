@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using AutoMapper;
 using DomainYandexMusic.Entities;
 using DomainYandexMusic.Models;
 using DomainYandexMusic.Services.Interfaces.EntitiesInterfaces;
 using PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices.Interfaces;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Album;
 using PresentationYandexMusic.Areas.Admin.ViewModel.Singer;
-using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 {
@@ -16,8 +16,10 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
         private readonly IAlbumDomainService albumDomainService;
         private readonly ITrackDomainService trackDomainService;
 
-        public AdminSingerPresentationService(ISingerDomainService singerDomainService,
-            IAlbumDomainService albumDomainService, ITrackDomainService trackDomainService)
+        public AdminSingerPresentationService(
+            ISingerDomainService singerDomainService,
+            IAlbumDomainService albumDomainService,
+            ITrackDomainService trackDomainService)
         {
             this.singerDomainService = singerDomainService;
             this.albumDomainService = albumDomainService;
@@ -26,15 +28,15 @@ namespace PresentationYandexMusic.Areas.Admin.Services.AdminPresentationServices
 
         public EditSingerViewModel GetEditSingerViewModel(int id)
         {
-            return Mapper.Map<Singer,EditSingerViewModel>(singerDomainService.GetSingerById(id));
+            return Mapper.Map<Singer, EditSingerViewModel>(singerDomainService.GetSingerById(id));
         }
 
         public void EditSinger(EditSingerViewModel singerView)
         {
             Singer singer = singerDomainService.GetSingerWithImage(singerView.Id);
-            Mapper.Map<EditSingerViewModel, Singer>(singerView, singer);
+            Mapper.Map(singerView, singer);
 
-            if(singerView.SingerImage != null)
+            if (singerView.SingerImage != null)
             {
                 singer.SingerImage.ImageData = GetArray(singerView.SingerImage);
             }

@@ -85,6 +85,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string CreatePlaylist = "CreatePlaylist";
+            public readonly string FormPlaylistSuccess = "FormPlaylistSuccess";
             public readonly string DeletePlaylist = "DeletePlaylist";
             public readonly string GetPlaylistImage = "GetPlaylistImage";
         }
@@ -93,6 +94,7 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string CreatePlaylist = "CreatePlaylist";
+            public const string FormPlaylistSuccess = "FormPlaylistSuccess";
             public const string DeletePlaylist = "DeletePlaylist";
             public const string GetPlaylistImage = "GetPlaylistImage";
         }
@@ -135,10 +137,12 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
                 public readonly string CreatePlaylist = "CreatePlaylist";
                 public readonly string DeletePlaylist = "DeletePlaylist";
                 public readonly string FormCreatePlaylist = "FormCreatePlaylist";
+                public readonly string FormPlaylistSuccess = "FormPlaylistSuccess";
             }
             public readonly string CreatePlaylist = "~/Areas/Admin/Views/AdminPlaylist/CreatePlaylist.cshtml";
             public readonly string DeletePlaylist = "~/Areas/Admin/Views/AdminPlaylist/DeletePlaylist.cshtml";
             public readonly string FormCreatePlaylist = "~/Areas/Admin/Views/AdminPlaylist/FormCreatePlaylist.cshtml";
+            public readonly string FormPlaylistSuccess = "~/Areas/Admin/Views/AdminPlaylist/FormPlaylistSuccess.cshtml";
         }
     }
 
@@ -167,6 +171,17 @@ namespace PresentationYandexMusic.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreatePlaylist);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "playlistView", playlistView);
             CreatePlaylistOverride(callInfo, playlistView);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FormPlaylistSuccessOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult FormPlaylistSuccess()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.FormPlaylistSuccess);
+            FormPlaylistSuccessOverride(callInfo);
             return callInfo;
         }
 

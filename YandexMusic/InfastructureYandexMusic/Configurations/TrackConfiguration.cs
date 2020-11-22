@@ -16,8 +16,10 @@ namespace InfastructureYandexMusic.Configurations
                 .HasMaxLength(50);
             Property(x => x.TimeOfCreation)
                 .IsRequired();
-            Property(x => x.Liked)
+            Property(x => x.NumberOfLikes) // ChangeTrackMigration
                 .IsRequired();
+            Property(x => x.Like)
+                .IsOptional(); // ChangeTrackMigration
 
             HasMany(x => x.Playlists)
                 .WithMany(x => x.Tracks)
